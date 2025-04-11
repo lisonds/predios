@@ -1,0 +1,63 @@
+.custom-table {
+    width: 100%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    font-family: 'Poppins', sans-serif;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra */
+  }
+
+  .custom-table th, .custom-table td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+  }
+
+  /* Estilo para los encabezados */
+  .custom-table th {
+    background-color: #007bff;
+    color: #fff;
+    font-weight: 600;
+  }
+
+  /* Fila alternada */
+  .custom-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+
+  /* Diseño más compacto */
+  .custom-table td {
+    font-size: 14px;
+  }
+
+  .table-title {
+    font-family: 'Roboto', sans-serif;
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    color: #333;
+  }
+
+  /* Hacer la tabla responsiva */
+  @media (max-width: 768px) {
+    .custom-table th, .custom-table td {
+      padding: 8px;
+      font-size: 12px;
+    }
+
+    .table-title {
+      font-size: 20px;
+    }
+  }
+
+ /*para buscador */
+ .rounded-pill {
+  border-radius: 50px !important;
+}
+
+.input-group input:focus {
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  border-color: #007bff;
+}
+
+
+/*fin para buscador */

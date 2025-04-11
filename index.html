@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirigiendo...</title>
+    <style>
+        /* Estilo de la pantalla de carga */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+            overflow: hidden;
+        }
+
+        .loader {
+            width: 50px;
+            height: 50px;
+            border: 6px solid #ccc;
+            border-top-color: #3498db;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .message {
+            margin-top: 20px;
+            text-align: center;
+            color: #555;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div class="loader"></div>
+        <div class="message">Cargando, por favor espera...</div>
+    </div>
+
+    <script>
+        // Redirigir automáticamente después de 3 segundos
+        setTimeout(() => {
+            window.location.href = "vista/login.php";
+        }, 3000); // Cambia el tiempo según lo necesario
+    </script>
+</body>
+</html>
