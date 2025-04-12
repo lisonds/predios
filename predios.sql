@@ -310,7 +310,7 @@ CREATE TABLE `indentificador` (
   `id` int NOT NULL AUTO_INCREMENT,
   `codigo` varchar(6) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -319,7 +319,7 @@ CREATE TABLE `indentificador` (
 
 LOCK TABLES `indentificador` WRITE;
 /*!40000 ALTER TABLE `indentificador` DISABLE KEYS */;
-INSERT INTO `indentificador` VALUES (1,'000001'),(5,'000002');
+INSERT INTO `indentificador` VALUES (1,'000001'),(5,'000002'),(6,'000003'),(7,'000003'),(8,'000003'),(9,'000004'),(10,'000005'),(11,'000005'),(12,'000005'),(13,'000005'),(14,'000005'),(15,'000005'),(16,'000005'),(17,'000005'),(18,'000005'),(19,'000006');
 /*!40000 ALTER TABLE `indentificador` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -377,7 +377,7 @@ CREATE TABLE `propietarios` (
   PRIMARY KEY (`idpropietarios`),
   KEY `fk_propietarios_indentificador_idx` (`indentificador_id`),
   CONSTRAINT `fk_propietarios_indentificador` FOREIGN KEY (`indentificador_id`) REFERENCES `indentificador` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -386,7 +386,7 @@ CREATE TABLE `propietarios` (
 
 LOCK TABLES `propietarios` WRITE;
 /*!40000 ALTER TABLE `propietarios` DISABLE KEYS */;
-INSERT INTO `propietarios` VALUES (1,'ORE ICHACCAYA, Tulio Lison','70421319','Persona Juridica','Propietario','Jr. Libertadores Mz K lote 5 ','Quinua','Huamanga','Ayacucho',1),(2,'QUISPE CALLAÑAUPA VIDAL','73458963','Persona Natural','Propietario','AV MANALLASAQ','Carmen Alto','Huamanga','Ayacucho',1),(4,'QUISPE CALLAÑAUPA VIDAL','70422589','Persona Natural','Propietario','LOS ANGELES','SAN JUAN','HUAMANGA','AYACUCHO',5),(5,'SARA SARMIENTO VARGAS','78965423','Persona Natural','Conyugue ','LOS ANGELES','SAN JUAN ','HUAMANGA','AYACUCHO',5);
+INSERT INTO `propietarios` VALUES (1,'ORE ICHACCAYA, Tulio Lison','70421319','Persona Juridica','Propietario','Jr. Libertadores Mz K lote 5 ','Quinua','Huamanga','Ayacucho',1),(2,'QUISPE CALLAÑAUPA VIDAL','73458963','Persona Natural','Propietario','AV MANALLASAQ','Carmen Alto','Huamanga','Ayacucho',1),(4,'QUISPE CALLAÑAUPA VIDAL','70422589','Persona Natural','Propietario','LOS ANGELES','SAN JUAN','HUAMANGA','AYACUCHO',5),(5,'SARA SARMIENTO VARGAS','78965423','Persona Natural','Conyugue ','LOS ANGELES','SAN JUAN ','HUAMANGA','AYACUCHO',5),(6,'NERY LUZ DE LA CRUZ AYME','71946323','Persona_natural','Propietario','Jr. Sallally','Quinua','Huamanga','Ayacucho',8),(7,'SANDRA JACQUELINE FLORES CAVERO','71985463','Persona_natural','Propietario','Jr. Suares','San Juan','Huamanga','Ayacucho',9),(8,'ILDA NILA ICHACCAYA VELARDE','28240364','Persona_natural','Propietario','Los Libertadores S/N','Quinua','Huamanga','Ayacucho',19);
 /*!40000 ALTER TABLE `propietarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -547,6 +547,268 @@ LOCK TABLES `valores_edificacion` WRITE;
 INSERT INTO `valores_edificacion` VALUES (1,'A','651.42','338.72','240.34','257.10','324.44','115.06','410.02',1),(2,'B','387.55','232.87','200.40','227.52','259.12','82.20','241.16',1),(3,'C','281.18','162.96','129.68','166.00','214.46','53.67','179.45',1),(4,'D','259.72','110.32','106.33','97.36','164.04','32.83','101.68',1),(5,'E','203.89','50.65','87.94','74.37','136.47','16.10','56.59',1),(6,'F','127.14','40.46','71.82','57.51','81.38','13.68','36.78',1),(7,'G','74.91','0','53.72','33.89','60.45','9.40','21.67',1),(8,'H','0','0','29.03','16.94','24.18','0','0',1),(9,'I','0','0','6.39','0','0','0','0',1),(10,'A','603.35','313.72','222.60','238.13','300.49','106.57','379.76',2),(11,'B','358.95','215.68','185.61','210.72','240.00','76.13','223.36',2),(12,'C','260.43','150.93','120.11','153.75','198.63','49.70','166.20',2),(13,'D','240.55','102.17','98.49','90.18','151.93','30.41','94.18',2),(14,'E','188.84','46.91','81.45','68.88','126.40','14.91','52.41',2),(15,'F','117.76','37.48','66.52','53.27','75.37','12.67','34.07',2),(16,'G','69.38','0','49.76','31.38','55.99','8.71','20.07',2),(17,'H','0','0','26.88','15.69','22.40','0','0',2),(18,'I','0','0','5.91','0','0','0','0',2);
 /*!40000 ALTER TABLE `valores_edificacion` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Dumping events for database 'dbpredios'
+--
+
+--
+-- Dumping routines for database 'dbpredios'
+--
+/*!50003 DROP PROCEDURE IF EXISTS `insertPredio` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insertPredio`(
+    IN p_codigo VARCHAR(50),
+    IN p_contribuyente VARCHAR(100),
+    IN p_razon_social VARCHAR(100),
+    IN p_dni VARCHAR(20),
+    IN p_nombre VARCHAR(50),
+    IN p_apellido_p VARCHAR(50),
+    IN p_apellido_m VARCHAR(50),
+    IN p_direccion VARCHAR(150),
+    IN p_distrito VARCHAR(50),
+    IN p_provincia VARCHAR(50),
+    IN p_departamento VARCHAR(50)
+)
+BEGIN
+    DECLARE v_id_codigo INT;
+
+    -- Insertar en la tabla 'indentificador' y obtener el ID generado
+    INSERT INTO indentificador (codigo) VALUES (p_codigo);
+    SET v_id_codigo = LAST_INSERT_ID();
+
+    -- Insertar en la tabla 'propietarios' usando el ID obtenido
+    INSERT INTO propietarios (nombre_completo, dni, razon_social, tipo, direccion, distrito, provincia, departamento, indentificador_id)
+    VALUES (p_contribuyente, p_dni, p_razon_social, 'Natural', p_direccion, p_distrito, p_provincia, p_departamento, v_id_codigo);
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `insertPropietario` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insertPropietario`(
+    IN p_codigo VARCHAR(50),
+    IN p_contribuyente VARCHAR(100),
+    IN p_razon_social VARCHAR(100),
+    IN p_dni VARCHAR(20),
+    IN p_nombre VARCHAR(100),
+    IN p_apellido_p VARCHAR(100),
+    IN p_apellido_m VARCHAR(100),
+    IN p_direccion VARCHAR(255),
+    IN p_distrito VARCHAR(100),
+    IN p_provincia VARCHAR(100),
+    IN p_departamento VARCHAR(100)
+)
+BEGIN
+    DECLARE new_id INT;
+
+    -- Insertar en indentificador
+    INSERT INTO indentificador (codigo) VALUES (p_codigo);
+    SET new_id = LAST_INSERT_ID();
+
+    -- Insertar en propietarios
+    INSERT INTO propietarios (indentificador_id, nombre_completo, dni, razon_social, tipo, direccion, distrito, provincia, departamento) 
+    VALUES (new_id, CONCAT(p_nombre, ' ', p_apellido_p, ' ', p_apellido_m), p_dni, p_razon_social, p_contribuyente, p_direccion, p_distrito, p_provincia, p_departamento);
+    
+    -- Retornar el ID del propietario insertado
+    SELECT new_id AS id;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `ObtenerPropietariosPorCodigo` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ObtenerPropietariosPorCodigo`(IN codigo_buscar VARCHAR(50))
+BEGIN
+    DECLARE identificador_id INT;
+
+    -- Buscar el ID del identificador según el código ingresado
+    SELECT id INTO identificador_id 
+    FROM indentificador 
+    WHERE codigo = codigo_buscar 
+    LIMIT 1;
+
+    -- Retornar la lista de propietarios asociados al identificador encontrado
+    SELECT * 
+    FROM propietarios 
+    WHERE indentificador_id = identificador_id;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `obtener_predios_por_codigo` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `obtener_predios_por_codigo`(
+    IN p_codigo VARCHAR(10) -- Parámetro de entrada para el código
+)
+BEGIN
+    -- Realizar la consulta con INNER JOIN
+   SELECT 
+        p.idpredios,
+        p.denominado,
+        p.sector,
+        p.distrito,
+        p.provincia,
+        p.departamento,
+        p.cod_predial,
+        p.cod_catastral
+    FROM indentificador i
+    INNER JOIN predios p ON i.id = p.indentificador_id
+    WHERE i.codigo LIKE p_codigo;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_eliminar_predio` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_eliminar_predio`(
+    IN p_id INT -- ID del predio que se desea eliminar
+)
+BEGIN
+    DECLARE v_resultado INT; -- Variable local para almacenar el resultado
+
+    -- Intentar eliminar el registro
+    DELETE FROM `predios`
+    WHERE `idpredios` = p_id;
+
+    -- Verificar si se eliminó algún registro
+    IF ROW_COUNT() > 0 THEN
+        -- Si se eliminó, guardar el ID eliminado
+        SET v_resultado = p_id;
+    ELSE
+        -- Si no se encontró el registro, guardar 0
+        SET v_resultado = 0;
+    END IF;
+
+    -- Retornar el resultado
+    SELECT v_resultado AS id_eliminado;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_eliminar_usuario` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_AUTO_VALUE_ON_ZERO' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_eliminar_usuario`(
+    IN p_id INT -- ID del usuario que se desea eliminar
+)
+BEGIN
+    DECLARE v_resultado INT; -- Variable local para almacenar el resultado
+
+    -- Intentar eliminar el registro
+    DELETE FROM tb_usuario
+    WHERE idtb_usuario = p_id;
+
+    -- Verificar si se eliminó algún registro
+    IF ROW_COUNT() > 0 THEN
+        -- Si se eliminó, guardar el ID eliminado
+        SET v_resultado = p_id;
+    ELSE
+        -- Si no se encontró el registro, guardar 0
+        SET v_resultado = 0;
+    END IF;
+
+    -- Retornar el resultado
+    SELECT v_resultado AS id_eliminado;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_loging` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_AUTO_VALUE_ON_ZERO' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_loging`(
+    IN p_usuario VARCHAR(50),     -- Usuario ingresado
+    IN p_password VARCHAR(255)   -- Contraseña ingresada
+)
+BEGIN
+    DECLARE v_id_usuario INT;  -- Variable para almacenar el ID del usuario
+    
+    -- Buscar el ID del usuario que coincida con las credenciales
+    SELECT idtb_usuario
+    INTO v_id_usuario
+    FROM tb_usuario
+    WHERE usuario = p_usuario AND password = p_password
+    LIMIT 1;
+    
+    -- Retornar el ID del usuario si existe o 0 si no existe
+    IF v_id_usuario IS NOT NULL THEN
+        SELECT v_id_usuario AS id_usuario;
+    ELSE
+        SELECT 0 AS id_usuario;
+    END IF;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -557,4 +819,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-04-10 20:15:36
+-- Dump completed on 2025-04-12  9:00:08
