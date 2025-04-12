@@ -19,6 +19,7 @@
     if ($option == "busca_codigo") {
         if($_POST){
             $codIdentificador=$_POST["codigo"];
+           
             $arrayPropietarios = $objPropietario->getCodPropietario($codIdentificador);
             
             if(empty($arrayPropietarios)){

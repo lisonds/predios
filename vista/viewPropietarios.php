@@ -156,17 +156,17 @@
                                             <!-- Código Predial -->
                                             <div class="col-md-6">
                                                 <label for="direccion" class="form-label fw-bold">Direccion Fiscal en DNI</label>
-                                                <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Ingrese el departamento">
+                                                <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Ingrese la direccion">
                                             </div>
 
                                             <!-- Código Catastral -->
                                             <div class="col-md-3">
                                                 <label for="distrito" class="form-label fw-bold">Distrito</label>
-                                                <input type="text" class="form-control" id="distrito" name="distrito" placeholder="Ingrese el código catastral">
+                                                <input type="text" class="form-control" id="distrito" name="distrito" placeholder="Ingrese el distrito">
                                             </div>
                                             <div class="col-md-3">
                                                 <label for="provincia" class="form-label fw-bold">Provincia</label>
-                                                <input type="text" class="form-control" id="provincia" name="provincia" placeholder="Ingrese el código catastral">
+                                                <input type="text" class="form-control" id="provincia" name="provincia" placeholder="Ingrese la provincia">
                                             </div>
                                         </div>
                                         <div class="row g-3">
