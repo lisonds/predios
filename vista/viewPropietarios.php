@@ -173,7 +173,7 @@
                                             <!-- Código Predial -->
                                             <div class="col-md-6">
                                                 <label for="departamento" class="form-label fw-bold">Departamento</label>
-                                                <input type="text" class="form-control" id="departamento" name="    " placeholder="Ingrese el departamento">
+                                                <input type="text" class="form-control" id="departamento" name="departamento" placeholder="Ingrese el departamento">
                                             </div>                                        
                                         </div>
 

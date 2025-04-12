@@ -35,7 +35,7 @@ require_once "../libreria/conexion.php";
             $sql = "CALL insertPropietario(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             $query = $this->conexion->prepare($sql);
             $query->bind_param("sssssssssss",//esto son tipos de datos para cada uno 
-                $strCodigo, $strContribuyente, $strRsocial, $strDni, 
+                $strCodigo, $strcontribuyente, $strRsocial, $strDni, 
                 $strNombre, $strApellidoP, $strApellidoM, 
                 $strDireccion, $strDistrito, $strProvincia, $strDepartamento
             );
