@@ -44,23 +44,23 @@ async function buscarCodigo(item) {
                  data.forEach(item => {
                      // Creamos una nueva fila
                      let newtr = document.createElement("tr");
-                     newtr.id = "row_" + item.idpredios;
+                     newtr.id = "row_" + item.idcontribuyente;
  
                      // Asignamos el contenido HTML a la fila
                      newtr.innerHTML = `
-                         <td>${item.idpredios}</td>
+                         <td>${item.idcontribuyente}</td>
                          <td>
                              <button 
                                  class="btn btn-primary btn-sm" 
                                  type="button" 
                                  data-bs-toggle="collapse" 
-                                 data-bs-target="#info${item.idpredios}" 
+                                 data-bs-target="#info${item.idcontribuyente}" 
                                  aria-expanded="false" 
-                                 aria-controls="info${item.idpredios}">
+                                 aria-controls="info${item.idcontribuyente}">
                                  <i class="ri-menu-add-fill"></i>
                              </button>
                          </td>
-                         <td style="text-transform: uppercase;">Predio Denominado ${item.denominado} en el Sector ${item.sector}</td>
+                         <td style="text-transform: uppercase;">Nombres ${item.nombres} en el Sector ${item.nombres}</td>
                          <td>${item.options}</td>
                          
                          
@@ -69,23 +69,23 @@ async function buscarCodigo(item) {
                      // Creamos la fila colapsable para la información extra
                      let collapseRow = document.createElement("tr");
                      collapseRow.className = "collapse";
-                     collapseRow.id = `info${item.idpredios}`;
+                     collapseRow.id = `info${item.idcontribuyente}`;
                      collapseRow.innerHTML = `
                          <td colspan="7" class="bg-light">
                              <div class="p-3 rounded border">
                                  <!-- Diseño Vertical para Ubicación -->
                                  <div class="d-flex flex-wrap gap-4 align-items-center">
                                      <div>
-                                         <strong><i class="bi bi-geo-alt-fill"></i> En El Distrito de:</strong> 
-                                         <span class="text-primary">${item.distrito}</span>
+                                         <strong><i class="bi bi-geo-alt-fill"></i> Nombres:</strong> 
+                                         <span class="text-primary">${item.nombres}</span>
                                      </div>
                                      <div>
-                                         <strong><i class="bi bi-map-fill"></i> Provincia de:</strong> 
-                                         <span class="text-primary">${item.provincia}</span>
+                                         <strong><i class="bi bi-map-fill"></i> Apellido Paterno:</strong> 
+                                         <span class="text-primary">${item.apellidoMaterno}</span>
                                      </div>
                                      <div>
-                                         <strong><i class="bi bi-globe"></i> Departamento de:</strong> 
-                                         <span class="text-primary">${item.departamento}</span>
+                                         <strong><i class="bi bi-globe"></i> Apellido Materno:</strong> 
+                                         <span class="text-primary">${item.apellidoMaterno}</span>
                                      </div>
                                  </div>
  

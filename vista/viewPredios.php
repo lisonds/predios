@@ -15,7 +15,7 @@
             <!-- start: Navbar -->
             <nav class="px-3 py-2 bg-white rounded shadow">
                 <i class="ri-menu-line sidebar-toggle me-3 d-block d-md-none"></i>
-                <h5 class="fw-bold mb-0 me-auto">Predios por codigo</h5>
+                <h5 class="fw-bold mb-0 me-auto">PREDIOS POR CODIGO</h5>
                 <div class="dropdown me-3 d-none d-sm-block">
                     <div class="cursor-pointer dropdown-toggle navbar-link" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="ri-notification-line"></i>
@@ -36,7 +36,7 @@
                 </div>
                 <div class="dropdown">
                     <div class="d-flex align-items-center cursor-pointer dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                        <span class="me-2 d-none d-sm-block">John Doe</span>
+                        <span class="me-2 d-none d-sm-block">Tulio Ore</span>
                         <img class="navbar-profile-image" src="https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cGVyc29ufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="Image">
                     </div>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
@@ -59,18 +59,19 @@
                     <button 
                         class="btn btn-primary rounded-pill ms-2" 
                         id="searchButton">
-                        <i class="ri-search-line"></i>
+                        <i class="ri-search-line">Buscar</i>
                     </button>
                     
                 </div>
 
-                <!-- Botón para agregar usuario -->
+                <!-- Botón para agregar predio -->
                 <button 
                     class="btn btn-success mb-3" 
                     data-bs-toggle="modal" 
                     data-bs-target="#modalRegistroPredio" 
                     id="addPredioButton">
-                    Agregar Predio
+                    <i class="fa-solid fa-plus">Agregar Predio</i>
+                    
                 </button>
                     <!-- Modal -->
                     <div class="modal fade" id="modalRegistroPredio" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
@@ -90,13 +91,13 @@
                                             <!-- Predio Denominado -->
                                             <div class="col-md-8">
                                                 <label for="predioDenominado" class="form-label fw-bold">Predio Denominado</label>
-                                                <input type="text" class="form-control" id="predioDenominado" name="predioDenominado" placeholder="Ingrese el nombre del predio">
+                                                <input type="text" class="form-control" id="predioDenominado" name="predioDenominado" placeholder="Ingrese el nombre del predio" required>
                                             </div>
 
                                             <!-- Sector -->
                                             <div class="col-md-4">
                                                 <label for="sector" class="form-label fw-bold">Sector</label>
-                                                <input type="text" class="form-control" id="sector" name="sector" placeholder="Ingrese el sector">
+                                                <input type="text" class="form-control" id="sector" name="sector" placeholder="Ingrese el sector" required>
                                             </div>
                                         </div>
 
@@ -104,19 +105,19 @@
                                             <!-- Distrito -->
                                             <div class="col-md-4">
                                                 <label for="distrito" class="form-label fw-bold">Distrito</label>
-                                                <input type="text" class="form-control" id="distrito" name="distrito" placeholder="Ingrese el distrito">
+                                                <input type="text" class="form-control" id="distrito" name="distrito" placeholder="Ingrese el distrito" required>
                                             </div>
 
                                             <!-- Provincia -->
                                             <div class="col-md-4">
                                                 <label for="provincia" class="form-label fw-bold">Provincia</label>
-                                                <input type="text" class="form-control" id="provincia" name="provincia" placeholder="Ingrese la provincia">
+                                                <input type="text" class="form-control" id="provincia" name="provincia" placeholder="Ingrese la provincia" required>
                                             </div>
 
                                             <!-- Departamento -->
                                             <div class="col-md-4">
                                                 <label for="departamento" class="form-label fw-bold">Departamento</label>
-                                                <input type="text" class="form-control" id="departamento" name="departamento" placeholder="Ingrese el departamento">
+                                                <input type="text" class="form-control" id="departamento" name="departamento" placeholder="Ingrese el departamento" required>
                                             </div>
                                         </div>
 
@@ -125,13 +126,13 @@
                                             <!-- Código Predial -->
                                             <div class="col-md-6">
                                                 <label for="codigoPredial" class="form-label fw-bold">Código Predial</label>
-                                                <input type="text" class="form-control" id="codigoPredial" name="codigoPredial" placeholder="Ingrese el código predial">
+                                                <input type="text" class="form-control" id="codigoPredial" name="codigoPredial" placeholder="Ingrese el código predial" required>
                                             </div>
 
                                             <!-- Código Catastral -->
                                             <div class="col-md-6">
                                                 <label for="codigoCatastral" class="form-label fw-bold">Código Catastral</label>
-                                                <input type="text" class="form-control" id="codigoCatastral" name="codigoCatastral" placeholder="Ingrese el código catastral">
+                                                <input type="text" class="form-control" id="codigoCatastral" name="codigoCatastral" placeholder="Ingrese el código catastral" required>
                                             </div>
                                         </div>
 

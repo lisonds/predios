@@ -1,5 +1,5 @@
 <?php
-    require 'template/footer.php';  // Incluye el header
+    require 'template/header.php';  // Incluye el header
     
     // Contenido principal de la página
     ?>
@@ -172,7 +172,7 @@
 
 
  <?php
-    require 'template/header.php';  // Incluye el header
+    require 'template/footer.php';  // Incluye el header
     
     // Contenido principal de la página
     ?>
