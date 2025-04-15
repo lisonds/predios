@@ -310,7 +310,7 @@ CREATE TABLE `indentificador` (
   `id` int NOT NULL AUTO_INCREMENT,
   `codigo` varchar(6) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -319,7 +319,7 @@ CREATE TABLE `indentificador` (
 
 LOCK TABLES `indentificador` WRITE;
 /*!40000 ALTER TABLE `indentificador` DISABLE KEYS */;
-INSERT INTO `indentificador` VALUES (1,'000001'),(5,'000002'),(6,'000003'),(7,'000003'),(8,'000003'),(9,'000004'),(10,'000005'),(11,'000005'),(12,'000005'),(13,'000005'),(14,'000005'),(15,'000005'),(16,'000005'),(17,'000005'),(18,'000005'),(19,'000006');
+INSERT INTO `indentificador` VALUES (1,'000001'),(5,'000002'),(6,'000003'),(7,'000003'),(8,'000003'),(9,'000004'),(10,'000005'),(11,'000005'),(12,'000005'),(13,'000005'),(14,'000005'),(15,'000005'),(16,'000005'),(17,'000005'),(18,'000005'),(19,'000006'),(20,'000007');
 /*!40000 ALTER TABLE `indentificador` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -343,7 +343,7 @@ CREATE TABLE `predios` (
   PRIMARY KEY (`idpredios`),
   KEY `fk_predios_indentificador_idx` (`indentificador_id`),
   CONSTRAINT `fk_predios_indentificador` FOREIGN KEY (`indentificador_id`) REFERENCES `indentificador` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -352,7 +352,7 @@ CREATE TABLE `predios` (
 
 LOCK TABLES `predios` WRITE;
 /*!40000 ALTER TABLE `predios` DISABLE KEYS */;
-INSERT INTO `predios` VALUES (1,'Cheqo Munay','Mansilla','Quinua','Huamanga','Ayacucho','25698653','25635412',1),(2,'Curcuman','Ananzayocc','Huamanguilla','Huamanga','Ayacucho','4568956','45_45689458_45',1),(13,'QORIWILLCA','CCCERA','OCROS','Huamanga','Ayacucho','125489554','78_649856_455',5),(14,'SACHARAQAY','LORENSAYOCC','OCROS','Huamanga','Ayacucho','125489458','78_6488556_455',5);
+INSERT INTO `predios` VALUES (1,'Cheqo Munay','Mansilla','Quinua','Huamanga','Ayacucho','25698653','25635412',1),(2,'Curcuman','Ananzayocc','Huamanguilla','Huamanga','Ayacucho','4568956','45_45689458_45',1),(13,'QORIWILLCA','CCCERA','OCROS','Huamanga','Ayacucho','125489554','78_649856_455',5),(14,'SACHARAQAY','LORENSAYOCC','OCROS','Huamanga','Ayacucho','125489458','78_6488556_455',5),(15,'CheqoPunku','Lorensayocc','Quinua','Huamanga','Ayacucho','12659845','45_4569+832_4',1);
 /*!40000 ALTER TABLE `predios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -377,7 +377,7 @@ CREATE TABLE `propietarios` (
   PRIMARY KEY (`idpropietarios`),
   KEY `fk_propietarios_indentificador_idx` (`indentificador_id`),
   CONSTRAINT `fk_propietarios_indentificador` FOREIGN KEY (`indentificador_id`) REFERENCES `indentificador` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -386,7 +386,7 @@ CREATE TABLE `propietarios` (
 
 LOCK TABLES `propietarios` WRITE;
 /*!40000 ALTER TABLE `propietarios` DISABLE KEYS */;
-INSERT INTO `propietarios` VALUES (1,'ORE ICHACCAYA, Tulio Lison','70421319','Persona Juridica','Propietario','Jr. Libertadores Mz K lote 5 ','Quinua','Huamanga','Ayacucho',1),(2,'QUISPE CALLAÑAUPA VIDAL','73458963','Persona Natural','Propietario','AV MANALLASAQ','Carmen Alto','Huamanga','Ayacucho',1),(4,'QUISPE CALLAÑAUPA VIDAL','70422589','Persona Natural','Propietario','LOS ANGELES','SAN JUAN','HUAMANGA','AYACUCHO',5),(5,'SARA SARMIENTO VARGAS','78965423','Persona Natural','Conyugue ','LOS ANGELES','SAN JUAN ','HUAMANGA','AYACUCHO',5),(6,'NERY LUZ DE LA CRUZ AYME','71946323','Persona_natural','Propietario','Jr. Sallally','Quinua','Huamanga','Ayacucho',8),(7,'SANDRA JACQUELINE FLORES CAVERO','71985463','Persona_natural','Propietario','Jr. Suares','San Juan','Huamanga','Ayacucho',9),(8,'ILDA NILA ICHACCAYA VELARDE','28240364','Persona_natural','Propietario','Los Libertadores S/N','Quinua','Huamanga','Ayacucho',19);
+INSERT INTO `propietarios` VALUES (1,'ORE ICHACCAYA, Tulio Lison','70421319','Persona Juridica','Propietario','Jr. Libertadores Mz K lote 5 ','Quinua','Huamanga','Ayacucho',1),(2,'QUISPE CALLAÑAUPA VIDAL','73458963','Persona Natural','Propietario','AV MANALLASAQ','Carmen Alto','Huamanga','Ayacucho',1),(4,'QUISPE CALLAÑAUPA VIDAL','70422589','Persona Natural','Propietario','LOS ANGELES','SAN JUAN','HUAMANGA','AYACUCHO',5),(5,'SARA SARMIENTO VARGAS','78965423','Persona Natural','Conyugue ','LOS ANGELES','SAN JUAN ','HUAMANGA','AYACUCHO',5),(6,'NERY LUZ DE LA CRUZ AYME','71946323','Persona_natural','Propietario','Jr. Sallally','Quinua','Huamanga','Ayacucho',8),(7,'SANDRA JACQUELINE FLORES CAVERO','71985463','Persona_natural','Propietario','Jr. Suares','San Juan','Huamanga','Ayacucho',9),(8,'ILDA NILA ICHACCAYA VELARDE','28240364','Persona_natural','Propietario','Los Libertadores S/N','Quinua','Huamanga','Ayacucho',19),(9,'ILDA NILA ICHACCAYA VELARDE','28240364','Persona_natural','Propietario','Jr. Sallally','Quinua','Huamanga','Ayacucho',20);
 /*!40000 ALTER TABLE `propietarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -549,12 +549,67 @@ INSERT INTO `valores_edificacion` VALUES (1,'A','651.42','338.72','240.34','257.
 UNLOCK TABLES;
 
 --
--- Dumping events for database 'dbpredios'
---
-
---
 -- Dumping routines for database 'dbpredios'
 --
+/*!50003 DROP PROCEDURE IF EXISTS `agregarPredio` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `agregarPredio`(
+    IN p_codigo VARCHAR(50),
+    IN p_denominado VARCHAR(100),
+    IN p_sector VARCHAR(100),
+    IN p_distrito VARCHAR(100),
+    IN p_provincia VARCHAR(100),
+    IN p_departamento VARCHAR(100),
+    IN p_cod_predial VARCHAR(50),
+    IN p_cod_catastral VARCHAR(50),
+    OUT p_idpredios INT
+)
+BEGIN
+    DECLARE v_indentificador_id INT;
+
+    -- Buscar el ID correspondiente al código
+    SELECT id INTO v_indentificador_id
+    FROM indentificador
+    WHERE codigo = p_codigo
+    LIMIT 1;
+
+    -- Insertar en la tabla predios
+    INSERT INTO predios (
+        denominado,
+        sector,
+        distrito,
+        provincia,
+        departamento,
+        cod_predial,
+        cod_catastral,
+        indentificador_id
+    ) VALUES (
+        p_denominado,
+        p_sector,
+        p_distrito,
+        p_provincia,
+        p_departamento,
+        p_cod_predial,
+        p_cod_catastral,
+        v_indentificador_id
+    );
+
+    -- Retornar el id generado
+    SET p_idpredios = LAST_INSERT_ID();
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `insertPredio` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -819,4 +874,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-04-12  9:00:08
+-- Dump completed on 2025-04-14 21:42:26
