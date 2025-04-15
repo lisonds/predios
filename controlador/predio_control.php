@@ -14,11 +14,16 @@
             }else{
                 for ($i=0; $i <count($arrayPredios) ; $i++) { 
                     $idpredio=$arrayPredios[$i]->idpredios;//estamos sacando el id del tabla
-                     $options='<a href="#" class="btn btn-primary btn-sm" 
-                                data-bs-toggle="modal" 
-                                data-bs-target="#modalEditarPredio" 
-                                data-idpredio="'.$idpredio.'"><i class="ri-file-edit-line"></i></a>
-                               <a class="btn btn-danger btn-sm" onclick="DeletePredio('.$idpredio.')"><i class="ri-delete-bin-6-line"></i></a>';
+                    $options = '<a href="#" class="btn btn-primary btn-sm" 
+                                    data-bs-toggle="modal" 
+                                    data-bs-target="#modalEditarPredio" 
+                                    data-idpredio="'.$idpredio.'"><i class="ri-file-edit-line"></i></a>
+                                <a class="btn btn-danger btn-sm" onclick="DeletePredio('.$idpredio.')"><i class="ri-delete-bin-6-line"></i></a>
+                                <a href="calcularAutovaluo.php?idpredio='.$idpredio.'" 
+                                class="btn btn-success btn-sm" 
+                                target="_blank">
+                                Calcular Autovaluo
+                                </a>';
                     $arrayPredios[$i]->options=$options;
     
                 }

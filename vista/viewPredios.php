@@ -163,7 +163,7 @@
                             </tr>
                         </thead>
                         <tbody id="tablaPredios">
-                            <!-- Filas generadas dinámicamente -->
+                            <!-- Filas generadas dinámicamente  por JS-->
                         </tbody>
                     </table>
                 </div>
