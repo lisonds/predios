@@ -26,6 +26,7 @@ async function buscarCodigo(item) {
 
      let formData = new FormData();
      formData.append('codigo', item);
+     //print_er
      try {
          let resp = await fetch(`${base_url}/controlador/propietarios_control.php?propietario=busca_codigo`, {
              method: 'POST', // Enviar con el método POST
@@ -44,32 +45,31 @@ async function buscarCodigo(item) {
                  data.forEach(item => {
                      // Creamos una nueva fila
                      let newtr = document.createElement("tr");
-                     newtr.id = "row_" + item.idcontribuyente;
+                     newtr.id = "row_" + item.idpropietarios;
  
                      // Asignamos el contenido HTML a la fila
                      newtr.innerHTML = `
-                         <td>${item.idcontribuyente}</td>
+                         <td>${item.idpropietarios}</td>
                          <td>
                              <button 
                                  class="btn btn-primary btn-sm" 
                                  type="button" 
                                  data-bs-toggle="collapse" 
-                                 data-bs-target="#info${item.idcontribuyente}" 
+                                 data-bs-target="#info${item.idpropietarios}" 
                                  aria-expanded="false" 
-                                 aria-controls="info${item.idcontribuyente}">
+                                 aria-controls="info${item.idpropietarios}">
                                  <i class="ri-menu-add-fill"></i>
                              </button>
                          </td>
                          <td style="text-transform: uppercase;">Nombres ${item.nombres} en el Sector ${item.nombres}</td>
                          <td>${item.options}</td>
                          
-                         
-                     `;
+                          `;
  
                      // Creamos la fila colapsable para la información extra
                      let collapseRow = document.createElement("tr");
                      collapseRow.className = "collapse";
-                     collapseRow.id = `info${item.idcontribuyente}`;
+                     collapseRow.id = `info${item.idpropietarios}`;
                      collapseRow.innerHTML = `
                          <td colspan="7" class="bg-light">
                              <div class="p-3 rounded border">
@@ -81,11 +81,11 @@ async function buscarCodigo(item) {
                                      </div>
                                      <div>
                                          <strong><i class="bi bi-map-fill"></i> Apellido Paterno:</strong> 
-                                         <span class="text-primary">${item.apellidoMaterno}</span>
+                                         <span class="text-primary">${item.apellido_p}</span>
                                      </div>
                                      <div>
                                          <strong><i class="bi bi-globe"></i> Apellido Materno:</strong> 
-                                         <span class="text-primary">${item.apellidoMaterno}</span>
+                                         <span class="text-primary">${item.apellido_m}</span>
                                      </div>
                                  </div>
  

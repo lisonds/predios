@@ -4,7 +4,7 @@
     //creando la instancia para acceder a modelo
     $objPropietario=new Propietario();
 
-    if ($option == "generateCodigo") {
+ if ($option == "generateCodigo") {
         $arrayPropietario= $objPropietario->GenerarCodigo();
         if(empty($arrayPropietario)){
             $arrayResponse = array('status' => false, 'msg' => 'Error Al Retornar');
@@ -13,10 +13,9 @@
         }
         echo json_encode($arrayResponse);
         die();
-    }
+    } 
 
-
-    if ($option == "busca_codigo") {
+if ($option == "busca_codigo") {
         if($_POST){
             $codIdentificador=$_POST["codigo"];
            
@@ -26,12 +25,12 @@
                 $arrayResponse = array('status' => false,'data'=>'', 'msg' => 'No hay Registros de Propietarios Con Este Codigo');
             }else{
                 for ($i=0; $i <count($arrayPropietarios) ; $i++) { 
-                    $idpropietarios=$arrayPropietarios[$i]->idpropietarios;//estamos sacando el id del tabla
+                    $idpropietario=$arrayPropietarios[$i]->$idpropietario;//estamos sacando el id del tabla
                      $options='<a href="#" class="btn btn-primary btn-sm" 
                                 data-bs-toggle="modal" 
-                                data-bs-target="#modalEditarPredio" 
-                                data-idpredio="'.$idpropietarios.'"><i class="ri-file-edit-line"></i></a>
-                               <a class="btn btn-danger btn-sm" onclick="DeletePredio('.$idpropietarios.')"><i class="ri-delete-bin-6-line"></i></a>';
+                                data-bs-target="#modalEditarPropietario" 
+                                data-idpredio="'.$idpropietario.'"><i class="ri-file-edit-line"></i></a>
+                               <a class="btn btn-danger btn-sm" onclick="DeletePropietario('.$idpropietario.')"><i class="ri-delete-bin-6-line"></i></a>';
                     $arrayPropietarios[$i]->options=$options;
     
                 }
