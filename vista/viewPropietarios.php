@@ -203,9 +203,7 @@
                             <tr>
                                 <th>ID</th>
                                 <th>+</th>
-                                <th>Nombres</th>
-                                <th>Apellidos</th>
-                                <th>Nombres</th>
+                                <th>Nombre Completo</th>
                                 <th>Acción</th>
                                 
                             </tr>

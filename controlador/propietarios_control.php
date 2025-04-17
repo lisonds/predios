@@ -15,36 +15,43 @@
         die();
     } 
 
-if ($option == "busca_codigo") {
-        if($_POST){
-            $codIdentificador=$_POST["codigo"];
-           
+    if ($option == "busca_codigo") {
+        if ($_POST) {
+            $codIdentificador = $_POST["codigo"];
             $arrayPropietarios = $objPropietario->getCodPropietario($codIdentificador);
-            
-            if(empty($arrayPropietarios)){
-                $arrayResponse = array('status' => false,'data'=>'', 'msg' => 'No hay Registros de Propietarios Con Este Codigo');
-            }else{
-                for ($i=0; $i <count($arrayPropietarios) ; $i++) { 
-                    $idpropietario=$arrayPropietarios[$i]->$idpropietario;//estamos sacando el id del tabla
-                     $options='<a href="#" class="btn btn-primary btn-sm" 
-                                data-bs-toggle="modal" 
-                                data-bs-target="#modalEditarPropietario" 
-                                data-idpredio="'.$idpropietario.'"><i class="ri-file-edit-line"></i></a>
-                               <a class="btn btn-danger btn-sm" onclick="DeletePropietario('.$idpropietario.')"><i class="ri-delete-bin-6-line"></i></a>';
-                    $arrayPropietarios[$i]->options=$options;
     
+            if (empty($arrayPropietarios)) {
+                $arrayResponse = array(
+                    'status' => false,
+                    'data' => '',
+                    'msg' => 'No hay Registros de Propietarios Con Este Codigo'
+                );
+            } else {
+                for ($i = 0; $i < count($arrayPropietarios); $i++) {
+                    $idpropietario = $arrayPropietarios[$i]->idpropietarios; // ✅ corregido
+    
+                    $options = '<a href="#" class="btn btn-primary btn-sm" 
+                                    data-bs-toggle="modal" 
+                                    data-bs-target="#modalEditarPropietario" 
+                                    data-idpredio="' . $idpropietario . '"><i class="ri-file-edit-line"></i></a>
+                                <a class="btn btn-danger btn-sm" onclick="DeletePropietario(' . $idpropietario . ')"><i class="ri-delete-bin-6-line"></i></a>';
+    
+                    $arrayPropietarios[$i]->options = $options;
                 }
-                //btn fin
-                $arrayResponse['status']=true;
-                $arrayResponse['data']=$arrayPropietarios;//aqui se le asigna a la data los datos de base de datos
-                $arrayResponse['msg']='Datos Encontrados';
-                
+    
+                $arrayResponse = array(
+                    'status' => true,
+                    'data' => $arrayPropietarios,
+                    'msg' => 'Datos Encontrados'
+                );
             }
+    
+            header('Content-Type: application/json'); // Opcional pero recomendable
             echo json_encode($arrayResponse);
+            die(); // Finaliza correctamente la ejecución
         }
-        die();
-
     }
+    
 
 
 if ($option == "agregar_propietario") {

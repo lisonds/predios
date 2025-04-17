@@ -17,9 +17,7 @@ require_once "../libreria/conexion.php";
            
         }
 
-        public function getCodPropietario(string $codIdentificador){
-            echo("Sí se ejecutó esta función con el código: " . $codIdentificador);
-          
+        public function getCodPropietario(string $codIdentificador){        
             $arrayPropietarios = array();
             $rs = $this->conexion->query("CALL ObtenerPropietariosPorCodigo('{$codIdentificador}')");
         

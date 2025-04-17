@@ -61,7 +61,7 @@ async function buscarCodigo(item) {
                                  <i class="ri-menu-add-fill"></i>
                              </button>
                          </td>
-                         <td style="text-transform: uppercase;">Nombres ${item.nombres} en el Sector ${item.nombres}</td>
+                         <td style="text-transform: uppercase;">${item.nombre_completo}</td>
                          <td>${item.options}</td>
                          
                           `;
@@ -77,29 +77,27 @@ async function buscarCodigo(item) {
                                  <div class="d-flex flex-wrap gap-4 align-items-center">
                                      <div>
                                          <strong><i class="bi bi-geo-alt-fill"></i> Nombres:</strong> 
-                                         <span class="text-primary">${item.nombres}</span>
+                                         <span class="text-primary">${item.direccion}</span>
                                      </div>
-                                     <div>
-                                         <strong><i class="bi bi-map-fill"></i> Apellido Paterno:</strong> 
-                                         <span class="text-primary">${item.apellido_p}</span>
-                                     </div>
-                                     <div>
-                                         <strong><i class="bi bi-globe"></i> Apellido Materno:</strong> 
-                                         <span class="text-primary">${item.apellido_m}</span>
-                                     </div>
+                                     
+                                     
                                  </div>
  
                                  <hr class="my-2">
  
                                  <!-- Diseño Horizontal para los Códigos -->
                                  <div class="d-flex flex-wrap gap-4">
-                                     <div>
-                                         <strong><i class="bi bi-key-fill"></i> Código Predial:</strong> 
-                                         <span class="text-success">${item.cod_predial}</span>
+                                    <div>
+                                         <strong><i class="bi bi-key-fill"></i> Distrito</strong> 
+                                         <span class="text-success">${item.distrito}</span>
                                      </div>
                                      <div>
-                                         <strong><i class="bi bi-code-slash"></i> Código Catastral:</strong> 
-                                         <span class="text-success">${item.cod_catastral}</span>
+                                         <strong><i class="bi bi-key-fill"></i> Provincia</strong> 
+                                         <span class="text-success">${item.provincia}</span>
+                                     </div>
+                                     <div>
+                                         <strong><i class="bi bi-code-slash"></i> Departamento:</strong> 
+                                         <span class="text-success">${item.departamento}</span>
                                      </div>
                                  </div>
                              </div>
