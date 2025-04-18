@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const inputElement = document.getElementById("searchInput");
+    const inputElement = document.getElementById("searchInputPredio");
 
     if (inputElement) {
         // Variable para almacenar el número ingresado como cadena

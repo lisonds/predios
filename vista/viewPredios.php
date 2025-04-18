@@ -9,6 +9,9 @@
     
     // Contenido principal de la página
     ?>
+    <?php
+    $codigo = isset($_GET['codigo']) ? $_GET['codigo'] : '';
+    ?>
     <!-- start: Main -->
     <main class="bg-light">
         <div class="p-2">
@@ -52,10 +55,11 @@
                 <div class="input-group mb-4" style="max-width: 300px; margin: auto;">
                     <input 
                         type="text" 
-                        id="searchInput" 
+                        id="searchInputPredio" 
                         class="form-control rounded-pill" 
                         placeholder="Ingrese código" 
-                        aria-label="Buscar código">
+                        aria-label="Buscar código"
+                        value="<?php echo htmlspecialchars($codigo); ?>">
                     <button 
                         class="btn btn-primary rounded-pill ms-2" 
                         id="searchButton">
@@ -247,6 +251,7 @@
 <script src="../assets/js/jquery.min.js"></script>
 <script src="../assets/js/script-msm.js"></script>
 <script src="js/view-predios.js"></script>
+<script src="../assets/js/script-general.js"></script>
 
  <?php
     require 'template/header.php';  // Incluye el header
