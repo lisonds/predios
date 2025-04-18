@@ -115,6 +115,13 @@ require_once "../libreria/conexion.php";
             }
         }
 
+
+        public function  EliminarPropietario(int $id){
+            $sql=$this->conexion->query("CALL sp_eliminar_propietario({$id})");
+            $sql=$sql->fetch_object();
+            return $sql;
+        }
+
         
         
     }

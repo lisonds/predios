@@ -122,7 +122,7 @@
     if ($option == "Delete") { 
         if($_POST){
             if(empty($_POST['idPredios'])){
-                $arraResponse=array('status'=>false,msg=>'Error de datos');
+                $arraResponse=array('status'=>false,'msg'=>'Error de datos');
             }else{
                 $idUsuario=intval($_POST["idPredios"]);
                 $arrayInfo = $objPredio->EliminarPredio($idUsuario);
