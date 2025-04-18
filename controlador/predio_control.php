@@ -19,7 +19,7 @@
                                     data-bs-target="#modalEditarPredio" 
                                     data-idpredio="'.$idpredio.'"><i class="ri-file-edit-line"></i></a>
                                 <a class="btn btn-danger btn-sm" onclick="DeletePredio('.$idpredio.')"><i class="ri-delete-bin-6-line"></i></a>
-                                <a href="calcularAutovaluo.php?idpredio='.$idpredio.'" 
+                                <a href="viewRuralUrbano.php?idpredio='.$idpredio.'" 
                                 class="btn btn-success btn-sm" 
                                 target="_blank">
                                 Calcular Autovaluo
