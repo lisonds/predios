@@ -134,7 +134,7 @@
             <li class="sidebar-menu-item has-dropdown">
                 <a href="#">
                     <i class="ri-user-line sidebar-menu-item-icon"></i>
-                    Authentication
+                    Autenticacion
                     <i class="ri-arrow-down-s-line sidebar-menu-item-accordion ms-auto"></i>
                 </a>
                 <ul class="sidebar-dropdown-menu">
@@ -165,27 +165,28 @@
                     </li>
                 </ul>
             </li>
-            <li class="sidebar-menu-divider mt-3 mb-1 text-uppercase">Apps</li>
+            <li class="sidebar-menu-divider mt-3 mb-1 text-uppercase">DATOS ESTATICOS</li>
             <li class="sidebar-menu-item has-dropdown">
                 <a href="#">
-                    <i class="ri-shopping-cart-2-line sidebar-menu-item-icon"></i>
-                    eCommerce
+                    
+                    <i class="ri-table-line sidebar-menu-item-icon"></i>
+                    LISTA DE VALORES ARANCELARIOS DE TERRENOS RUSTICOS 
                     <i class="ri-arrow-down-s-line sidebar-menu-item-accordion ms-auto"></i>
                 </a>
                 <ul class="sidebar-dropdown-menu">
                     <li class="sidebar-dropdown-menu-item">
                         <a href="#">
-                            Shop
+                            tierras aptas para cultivo limpio
                         </a>
                     </li>
                     <li class="sidebar-dropdown-menu-item">
                         <a href="#">
-                            Checkout
+                            tierras aptas para cultivo permanente
                         </a>
                     </li>
                     <li class="sidebar-dropdown-menu-item">
                         <a href="#">
-                            Details
+                            Tierras aptas para Pastos
                         </a>
                     </li>
                     <li class="sidebar-dropdown-menu-item">
@@ -198,7 +199,7 @@
             <li class="sidebar-menu-item">
                 <a href="#">
                     <i class="ri-mail-line sidebar-menu-item-icon"></i>
-                    Email
+                    LISTA DE VALORES ARANCELARIOS DE EIDFICACIONES 
                 </a>
             </li>
             <li class="sidebar-menu-item">
