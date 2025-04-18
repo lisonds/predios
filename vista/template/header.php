@@ -198,7 +198,7 @@
             </li>
             <li class="sidebar-menu-item">
                 <a href="#">
-                    <i class="ri-mail-line sidebar-menu-item-icon"></i>
+                    <i class="ri-table-fill sidebar-menu-item-icon"></i>
                     LISTA DE VALORES ARANCELARIOS DE EIDFICACIONES 
                 </a>
             </li>
