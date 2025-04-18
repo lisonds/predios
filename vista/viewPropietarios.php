@@ -78,6 +78,9 @@
                     id="addPropietarioButton">
                     Agregar Propietario
                 </button>
+                <button class="btn btn-info mb-3">
+                    Ver Sus Predios
+                </button>
                     <!-- Modal -->
                     <div class="modal fade" id="modalRegistroPropietario" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-xl">

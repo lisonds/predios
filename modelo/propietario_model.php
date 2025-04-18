@@ -41,53 +41,31 @@ require_once "../libreria/conexion.php";
                 '{$strDireccion}',
                 '{$strDistrito}',
                 '{$strProvincia}',
-                '{$strDepartamento}',
-                @idPropietarios
+                '{$strDepartamento}'
             )";
 
             $result = $this->conexion->query($query);
 
-               if ($result) {
-                        // Recuperar el valor del parámetro OUT (@idPropietarios)
-                        $queryResult = $this->conexion->query("SELECT @idPropietarios AS idPropietarios");
-                
-                        if ($queryResult) {
-                            $row = $queryResult->fetch_assoc();
-                            $idPropietarios = $row['idPropietarios'] ?? null;
-                
-                            if ($idPropietarios) {
-                                // Retornar el ID del predio y el mensaje de éxito
-                                return (object) [
-                                    "status" => true,
-                                    "idPropietarios" => $idPropietarios,
-                                    "msg" => "Se registró correctamente un Propiesatrio"
-                                ];
-                            } else {
-                                // Manejo en caso de no obtener un ID válido
-                                return (object) [
-                                    "status" => false,
-                                    "msg" => "El procedimiento no devolvió un ID válido"
-                                ];
-                            }
-                        } else {
-                            // Error al ejecutar la consulta de recuperación de @idpredios
-                            return (object) [
-                                "status" => false,
-                                "msg" => "Error al recuperar el ID: " . $this->conexion->error
-                            ];
-                        }
-                    } else {
-                        // Error al ejecutar el procedimiento almacenado
-                        return (object) [
-                            "status" => false,
-                            "msg" => "Error al ejecutar el procedimiento almacenado: " . $this->conexion->error
-                        ];
-                    }           
+            if ($result) {
+                $row = $result->fetch_assoc();
+                $idPropietarios = $row['id_propietario'] ?? null;
+            
+                return (object)[
+                    "status" => true,
+                    "idPropietarios" => $idPropietarios,
+                    "msg" => "Se registró correctamente un Propietario"
+                ];
+            } else {
+                return (object)[
+                    "status" => false,
+                    "msg" => "Error al ejecutar el procedimiento almacenado: " . $this->conexion->error
+                ];
+            }     
 
         
         }
 
-          public function VerPropietarioId(int $idPropietario){
+        public function VerPropietarioId(int $idPropietario){
             $sql=$this->conexion->query("SELECT * FROM propietarios where idPropietarios='$idPropietario'");
             $sql=$sql->fetch_object();
             return $sql;
