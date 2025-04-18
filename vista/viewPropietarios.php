@@ -78,9 +78,8 @@
                     id="addPropietarioButton">
                     Agregar Propietario
                 </button>
-                <button class="btn btn-info mb-3">
-                    Ver Sus Predios
-                </button>
+                <a id="linkAutovaluo" href="#" class="btn btn-info mb-3">Ver Sus Predios</a>
+                
                     <!-- Modal -->
                     <div class="modal fade" id="modalRegistroPropietario" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-xl">
@@ -348,6 +347,7 @@
 <script src="../assets/js/jquery.min.js"></script>
 <script src="../assets/js/script-msm.js"></script>
 <script src="js/view-propietarios.js"></script>
+<script src="../assets/js/script-general.js"></script>
 
  <?php
     require 'template/header.php';  // Incluye el header
