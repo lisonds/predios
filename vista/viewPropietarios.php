@@ -217,17 +217,17 @@
             
                 
                 <!-- INICIAR MODAL PARA EDITAR -->
-            <div class="modal fade" id="modalEditarContribuyente" tabindex="-1" aria-labelledby="modalEditarcontribuyenteLabel" aria-hidden="true">
+            <div class="modal fade" id="modalEditarPropietario" tabindex="-1" aria-labelledby="modalEditarPropietarioLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="modalEditarContribuyenteLabel">Editar Contribuyente</h5>
+                            <h5 class="modal-title" id="modalEditarPropietarioLabel">Editar Contribuyente</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
                         </div>
                         <div class="modal-body">
                             <form id="formEditarPropietario">
                                 <!-- nombre del propietario (oculto) -->
-                                <input type="hidden" id="idContribuyenteEdit" name="idContribuyente">
+                                <input type="hidden" id="idPropietarioEdit" name="idPropietario">
 
                                 <!-- Información del contribuyente -->
                                 <div class="row g-3">

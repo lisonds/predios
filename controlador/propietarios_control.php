@@ -90,5 +90,44 @@ if ($option == "agregar_propietario") {
     }
     die();
 }
+
+ if ($option == "verPropietario") {
+        if($_POST){
+            $idPropietario=intval($_POST["idPropietario"]);
+            $arrayPredio = $objPredio->VerPropietarioId($idPropietario);
+            if(empty($arrayPropietario)){
+                $arrayResponse = array('status' => false, 'msg' => 'Datos no encontrados');
+            }else{
+                $arrayResponse = array('status' => true, 'msg' => 'Datos Encontrados','data'=>$arrayPropietario);
+            }
+            echo json_encode($arrayResponse);
+        }
+        die();
+
+    }
+
+
+
+    if ($option == "Delete") { 
+        if($_POST){
+            if(empty($_POST['idPropietarios'])){
+                $arraResponse=array('status'=>false,'msg'=>'Error de datos');
+            }else{
+                $idUsuario=intval($_POST["idPropietarios"]);
+                $arrayInfo = $objPropietarios->EliminarPropietario($idUsuario);
+                
+                
+                if($arrayInfo ->id_eliminado){//lo que retorna en base de datos 
+                    $arrayResponse = array('status' =>true, 'msg' => 'Registro Eliminado');
+                }else{
+                    $arrayResponse = array('status' =>false, 'msg' => 'error al Eliminar');
+                }
+                echo json_encode($arrayResponse);
+            }          
+           
+        }
+        die();
+
+    }
    
 ?>
