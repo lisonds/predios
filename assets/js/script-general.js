@@ -25,3 +25,10 @@ window.addEventListener('DOMContentLoaded', function () {
         input.dispatchEvent(event);
     }
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    const inputAnio = document.getElementById('anio');
+    if (inputAnio) {
+      inputAnio.value = new Date().getFullYear();
+    }
+  });
