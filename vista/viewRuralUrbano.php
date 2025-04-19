@@ -127,14 +127,6 @@
                     <i class="ri-survey-fill me-1"></i> INGRESAR DATOS
                 </button>
 
-                    <button class="btn btn-success shadow-sm">
-                    <i class="ri-survey-fill"></i> Ingresar Datos
-                    </button>
-
-                    <button class="btn btn-success shadow-sm">
-                    <i class="ri-survey-fill"></i> Ingresar Datos
-                    </button>
-
                 </div>
                 <div class="info-row">
 
