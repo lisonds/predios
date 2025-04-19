@@ -85,41 +85,52 @@
             <!-- end: Navbar -->
             
             <div class="container">
-    <div class="info-row">
-        <!-- Selector de año -->
-        <div class="year-select">
-            <label for="yearSelect">Año:</label>
-            <select id="yearSelect" name="yearSelect" class="form-select form-select-sm">
-                <?php for ($year = $currentYear; $year >= $startYear; $year--): ?>
-                    <option value="<?php echo $year; ?>" <?php echo ($year == $currentYear) ? 'selected' : ''; ?>>
-                        <?php echo $year; ?>
-                    </option>
-                <?php endfor; ?>
-            </select>
-        </div>
+                <div class="info-row">
+                    <!-- Selector de año -->
+                    <div class="year-select">
+                        <label for="yearSelect" class="year-label">Selecciona Año:</label>
+                        <select id="yearSelect" name="yearSelect" class="form-select form-select-sm">
+                            <?php for ($year = $currentYear; $year >= $startYear; $year--): ?>
+                                <option value="<?php echo $year; ?>" <?php echo ($year == $currentYear) ? 'selected' : ''; ?>>
+                                    <?php echo $year; ?>
+                                </option>
+                            <?php endfor; ?>
+                        </select>
+                    </div>
 
-        <!-- Datos del predio -->
-        <div class="info-block">
-            <div class="info-label">Denominación</div>
-            <div class="info-data">Ejemplo de Predio</div>
-        </div>
+                    <!-- Datos del predio -->
+                    <div class="info-block">
+                        <div class="info-label">Denominado</div>
+                        <div class="info-data"><?php echo strtoupper(htmlspecialchars($predio['denominado'])); ?></div>
+                    </div>
 
-        <div class="info-block">
-            <div class="info-label">Sector</div>
-            <div class="info-data">Sector 1</div>
-        </div>
+                    <div class="info-block">
+                        <div class="info-label">Sector</div>
+                        <div class="info-data"><?php echo strtoupper(htmlspecialchars($predio['sector'])); ?></div>
+                    </div>
 
-        <div class="info-block">
-            <div class="info-label">Código Predial</div>
-            <div class="info-data">123456</div>
-        </div>
+                    <div class="info-block">
+                        <div class="info-label">Código Predial</div>
+                        <div class="info-data"><?php echo strtoupper(htmlspecialchars($predio['cod_predial'])); ?></div>
+                    </div>
 
-        <div class="info-block">
-            <div class="info-label">Código Catastral</div>
-            <div class="info-data">654321</div>
-        </div>
-    </div>
-</div>
+                    <div class="info-block">
+                        <div class="info-label">Código Catastral</div>
+                        <div class="info-data"><?php echo strtoupper(htmlspecialchars($predio['cod_catastral'])); ?></div>
+                    </div>
+                </div>
+            </div>
+            <div class="container mt-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <button class="btn btn-success shadow-sm">
+                    <i class="ri-survey-fill"></i> Ingresar Datos
+                    </button>
+                </div>
+                <div class="info-row">
+
+                </div>
+                    
+            </div>
     </main>
     <!-- end: Main -->
 
