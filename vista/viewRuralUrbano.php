@@ -122,15 +122,22 @@
             </div>
             <div class="container mt-4">
                 <div class="d-flex justify-content-between align-items-center mb-3">
+<<<<<<< Updated upstream
                 <button class="btn btn-success shadow-sm" data-bs-toggle="modal" data-bs-target="#modalPredio">
                     <i class="ri-survey-fill me-1"></i> INGRESAR DATOS
                 </button>
+=======
+                    <button class="btn btn-success shadow-sm">
+                    <i class="ri-survey-fill"></i> Ingresar Datos
+                    </button>
+>>>>>>> Stashed changes
                 </div>
                 <div class="info-row">
 
                 </div>
                     
             </div>
+<<<<<<< Updated upstream
             <!--MODALLLL -->
             <!-- Modal grande -->
                 <div class="modal fade" id="modalPredio" tabindex="-1" aria-labelledby="modalPredioLabel" aria-hidden="true">
@@ -231,6 +238,8 @@
                     </div>
                 </div>
                 </div>
+=======
+>>>>>>> Stashed changes
     </main>
     <!-- end: Main -->
 
