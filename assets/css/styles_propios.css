@@ -113,39 +113,36 @@
 
 .year-select {
   display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  min-width: 220px;
-  flex-shrink: 0;
-  background-color: #f1f3f5;
+  flex-direction: column;
+  background-color: #f8f9fa;
+  padding: 0.8rem 1rem;
   border-radius: 12px;
-  padding: 0.6rem 1rem;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  width: fit-content;
 }
 
-.year-select label {
-  margin-bottom: 0;
+.year-label {
   font-weight: 600;
   color: #343a40;
+  margin-bottom: 0.4rem;
+  font-size: 0.9rem;
 }
 
-.year-select select {
-  width: 100px;
-  border-radius: 6px;
-  border: 1px solid #ced4da;
+#yearSelect {
+  border-radius: 8px;
   padding: 0.3rem 0.5rem;
   font-size: 0.9rem;
-  background-color: #fff;
+  border: 1px solid #ced4da;
+  background-color: #ffffff;
   color: #212529;
   transition: all 0.2s ease;
 }
 
-.year-select select:focus {
+#yearSelect:focus {
   outline: none;
   border-color: #99cc33;
   box-shadow: 0 0 0 0.2rem rgba(153, 204, 51, 0.25);
 }
-
 @media (max-width: 768px) {
   .info-row {
     flex-direction: column;
