@@ -1,4 +1,4 @@
-    <!-- end: Sidebar -->
+ <!-- end: Sidebar -->
     <?php
     require 'template/header.php';  // Incluye el header
     
@@ -76,7 +76,7 @@
                     id="addRegistroAñoButton">
                     AGREGAR NUEVO AÑO
                 </button>
-                    <!-- Modal -->
+                <!-- Modal -->
                     <div class="modal fade" id="modalRegistroAño" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-xl">
                             <div class="modal-content">
@@ -84,11 +84,14 @@
                                     <h5 class="modal-title" id="modalLabel">REGISTRAR NUEVA LISTA <span id="codigoRegistroAnio" class="text-primary fw-bold"></span> </h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
+
+                                <div class="modal-body">
+                                    <form id="formRegistroPropietarios">
                                     <!--Año fiscal -->
                                     <div class="col-md-4">
                                         <label for="año" class="form-label fw-bold">AÑO</label>
                                                 
-                                    </div>
+                                </div>
 
                                 </div>
 
@@ -188,124 +191,8 @@
                     </table>
                 </div>
             </div>
+                            
             
-                
-                <!-- INICIAR MODAL PARA EDITAR -->
-            <div class="modal fade" id="modalEditarPropietario" tabindex="-1" aria-labelledby="modalEditarPropietarioLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="modalEditarPropietarioLabel">Editar Contribuyente</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form id="formEditarPropietario">
-                                <!-- nombre del propietario (oculto) -->
-                                <input type="hidden" id="idPropietarioEdit" name="idPropietario">
-
-                                <!-- Información del contribuyente -->
-                                <div class="row g-3">
-                                    <!-- Tipo de Contribuyente -->
-                                    <div class="col-md-4">
-                                        <label for="contribuyente" class="form-label fw-bold">Tipo de Contribuyente</label>
-                                        <div class="input-group">
-                                            <select class="form-select" id="contribuyenteEdit" name="contribuyenteEdit">
-                                                <option value="" selected disabled>Seleccione Tipo de Contribuyente</option>
-                                                    <option value="propietario">Propietario</option>
-                                                    <option value="conyugue">Cónyuge</option>
-                                                    <option value="copropietario">CoPropietario</option>
-                                                    <option value="exoneradas">Entidades Exoneradas</option>
-                                                    <option value="sucesiones">Sucesiones Indivisas</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <!-- Razón Social -->
-                                    <div class="col-md-4">
-                                        <label for="R_social" class="form-label fw-bold">Razón Social</label>
-                                            <div class="input-group">
-                                                <select class="form-select" id="R_socialEdit" name="R_socialEdit">
-                                                    <option value="" selected disabled>Seleccione Razón Social</option>
-                                                    <option value="persona_natural">Persona Natural</option>
-                                                    <option value="persona_juridica">Persona Jurídica</option>
-                                                </select>
-                                            </div>
-                                    </div>
-
-                                    <div class="col-md-4">
-                                        <label for="dni" class="form-label fw-bold">DNI o Ruc</label>
-                                            <div class="input-group">
-                                                <input type="text" class="form-control" id="dniEdit" name="dniEdit" placeholder="Ingrese el DNI">
-                                                <button class="btn btn-primary" type="button" id="buscarDniEdit" onclick="buscarDNI()">
-                                                    <i class="ri-search-line"></i> <!-- Ícono de búsqueda -->
-                                                </button>
-                                            </div>
-                                    </div>
-                                    
-
-                                    <div class="row g-3 mb-3">
-                                        <!-- nombre contribuyente -->
-                                        <div class="col-md-4">
-                                            <label for="nombres" class="form-label fw-bold">Nombres</label>
-                                                <input type="text" class="form-control" id="nombresEdit" name="nombresEdit" placeholder="Ingrese su nombre completo">
-                                            </div>
-
-                                        <!-- apellido paterno del contribuyente -->
-                                            <div class="col-md-4">
-                                                <label for="apellido_p" class="form-label fw-bold">Apellido Paterno</label>
-                                                <input type="text" class="form-control" id="apellido_pEdit" name="apellido_pEdit" placeholder="Apellido paterno">
-                                            </div>
-
-                                        <!-- apellido materno del contribuyente -->
-                                            <div class="col-md-4">
-                                                <label for="apellido_m" class="form-label fw-bold">Apellido Materno</label>
-                                                <input type="text" class="form-control" id="apellido_mEdit" name="apellido_mEdit" placeholder="Apellido materno">
-                                            </div>
-                                            
-
-                                        <!-- direccion fiscal del contribuyente (en la misma fila) -->
-                                            <div class="row g-3">
-                                                <!-- direccion -->
-                                                <div class="col-md-6">
-                                                    <label for="direccion" class="form-label fw-bold">Direccion Fiscal en DNI</label>
-                                                    <input type="text" class="form-control" id="direccionEdit" name="direccionEdit" placeholder="Ingrese la direccion" required>
-                                                </div>
-
-                                        <!-- distrito al que pertenece el contribuyente -->
-                                            <div class="col-md-3">
-                                                    <label for="distrito" class="form-label fw-bold">Distrito</label>
-                                                    <input type="text" class="form-control" id="distritoEdit" name="distritoEdit" placeholder="Ingrese el distrito" required>
-                                            </div>
-
-                                        <!-- provincia al que pertenece el contribuyente -->
-                                             <div class="col-md-3">
-                                                    <label for="provincia" class="form-label fw-bold">Provincia</label>
-                                                    <input type="text" class="form-control" id="provinciaEdit" name="provinciaEdit" placeholder="Ingrese la provincia" required>
-                                                </div>
-                                            </div>
-                                            <div class="row g-3">
-                                        <!--  provincia al que pertenece el contribuyente  -->
-                                            <div class="col-md-6">
-                                                <label for="departamento" class="form-label fw-bold">Departamento</label>
-                                                <input type="text" class="form-control" id="departamentoEdit" name="departamentoEdit" placeholder="Ingrese el departamento" required>
-                                                </div>                                        
-                                            </div>
-                               
-                                    </div>
-                                </div>    
-                                <!-- Botones -->
-                                <div class="mt-4 text-end">
-                                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            
-
-
-                    <!--modal final-->
             </div>
         </div>
     </main>

@@ -170,7 +170,7 @@
                 <a href="#">
                     
                     <i class="ri-table-line sidebar-menu-item-icon"></i>
-                    LISTA DE VALORES ARANCELARIOS DE TERRENOS RUSTICOS 
+                    TERRENOS RUSTICOS 
                     <i class="ri-arrow-down-s-line sidebar-menu-item-accordion ms-auto"></i>
                 </a>
                 <ul class="sidebar-dropdown-menu">
@@ -199,7 +199,7 @@
             <li class="sidebar-menu-item">
                 <a href="#">
                     <i class="ri-table-fill sidebar-menu-item-icon"></i>
-                    LISTA DE VALORES ARANCELARIOS DE EIDFICACIONES 
+                    EDIFICACIONES 
                 </a>
             </li>
             <li class="sidebar-menu-item">
