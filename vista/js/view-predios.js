@@ -130,7 +130,7 @@ async function buscarCodigo(item) {
 /*DEL BUSCAR CODIGO SELECCIONADO VA AGREGAR AL MODAL PARA REGISTRAR PREDIO*/
 document.getElementById('addPredioButton').addEventListener('click', function () {
     // Obtener el valor del input
-    const codigo = document.getElementById('searchInput').value;
+    const codigo = document.getElementById('searchInputPredio').value;
 
     // Mostrar el valor en el modal
     document.getElementById('codigoPredio').textContent = codigo;
