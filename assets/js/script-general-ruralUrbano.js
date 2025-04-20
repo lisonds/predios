@@ -206,6 +206,19 @@ document.addEventListener("DOMContentLoaded", function () {
             </select>
         </td>
         <td>
+            <select class="form-control">
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+                <option value="D">D</option>
+                <option value="E">E</option>
+                <option value="F">F</option>
+                <option value="G">G</option>
+                <option value="H">H</option>
+                <option value="I">I</option>
+            </select>
+        </td>
+        <td>
             <input type="number" class="form-control" placeholder="Área en m²" />
         </td>
     `;
