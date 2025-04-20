@@ -310,7 +310,7 @@ CREATE TABLE `indentificador` (
   `id` int NOT NULL AUTO_INCREMENT,
   `codigo` varchar(6) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -319,7 +319,7 @@ CREATE TABLE `indentificador` (
 
 LOCK TABLES `indentificador` WRITE;
 /*!40000 ALTER TABLE `indentificador` DISABLE KEYS */;
-INSERT INTO `indentificador` VALUES (1,'000001'),(5,'000002'),(6,'000003'),(7,'000003'),(8,'000003'),(9,'000004'),(10,'000005'),(11,'000005'),(12,'000005'),(13,'000005'),(14,'000005'),(15,'000005'),(16,'000005'),(17,'000005'),(18,'000005'),(19,'000006'),(20,'000007');
+INSERT INTO `indentificador` VALUES (1,'000001'),(5,'000002'),(6,'000003'),(7,'000003'),(8,'000003'),(9,'000004'),(10,'000005'),(11,'000005'),(12,'000005'),(13,'000005'),(14,'000005'),(15,'000005'),(16,'000005'),(17,'000005'),(18,'000005'),(19,'000006'),(20,'000007'),(21,'000001');
 /*!40000 ALTER TABLE `indentificador` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -377,7 +377,7 @@ CREATE TABLE `propietarios` (
   PRIMARY KEY (`idpropietarios`),
   KEY `fk_propietarios_indentificador_idx` (`indentificador_id`),
   CONSTRAINT `fk_propietarios_indentificador` FOREIGN KEY (`indentificador_id`) REFERENCES `indentificador` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -386,7 +386,7 @@ CREATE TABLE `propietarios` (
 
 LOCK TABLES `propietarios` WRITE;
 /*!40000 ALTER TABLE `propietarios` DISABLE KEYS */;
-INSERT INTO `propietarios` VALUES (1,'ORE ICHACCAYA, Tulio Lison','70421319','Persona Juridica','Propietario','Jr. Libertadores Mz K lote 5 ','Quinua','Huamanga','Ayacucho',1),(2,'QUISPE CALLAÑAUPA VIDAL','73458963','Persona Natural','Propietario','AV MANALLASAQ','Carmen Alto','Huamanga','Ayacucho',1),(4,'QUISPE CALLAÑAUPA VIDAL','70422589','Persona Natural','Propietario','LOS ANGELES','SAN JUAN','HUAMANGA','AYACUCHO',5),(5,'SARA SARMIENTO VARGAS','78965423','Persona Natural','Conyugue ','LOS ANGELES','SAN JUAN ','HUAMANGA','AYACUCHO',5),(6,'NERY LUZ DE LA CRUZ AYME','71946323','Persona_natural','Propietario','Jr. Sallally','Quinua','Huamanga','Ayacucho',8),(7,'SANDRA JACQUELINE FLORES CAVERO','71985463','Persona_natural','Propietario','Jr. Suares','San Juan','Huamanga','Ayacucho',9),(8,'ILDA NILA ICHACCAYA VELARDE','28240364','Persona_natural','Propietario','Los Libertadores S/N','Quinua','Huamanga','Ayacucho',19),(9,'ILDA NILA ICHACCAYA VELARDE','28240364','Persona_natural','Propietario','Jr. Sallally','Quinua','Huamanga','Ayacucho',20);
+INSERT INTO `propietarios` VALUES (1,'ORE ICHACCAYA, Tulio Lison','70421319','Persona Juridica','Propietario','Jr. Libertadores Mz K lote 5 ','Quinua','Huamanga','Ayacucho',1),(2,'QUISPE CALLAÑAUPA VIDAL','73458963','Persona Natural','Propietario','AV MANALLASAQ','Carmen Alto','Huamanga','Ayacucho',1),(4,'QUISPE CALLAÑAUPA VIDAL','70422589','Persona Natural','Propietario','LOS ANGELES','SAN JUAN','HUAMANGA','AYACUCHO',5),(5,'SARA SARMIENTO VARGAS','78965423','Persona Natural','Conyugue ','LOS ANGELES','SAN JUAN ','HUAMANGA','AYACUCHO',5),(6,'NERY LUZ DE LA CRUZ AYME','71946323','Persona_natural','Propietario','Jr. Sallally','Quinua','Huamanga','Ayacucho',8),(7,'SANDRA JACQUELINE FLORES CAVERO','71985463','Persona_natural','Propietario','Jr. Suares','San Juan','Huamanga','Ayacucho',9),(8,'ILDA NILA ICHACCAYA VELARDE','28240364','Persona_natural','Propietario','Los Libertadores S/N','Quinua','Huamanga','Ayacucho',19),(9,'ILDA NILA ICHACCAYA VELARDE','28240364','Persona_natural','Propietario','Jr. Sallally','Quinua','Huamanga','Ayacucho',20),(10,'NERY LUZ DE LA CRUZ AYME','71946323','Persona_natural','Propietario','Jr. Condorcanqui N° 356 ','Quinua','Huamanga','Ayacucho',21),(11,'NERY LUZ DE LA CRUZ AYME','71946323','Persona_natural','Conyugue','Jr. Condorcanqui N° 356 ','Quinua','Huamanga','Ayacucho',1);
 /*!40000 ALTER TABLE `propietarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -673,18 +673,38 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `insertPropietario`(
     IN p_departamento VARCHAR(100)
 )
 BEGIN
-    DECLARE new_id INT;
+    DECLARE id_indentificador INT;
+    DECLARE id_propietario INT;
 
-    -- Insertar en indentificador
-    INSERT INTO indentificador (codigo) VALUES (p_codigo);
-    SET new_id = LAST_INSERT_ID();
+    -- Buscar si ya existe el código
+    SELECT id INTO id_indentificador
+    FROM indentificador
+    WHERE codigo = p_codigo
+    LIMIT 1;
 
-    -- Insertar en propietarios
-    INSERT INTO propietarios (indentificador_id, nombre_completo, dni, razon_social, tipo, direccion, distrito, provincia, departamento) 
-    VALUES (new_id, CONCAT(p_nombre, ' ', p_apellido_p, ' ', p_apellido_m), p_dni, p_razon_social, p_contribuyente, p_direccion, p_distrito, p_provincia, p_departamento);
-    
-    -- Retornar el ID del propietario insertado
-    SELECT new_id AS id;
+    -- Si no existe, lo insertamos
+    IF id_indentificador IS NULL THEN
+        INSERT INTO indentificador (codigo) VALUES (p_codigo);
+        SET id_indentificador = LAST_INSERT_ID();
+    END IF;
+
+    -- Insertar el propietario con el id_indentificador
+    INSERT INTO propietarios (
+        indentificador_id, nombre_completo, dni, razon_social, tipo,
+        direccion, distrito, provincia, departamento
+    )
+    VALUES (
+        id_indentificador,
+        CONCAT(p_nombre, ' ', p_apellido_p, ' ', p_apellido_m),
+        p_dni, p_razon_social, p_contribuyente,
+        p_direccion, p_distrito, p_provincia, p_departamento
+    );
+
+    SET id_propietario = LAST_INSERT_ID();
+
+    -- Retornar ambos IDs
+    SELECT  id_propietario AS id_propietario;
+
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -874,4 +894,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-04-14 21:42:26
+-- Dump completed on 2025-04-20  8:15:04
