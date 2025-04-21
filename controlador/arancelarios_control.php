@@ -1,79 +1,167 @@
 <?php
-// modelo/arancelarios_model.php
+// controlador/arancelarios_control.php
 
-class ArancelariosModel {
-    private $data = [];
+require_once '../modelo/arancelarios_model.php';
+
+class ArancelariosController {
+    private $model;
 
     public function __construct() {
-        // Simulación de datos
-        $this->data = [
-            '2023' => [
-                ['categoria' => 'A', 'muros_columnas' => 603.35, 'techos' => 313.72, 'pisos' => 222.60, 'puertas_ventanas' => 238.13, 'revestimiento' => 300.49, 'banos' => 106.57, 'instalaciones' => 379.76],
-                ['categoria' => 'B', 'muros_columnas' => 358.95, 'techos' => 215.68, 'pisos' => 185.61, 'puertas_ventanas' => 210.72, 'revestimiento' => 240.00, 'banos' => 76.13, 'instalaciones' => 223.36],
-            ],
-            '2022' => [
-                ['categoria' => 'A', 'muros_columnas' => 580.00, 'techos' => 300.00, 'pisos' => 210.00, 'puertas_ventanas' => 220.00, 'revestimiento' => 280.00, 'banos' => 100.00, 'instalaciones' => 350.00],
-                ['categoria' => 'B', 'muros_columnas' => 340.00, 'techos' => 200.00, 'pisos' => 170.00, 'puertas_ventanas' => 190.00, 'revestimiento' => 220.00, 'banos' => 70.00, 'instalaciones' => 210.00],
-            ],
-        ];
+        $this->model = new ArancelariosModel();
     }
 
-    // Generar un nuevo año
-    public function generateYear() {
-        $years = array_keys($this->data);
-        $lastYear = max($years);
-        return $lastYear + 1;
+    // Manejador principal para procesar las solicitudes
+    public function handleRequest() {
+        $option = $_REQUEST['option'] ?? '';
+
+        switch ($option) {
+            case 'getYears':
+                $this->getYears();
+                break;
+            case 'getDataByYear':
+                $this->getDataByYear();
+                break;
+            case 'addYear':
+                $this->addYear();
+                break;
+            case 'editYear':
+                $this->editYear();
+                break;
+            case 'deleteYear':
+                $this->deleteYear();
+                break;
+            default:
+                echo json_encode(['status' => false, 'msg' => 'Acción no válida']);
+                break;
+        }
+    }
+
+    // Obtener todos los años disponibles
+    private function getYears() {
+        $years = $this->model->getYears();
+
+        echo json_encode(['status' => true, 'data' => $years]);
+        die();
     }
 
     // Obtener datos de un año específico
-    public function getDataByYear($year) {
-        return $this->data[$year] ?? [];
+    private function getDataByYear() {
+        if ($_GET) {
+            $year = $_GET['year'];
+            $data = $this->model->getDataByYear($year);
+
+            echo json_encode(['status' => true, 'data' => $data]);
+            die();
+        }
     }
 
-    // Agregar un nuevo año
-    public function addYear($year, $categoria, $muros_columnas, $techos, $pisos, $puertas_ventanas, $revestimiento, $banos, $instalaciones) {
-        if (!isset($this->data[$year])) {
-            $this->data[$year] = [];
+    // Agregar un nuevo año y sus datos
+    private function addYear() {
+        if ($_POST) {
+            if (
+                empty($_POST['year']) || empty($_POST['categoria']) || empty($_POST['muros_columnas']) ||
+                empty($_POST['techos']) || empty($_POST['pisos']) || empty($_POST['puertas_ventanas']) ||
+                empty($_POST['revestimientos']) || empty($_POST['banos']) || empty($_POST['instalaciones'])
+            ) {
+                echo json_encode(['status' => false, 'msg' => 'Error en los datos']);
+                die();
+            }
+
+            $year = trim($_POST['year']);
+            $categoria = ucwords(trim($_POST['categoria']));
+            $muros_columnas = floatval($_POST['muros_columnas']);
+            $techos = floatval($_POST['techos']);
+            $pisos = floatval($_POST['pisos']);
+            $puertas_ventanas = floatval($_POST['puertas_ventanas']);
+            $revestimientos = floatval($_POST['revestimientos']);
+            $banos = floatval($_POST['banos']);
+            $instalaciones = floatval($_POST['instalaciones']);
+
+            $success = $this->model->addYear(
+                $year,
+                $categoria,
+                $muros_columnas,
+                $techos,
+                $pisos,
+                $puertas_ventanas,
+                $revestimientos,
+                $banos,
+                $instalaciones
+            );
+
+            if ($success) {
+                echo json_encode(['status' => true, 'msg' => 'Se guardó correctamente']);
+            } else {
+                echo json_encode(['status' => false, 'msg' => 'Error al guardar']);
+            }
+            die();
         }
-        $this->data[$year][] = [
-            'categoria' => $categoria,
-            'muros_columnas' => $muros_columnas,
-            'techos' => $techos,
-            'pisos' => $pisos,
-            'puertas_ventanas' => $puertas_ventanas,
-            'revestimiento' => $revestimiento,
-            'banos' => $banos,
-            'instalaciones' => $instalaciones,
-        ];
-        return true;
     }
 
     // Editar un año existente
-    public function editYear($year, $categoria, $muros_columnas, $techos, $pisos, $puertas_ventanas, $revestimiento, $banos, $instalaciones) {
-        if (!isset($this->data[$year])) {
-            return false;
+    private function editYear() {
+        if ($_POST) {
+            if (
+                empty($_POST['idArancelario']) || empty($_POST['categoria']) || empty($_POST['muros_columnas']) ||
+                empty($_POST['techos']) || empty($_POST['pisos']) || empty($_POST['puertas_ventanas']) ||
+                empty($_POST['revestimientos']) || empty($_POST['banos']) || empty($_POST['instalaciones'])
+            ) {
+                echo json_encode(['status' => false, 'msg' => 'Error en los datos']);
+                die();
+            }
+
+            $idArancelario = intval($_POST['idArancelario']);
+            $categoria = ucwords(trim($_POST['categoria']));
+            $muros_columnas = floatval($_POST['muros_columnas']);
+            $techos = floatval($_POST['techos']);
+            $pisos = floatval($_POST['pisos']);
+            $puertas_ventanas = floatval($_POST['puertas_ventanas']);
+            $revestimientos = floatval($_POST['revestimientos']);
+            $banos = floatval($_POST['banos']);
+            $instalaciones = floatval($_POST['instalaciones']);
+
+            $success = $this->model->editYear(
+                $idArancelario,
+                $categoria,
+                $muros_columnas,
+                $techos,
+                $pisos,
+                $puertas_ventanas,
+                $revestimientos,
+                $banos,
+                $instalaciones
+            );
+
+            if ($success) {
+                echo json_encode(['status' => true, 'msg' => 'Se actualizó correctamente']);
+            } else {
+                echo json_encode(['status' => false, 'msg' => 'Error al actualizar']);
+            }
+            die();
         }
-        $this->data[$year] = [
-            [
-                'categoria' => $categoria,
-                'muros_columnas' => $muros_columnas,
-                'techos' => $techos,
-                'pisos' => $pisos,
-                'puertas_ventanas' => $puertas_ventanas,
-                'revestimiento' => $revestimiento,
-                'banos' => $banos,
-                'instalaciones' => $instalaciones,
-            ],
-        ];
-        return true;
     }
 
     // Eliminar un año
-    public function deleteYear($year) {
-        if (isset($this->data[$year])) {
-            unset($this->data[$year]);
-            return true;
+    private function deleteYear() {
+        if ($_POST) {
+            if (empty($_POST['idArancelario'])) {
+                echo json_encode(['status' => false, 'msg' => 'Error en los datos']);
+                die();
+            }
+
+            $idArancelario = intval($_POST['idArancelario']);
+            $success = $this->model->deleteYear($idArancelario);
+
+            if ($success) {
+                echo json_encode(['status' => true, 'msg' => 'Registro eliminado']);
+            } else {
+                echo json_encode(['status' => false, 'msg' => 'Error al eliminar']);
+            }
+            die();
         }
-        return false;
     }
 }
+
+// Instanciar el controlador y manejar la solicitud
+$controller = new ArancelariosController();
+$controller->handleRequest();

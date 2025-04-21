@@ -1,23 +1,28 @@
-
-
-    <?php
+ <?php
     require 'template/header.php';  // Incluye el header
     require '../configuracion/config.php';  // las configuraciones
+    ?>
+$conexion->close();
+    ?>
+    <?php 
+    $currentYear = date("Y"); // Año actual
+    $startYear = 2010; // Año de inicio
     ?>
 
     <!-- start: Main -->
     <main class="bg-light">
+
         <div class="p-2">
-            <!-- start: Navbar -->
+        <!-- start: Navbar -->
             <nav class="px-3 py-2 bg-white rounded shadow">
                 <i class="ri-menu-line sidebar-toggle me-3 d-block d-md-none"></i>
-                <h5 class="fw-bold mb-0 me-auto">ADMINISTRAR ARANCELARIOS</h5>
+                <h5 class="fw-bold mb-0 me-auto">LISTA DE VALORES ARANCELARIOS DE EDIFICACIONES</h5>
                 <div class="dropdown me-3 d-none d-sm-block">
                     <div class="cursor-pointer dropdown-toggle navbar-link" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="ri-notification-line"></i>
                     </div>
                     <div class="dropdown-menu fx-dropdown-menu">
-                        <h5 class="p-3 bg-indigo text-light">Notificaciones</h5>
+                        <h5 class="p-3 bg-indigo text-light">Notification</h5>
                         <div class="list-group list-group-flush">
                             <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
                                 <div class="me-auto">
@@ -26,6 +31,7 @@
                                 </div>
                                 <span class="badge bg-primary rounded-pill">14</span>
                             </a>
+                            
                         </div>
                     </div>
                 </div>
@@ -36,48 +42,58 @@
                     </div>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                         <li><a class="dropdown-item" href="#">Perfil</a></li>
-                        <li><a class="dropdown-item" href="#">Cerrar Sesión</a></li>
+                        <li><a class="dropdown-item" href="#">Cerrar Sesion</a></li>
+                        
                     </ul>
                 </div>
             </nav>
             <!-- end: Navbar -->
+            <br>
 
-            <div class="container mt-5">
-                <!-- Selector de Año y Botón Agregar Año -->
-                <div class="input-group mb-4" style="max-width: 600px; margin: auto;">
-                    <select class="form-select rounded-pill" id="year-selector" onchange="loadData(this.value)">
-                        <?php foreach ($years as $year): ?>
-                            <option value="<?php echo $year; ?>"><?php echo $year; ?></option>
-                        <?php endforeach; ?>
-                    </select>
-                    <button 
-                        class="btn btn-success rounded-pill ms-2" 
-                        data-bs-toggle="modal" 
-                        data-bs-target="#addYearModal">
-                        Agregar Año
-                    </button>
-                </div>
+            <div class="info-row">
+                    <!-- Selector de año -->
+                    <div class="year-select">
+                        <label for="yearSelect" class="year-label">Selecciona Año:</label>
+                        <select id="yearSelect" name="yearSelect" class="form-select form-select-sm">
+                            <?php for ($year = $currentYear; $year >= $startYear; $year--): ?>
+                                <option value="<?php echo $year; ?>" <?php echo ($year == $currentYear) ? 'selected' : ''; ?>>
+                                    <?php echo $year; ?>
+                                </option>
+                            <?php endfor; ?>
+                        </select>
+                    </div>
 
-                <!-- Tabla -->
-                <div class="table-responsive">
-                    <table class="table table-bordered custom-table">
-                        <thead class="table-primary">
-                            <tr>
-                                <th>CATEGORÍA</th>
-                                <th>Muros y Columnas</th>
-                                <th>Techos</th>
-                                <th>Pisos</th>
-                                <th>Puertas y Ventanas</th>
-                                <th>Revestimiento</th>
-                                <th>Baños</th>
-                                <th>Instalaciones</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tablaArancelarios">
-                            <!-- Filas generadas dinámicamente -->
-                        </tbody>
-                    </table>
-                </div>
+                <button 
+                    class="btn btn-success rounded-pill ms-2" 
+                    data-bs-toggle="modal" 
+                    data-bs-target="#addYearModal">
+                    Agregar nueva Lista 
+                </button>            
+
+            </div>
+              
+
+        
+
+            <!-- Tabla -->
+            <div class="table-responsive">
+                <table class="table table-bordered custom-table">
+                    <thead class="table-primary">
+                        <tr>
+                            <th>Categoria</th>
+                            <th>Muros y Columnas</th>
+                            <th>Techos</th>
+                            <th>Pisos</th>
+                            <th>Puertas y Ventanas</th>
+                            <th>Revestimientos</th>
+                            <th>Baños</th>
+                            <th>Instalaciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaArancelarios">
+                        <!-- Filas generadas dinámicamente -->
+                    </tbody>
+                </table>
             </div>
 
             <!-- Modal para Agregar Año -->
@@ -85,7 +101,7 @@
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="addYearModalLabel">Agregar Nuevo Año</h5>
+                            <h5 class="modal-title" id="addYearModalLabel">REGISTRAR NUEVA LISTA</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
@@ -100,8 +116,9 @@
                                         <input type="text" class="form-control" id="categoria" name="categoria" placeholder="Ej: A, B, C" required>
                                     </div>
                                     <div class="col-md-6">
+                                        
                                         <label for="muros_columnas" class="form-label fw-bold">Muros y Columnas</label>
-                                        <input type="number" step="0.01" class="form-control" id="muros_columnas" name="muros_columnas" placeholder="Ej: 603.35" required>
+                                        <input type="number"  step="0.01" class="form-control" id="muros_columnas" name="muros_columnas" placeholder="Ej: 603.35" required>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="techos" class="form-label fw-bold">Techos</label>
@@ -116,15 +133,15 @@
                                         <input type="number" step="0.01" class="form-control" id="puertas_ventanas" name="puertas_ventanas" placeholder="Ej: 238.13" required>
                                     </div>
                                     <div class="col-md-6">
-                                        <label for="revestimiento" class="form-label fw-bold">Revestimiento</label>
-                                        <input type="number" step="0.01" class="form-control" id="revestimiento" name="revestimiento" placeholder="Ej: 300.49" required>
+                                        <label for="revestimientos" class="form-label fw-bold">Revestimientos</label>
+                                        <input type="number" step="0.01" class="form-control" id="revestimientos" name="revestimientos" placeholder="Ej: 300.49" required>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="banos" class="form-label fw-bold">Baños</label>
                                         <input type="number" step="0.01" class="form-control" id="banos" name="banos" placeholder="Ej: 106.57" required>
                                     </div>
                                     <div class="col-md-6">
-                                        <label for="instalaciones" class="form-label fw-bold">Instalaciones</label>
+                                        <label for="instalaciones" class="form-label fw-bold">Instalaciones electricas y sanitarias</label>
                                         <input type="number" step="0.01" class="form-control" id="instalaciones" name="instalaciones" placeholder="Ej: 379.76" required>
                                     </div>
                                 </div>
@@ -141,34 +158,7 @@
     </main>
     <!-- end: Main -->
 
-    <!-- Script para cargar datos dinámicamente -->
-    <script>
-        function loadData(year) {
-            fetch(`arancelarios_control.php?action=loadData&year=${year}`)
-                .then(response => response.json())
-                .then(data => {
-                    let table = '';
-                    data.forEach(row => {
-                        table += '<tr>';
-                        table += `<td>${row.categoria}</td>`;
-                        table += `<td>${row.muros_columnas.toFixed(2)}</td>`;
-                        table += `<td>${row.techos.toFixed(2)}</td>`;
-                        table += `<td>${row.pisos.toFixed(2)}</td>`;
-                        table += `<td>${row.puertas_ventanas.toFixed(2)}</td>`;
-                        table += `<td>${row.revestimiento.toFixed(2)}</td>`;
-                        table += `<td>${row.banos.toFixed(2)}</td>`;
-                        table += `<td>${row.instalaciones.toFixed(2)}</td>`;
-                        table += '</tr>';
-                    });
-                    document.getElementById('tablaArancelarios').innerHTML = table;
-                });
-        }
 
-        window.onload = () => {
-            const defaultYear = document.getElementById('year-selector').value;
-            loadData(defaultYear);
-        };
-    </script>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
