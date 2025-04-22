@@ -3,6 +3,7 @@
 
 class ArancelariosModel {
     private $conexion;
+    private $db;
 
     public function __construct() {
         require_once "../libreria/conexion.php";
@@ -23,16 +24,17 @@ class ArancelariosModel {
 
     // Obtener datos de un año específico
     public function getDataByYear($year) {
-        $query = "SELECT * FROM valores_edificacion WHERE anio = ?";
-        $stmt = $this->conexion->prepare($query);
-        $stmt->bind_param("s", $year);
+        var_dump($this->db);
+    try {
+        $sql = "SELECT * FROM valores_edificacion WHERE anio = :anio";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(':anio', $year, PDO::PARAM_INT);
         $stmt->execute();
-        $result = $stmt->get_result();
-        $data = [];
-        while ($row = $result->fetch_assoc()) {
-            $data[] = $row;
-        }
-        return $data;
+        return $stmt->fetchAll(PDO::FETCH_ASSOC); // Devuelve los datos como un array asociativo
+    } catch (PDOException $e) {
+        error_log("Error al obtener datos por año: " . $e->getMessage());
+        return [];
+    }
     }
 
     // Agregar un nuevo año y sus datos

@@ -46,13 +46,12 @@ class ArancelariosController {
 
     // Obtener datos de un año específico
     private function getDataByYear() {
-        if ($_GET) {
-            $year = $_GET['year'];
-            $data = $this->model->getDataByYear($year);
-
-            echo json_encode(['status' => true, 'data' => $data]);
-            die();
-        }
+    if ($_GET) {
+        $year = $_GET['year'];
+        $data = $this->model->getDataByYear($year); // Obtener datos del modelo
+        echo json_encode(['status' => true, 'data' => $data]);
+        die();
+    }
     }
 
     // Agregar un nuevo año y sus datos

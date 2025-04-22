@@ -85,16 +85,17 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Función para cargar los datos de un año específico
+    // Función para cargar los datos de un año específico
     function loadDataByYear(year) {
         fetch(`../controlador/arancelarios_control.php?option=getDataByYear&year=${year}`)
             .then(response => response.json())
             .then(result => {
-                if (result.status) {
-                    const data = result.data;
-                    tablaArancelarios.innerHTML = ''; // Limpiar la tabla
+                const tableBody = document.getElementById('tablaArancelarios');
+                tableBody.innerHTML = ''; // Limpiar la tabla
 
+                if (result.status && result.data.length > 0) {
                     // Generar las filas de la tabla
-                    data.forEach(row => {
+                    result.data.forEach(row => {
                         const tr = document.createElement('tr');
                         tr.innerHTML = `
                             <td>${row.categoria}</td>
@@ -106,10 +107,13 @@ document.addEventListener('DOMContentLoaded', function () {
                             <td>${row.banos}</td>
                             <td>${row.instalaciones}</td>
                         `;
-                        tablaArancelarios.appendChild(tr);
+                        tableBody.appendChild(tr);
                     });
                 } else {
-                    alert('No hay datos disponibles para este año.');
+                    // Mostrar mensaje si no hay datos disponibles
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = '<td colspan="8" class="text-center">No hay datos disponibles para este año.</td>';
+                    tableBody.appendChild(tr);
                 }
             })
             .catch(error => {

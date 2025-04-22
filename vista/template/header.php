@@ -197,7 +197,7 @@
                 </ul>
             </li>
             <li class="sidebar-menu-item">
-                <a href="#">
+                <a href="viewArancelarios.php">
                     <i class="ri-table-fill sidebar-menu-item-icon"></i>
                     EDIFICACIONES 
                 </a>
