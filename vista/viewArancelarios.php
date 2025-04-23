@@ -107,43 +107,51 @@ $conexion->close();
                         <div class="modal-body">
                             <form id="formAgregarAnio">
                                 <div class="row g-3">
-                                    <div class="col-md-6">
+                                    <!-- Campo para el año -->
+                                    <div class="col-md-12">
                                         <label for="nuevo_anio" class="form-label fw-bold">Nuevo Año</label>
                                         <input type="number" class="form-control" id="nuevo_anio" name="nuevo_anio" placeholder="Ej: 2024" required>
                                     </div>
-                                    <div class="col-md-6">
-                                        <label for="categoria" class="form-label fw-bold">Categoría</label>
-                                        <input type="text" class="form-control" id="categoria" name="categoria" placeholder="Ej: A, B, C" required>
-                                    </div>
-                                    <div class="col-md-6">
-                                        
-                                        <label for="muros_columnas" class="form-label fw-bold">Muros y Columnas</label>
-                                        <input type="number"  step="0.01" class="form-control" id="muros_columnas" name="muros_columnas" placeholder="Ej: 603.35" required>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="techos" class="form-label fw-bold">Techos</label>
-                                        <input type="number" step="0.01" class="form-control" id="techos" name="techos" placeholder="Ej: 313.72" required>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="pisos" class="form-label fw-bold">Pisos</label>
-                                        <input type="number" step="0.01" class="form-control" id="pisos" name="pisos" placeholder="Ej: 222.60" required>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="puertas_ventanas" class="form-label fw-bold">Puertas y Ventanas</label>
-                                        <input type="number" step="0.01" class="form-control" id="puertas_ventanas" name="puertas_ventanas" placeholder="Ej: 238.13" required>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="revestimientos" class="form-label fw-bold">Revestimientos</label>
-                                        <input type="number" step="0.01" class="form-control" id="revestimientos" name="revestimientos" placeholder="Ej: 300.49" required>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="banos" class="form-label fw-bold">Baños</label>
-                                        <input type="number" step="0.01" class="form-control" id="banos" name="banos" placeholder="Ej: 106.57" required>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="instalaciones" class="form-label fw-bold">Instalaciones electricas y sanitarias</label>
-                                        <input type="number" step="0.01" class="form-control" id="instalaciones" name="instalaciones" placeholder="Ej: 379.76" required>
-                                    </div>
+
+                                    <!-- Campos para cada categoría -->
+                                    <?php
+                                    $categorias = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'];
+                                    foreach ($categorias as $categoria) {
+                                        echo '<div class="col-md-12">';
+                                        echo '<h6 class="fw-bold mt-3">Categoría ' . $categoria . '</h6>';
+                                        echo '<div class="row g-3">';
+                                        echo '<div class="col-md-6">';
+                                        echo '<label for="muros_columnas_' . $categoria . '" class="form-label">Muros y Columnas</label>';
+                                        echo '<input type="number" step="0.01" class="form-control" id="muros_columnas_' . $categoria . '" name="muros_columnas[' . $categoria . ']" placeholder="Ej: 603.35" required>';
+                                        echo '</div>';
+                                        echo '<div class="col-md-6">';
+                                        echo '<label for="techos_' . $categoria . '" class="form-label">Techos</label>';
+                                        echo '<input type="number" step="0.01" class="form-control" id="techos_' . $categoria . '" name="techos[' . $categoria . ']" placeholder="Ej: 313.72" required>';
+                                        echo '</div>';
+                                        echo '<div class="col-md-6">';
+                                        echo '<label for="pisos_' . $categoria . '" class="form-label">Pisos</label>';
+                                        echo '<input type="number" step="0.01" class="form-control" id="pisos_' . $categoria . '" name="pisos[' . $categoria . ']" placeholder="Ej: 222.60" required>';
+                                        echo '</div>';
+                                        echo '<div class="col-md-6">';
+                                        echo '<label for="puertas_ventanas_' . $categoria . '" class="form-label">Puertas y Ventanas</label>';
+                                        echo '<input type="number" step="0.01" class="form-control" id="puertas_ventanas_' . $categoria . '" name="puertas_ventanas[' . $categoria . ']" placeholder="Ej: 238.13" required>';
+                                        echo '</div>';
+                                        echo '<div class="col-md-6">';
+                                        echo '<label for="revestimientos_' . $categoria . '" class="form-label">Revestimientos</label>';
+                                        echo '<input type="number" step="0.01" class="form-control" id="revestimientos_' . $categoria . '" name="revestimientos[' . $categoria . ']" placeholder="Ej: 300.49" required>';
+                                        echo '</div>';
+                                        echo '<div class="col-md-6">';
+                                        echo '<label for="banos_' . $categoria . '" class="form-label">Baños</label>';
+                                        echo '<input type="number" step="0.01" class="form-control" id="banos_' . $categoria . '" name="banos[' . $categoria . ']" placeholder="Ej: 106.57" required>';
+                                        echo '</div>';
+                                        echo '<div class="col-md-6">';
+                                        echo '<label for="instalaciones_' . $categoria . '" class="form-label">Instalaciones eléctricas y sanitarias</label>';
+                                        echo '<input type="number" step="0.01" class="form-control" id="instalaciones_' . $categoria . '" name="instalaciones[' . $categoria . ']" placeholder="Ej: 379.76" required>';
+                                        echo '</div>';
+                                        echo '</div>'; // Cierre de row
+                                        echo '</div>'; // Cierre de col-md-12
+                                    }
+                                    ?>
                                 </div>
                                 <div class="mt-4 text-end">
                                     <button type="submit" class="btn btn-primary">Guardar</button>
@@ -154,6 +162,7 @@ $conexion->close();
                     </div>
                 </div>
             </div>
+            
         </div>
     </main>
     <!-- end: Main -->

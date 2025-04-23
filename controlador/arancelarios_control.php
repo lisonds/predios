@@ -56,26 +56,26 @@ class ArancelariosController {
 
     // Agregar un nuevo año y sus datos
     private function addYear() {
-        if ($_POST) {
-            if (
-                empty($_POST['year']) || empty($_POST['categoria']) || empty($_POST['muros_columnas']) ||
-                empty($_POST['techos']) || empty($_POST['pisos']) || empty($_POST['puertas_ventanas']) ||
-                empty($_POST['revestimientos']) || empty($_POST['banos']) || empty($_POST['instalaciones'])
-            ) {
-                echo json_encode(['status' => false, 'msg' => 'Error en los datos']);
-                die();
-            }
+    if ($_POST) {
+        // Validar que el año esté presente
+        if (empty($_POST['nuevo_anio'])) {
+            echo json_encode(['status' => false, 'msg' => 'El año es obligatorio']);
+            die();
+        }
 
-            $year = trim($_POST['year']);
-            $categoria = ucwords(trim($_POST['categoria']));
-            $muros_columnas = floatval($_POST['muros_columnas']);
-            $techos = floatval($_POST['techos']);
-            $pisos = floatval($_POST['pisos']);
-            $puertas_ventanas = floatval($_POST['puertas_ventanas']);
-            $revestimientos = floatval($_POST['revestimientos']);
-            $banos = floatval($_POST['banos']);
-            $instalaciones = floatval($_POST['instalaciones']);
+        $year = trim($_POST['nuevo_anio']);
+        $categorias = $_POST['muros_columnas']; // Obtiene las categorías desde los datos enviados
 
+        foreach ($categorias as $categoria => $valor) {
+            $muros_columnas = floatval($_POST['muros_columnas'][$categoria]);
+            $techos = floatval($_POST['techos'][$categoria]);
+            $pisos = floatval($_POST['pisos'][$categoria]);
+            $puertas_ventanas = floatval($_POST['puertas_ventanas'][$categoria]);
+            $revestimientos = floatval($_POST['revestimientos'][$categoria]);
+            $banos = floatval($_POST['banos'][$categoria]);
+            $instalaciones = floatval($_POST['instalaciones'][$categoria]);
+
+            // Insertar los datos en la base de datos
             $success = $this->model->addYear(
                 $year,
                 $categoria,
@@ -88,57 +88,17 @@ class ArancelariosController {
                 $instalaciones
             );
 
-            if ($success) {
-                echo json_encode(['status' => true, 'msg' => 'Se guardó correctamente']);
-            } else {
-                echo json_encode(['status' => false, 'msg' => 'Error al guardar']);
-            }
-            die();
-        }
-    }
-
-    // Editar un año existente
-    private function editYear() {
-        if ($_POST) {
-            if (
-                empty($_POST['idArancelario']) || empty($_POST['categoria']) || empty($_POST['muros_columnas']) ||
-                empty($_POST['techos']) || empty($_POST['pisos']) || empty($_POST['puertas_ventanas']) ||
-                empty($_POST['revestimientos']) || empty($_POST['banos']) || empty($_POST['instalaciones'])
-            ) {
-                echo json_encode(['status' => false, 'msg' => 'Error en los datos']);
+            if (!$success) {
+                echo json_encode(['status' => false, 'msg' => 'Error al guardar la categoría ' . $categoria]);
                 die();
             }
-
-            $idArancelario = intval($_POST['idArancelario']);
-            $categoria = ucwords(trim($_POST['categoria']));
-            $muros_columnas = floatval($_POST['muros_columnas']);
-            $techos = floatval($_POST['techos']);
-            $pisos = floatval($_POST['pisos']);
-            $puertas_ventanas = floatval($_POST['puertas_ventanas']);
-            $revestimientos = floatval($_POST['revestimientos']);
-            $banos = floatval($_POST['banos']);
-            $instalaciones = floatval($_POST['instalaciones']);
-
-            $success = $this->model->editYear(
-                $idArancelario,
-                $categoria,
-                $muros_columnas,
-                $techos,
-                $pisos,
-                $puertas_ventanas,
-                $revestimientos,
-                $banos,
-                $instalaciones
-            );
-
-            if ($success) {
-                echo json_encode(['status' => true, 'msg' => 'Se actualizó correctamente']);
-            } else {
-                echo json_encode(['status' => false, 'msg' => 'Error al actualizar']);
-            }
-            die();
         }
+
+        echo json_encode(['status' => true, 'msg' => 'Datos guardados correctamente']);
+        die();
     }
+}
+
 
     // Eliminar un año
     private function deleteYear() {

@@ -38,93 +38,45 @@ class ArancelariosModel {
     }
 
     // Agregar un nuevo año y sus datos
-    public function addYear(
-        string $year,
-        string $categoria,
-        float $muros_columnas,
-        float $techos,
-        float $pisos,
-        float $puertas_ventanas,
-        float $revestimientos,
-        float $banos,
-        float $instalaciones
-    ) {
-        $query = "INSERT INTO valores_edificacion (
-                    anio, 
-                    categoria, 
-                    muros_columnas, 
-                    techos, 
-                    pisos, 
-                    puertas_ventanas, 
-                    revestimientos, 
-                    banos, 
-                    instalaciones
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
-        $stmt = $this->conexion->prepare($query);
-        $stmt->bind_param(
-            "ssddddddd",
-            $year,
-            $categoria,
-            $muros_columnas,
-            $techos,
-            $pisos,
-            $puertas_ventanas,
-            $revestimientos,
-            $banos,
-            $instalaciones
-        );
-
-        if ($stmt->execute()) {
-            return true;
-        } else {
-            return false;
-        }
+    public function addYear($anio, $categoria, $muros_columnas, $techos, $pisos, $puertas_ventanas, $revestimientos, $banos, $instalaciones) {
+    try {
+        $sql = "INSERT INTO arancelarios (
+            anio,
+            categoria,
+            muros_columnas,
+            techos,
+            pisos,
+            puertas_ventanas,
+            revestimientos,
+            banos,
+            instalaciones
+        ) VALUES (
+            :anio,
+            :categoria,
+            :muros_columnas,
+            :techos,
+            :pisos,
+            :puertas_ventanas,
+            :revestimientos,
+            :banos,
+            :instalaciones
+        )";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(':anio', $anio, PDO::PARAM_INT);
+        $stmt->bindParam(':categoria', $categoria, PDO::PARAM_STR);
+        $stmt->bindParam(':muros_columnas', $muros_columnas, PDO::PARAM_STR);
+        $stmt->bindParam(':techos', $techos, PDO::PARAM_STR);
+        $stmt->bindParam(':pisos', $pisos, PDO::PARAM_STR);
+        $stmt->bindParam(':puertas_ventanas', $puertas_ventanas, PDO::PARAM_STR);
+        $stmt->bindParam(':revestimientos', $revestimientos, PDO::PARAM_STR);
+        $stmt->bindParam(':banos', $banos, PDO::PARAM_STR);
+        $stmt->bindParam(':instalaciones', $instalaciones, PDO::PARAM_STR);
+        return $stmt->execute();
+    } catch (PDOException $e) {
+        error_log("Error al agregar valores arancelarios: " . $e->getMessage());
+        return false;
     }
-
-    // Editar un año existente
-    public function editYear(
-        int $idArancelario,
-        string $categoria,
-        float $muros_columnas,
-        float $techos,
-        float $pisos,
-        float $puertas_ventanas,
-        float $revestimientos,
-        float $banos,
-        float $instalaciones
-    ) {
-        $query = "UPDATE arancelarios SET 
-                    categoria = ?, 
-                    muros_columnas = ?, 
-                    techos = ?, 
-                    pisos = ?, 
-                    puertas_ventanas = ?, 
-                    revestimientos = ?, 
-                    banos = ?, 
-                    instalaciones = ?
-                  WHERE id_arancelario = ?";
-
-        $stmt = $this->conexion->prepare($query);
-        $stmt->bind_param(
-            "sdddddddi",
-            $categoria,
-            $muros_columnas,
-            $techos,
-            $pisos,
-            $puertas_ventanas,
-            $revestimientos,
-            $banos,
-            $instalaciones,
-            $idArancelario
-        );
-
-        if ($stmt->execute()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+}
 
     // Eliminar un año
     public function deleteYear(int $idArancelario) {

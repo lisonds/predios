@@ -52,30 +52,26 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Función para cargar los años disponibles desde el servidor
     function fetchYears() {
-        fetch('../controlador/arancelarios_control.php?option=getYears')
-            .then(response => response.json())
-            .then(result => {
-                if (result.status) {
-                    const years = result.data;
-                    yearSelect.innerHTML = ''; // Limpiar el selector
-
-                    // Agregar una opción por defecto
-                    const defaultOption = document.createElement('option');
-                    defaultOption.value = '';
-                    defaultOption.textContent = 'Seleccionar Año';
-                    defaultOption.disabled = true;
-                    defaultOption.selected = true;
-                    yearSelect.appendChild(defaultOption);
-
-                    // Agregar los años disponibles
-                    years.forEach(year => {
+        fetch('../../controlador/arancelarios_control.php?option=getYears')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Respuesta del servidor no exitosa (' + response.status + ')');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.status) {
+                    const yearSelect = document.getElementById('yearSelect');
+                    yearSelect.innerHTML = ''; // Limpiar el select
+    
+                    data.data.forEach(year => {
                         const option = document.createElement('option');
                         option.value = year;
                         option.textContent = year;
                         yearSelect.appendChild(option);
                     });
                 } else {
-                    alert('Error al cargar los años.');
+                    alert('Ocurrió un error al cargar los años: ' + data.msg);
                 }
             })
             .catch(error => {
@@ -83,6 +79,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 alert('Ocurrió un error al cargar los años.');
             });
     }
+    
+    // Llamar a la función al cargar la página
+    document.addEventListener('DOMContentLoaded', fetchYears);
 
     // Función para cargar los datos de un año específico
     // Función para cargar los datos de un año específico
