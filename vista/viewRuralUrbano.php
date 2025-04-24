@@ -347,7 +347,7 @@
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CANCELAR</button>
-                        <button type="submit" form="formPredio" class="btn btn-success">GUARDAR</button>
+                        <button type="submit" form="formPredioRuralCal" class="btn btn-success">GUARDAR</button>
                     </div>
                     </div>
                 </div>

@@ -1,14 +1,17 @@
 
 /*ESTE VA SER EL QUE CAPTURA FORMULARIO */
-if (document.querySelector("#formRegistroPredio")) {//AQUI se valida si existe el id formulario en html
-    let frmPredio=document.querySelector("#formRegistroPredio");//
+if (document.querySelector("#formPredioRuralCal")) {//AQUI se valida si existe el id formulario en html
+    let frmPredio=document.querySelector("#formPredioRuralCal");//
     frmPredio.onsubmit=function(e){//ejecutar al dar btn guardar
         e.preventDefault();//evitar que se recargue cuando damos el btn guardar
         btnGuardarPredio();//lamar funcion guardar
     }
 
     async function btnGuardarPredio() {
+
+        console.log("SE REALIZO EL CLICK RESPECTIVO PARA GUARDAR ..... INFORMACION");
         //extraer datos de cada input
+        /*
         let strCodigo=document.querySelector("#codigoValor").value;
         let strDenomidado=document.querySelector("#predioDenominado").value;
         let strSector=document.querySelector("#sector").value;
@@ -75,7 +78,7 @@ if (document.querySelector("#formRegistroPredio")) {//AQUI se valida si existe e
 
         } catch (error) {
             console.log("Ocurrio un Error: "+error);
-        }
+        }*/
     }
 }
 
