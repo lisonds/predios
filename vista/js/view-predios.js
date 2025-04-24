@@ -27,7 +27,7 @@ async function buscarCodigo(item) {
     let formData = new FormData();
     formData.append('codigo', item);
     try {
-        let resp = await fetch(`${base_url}/controlador/predio_control.php?predio=busca_codigo`, {
+        let resp = await fetch(base_url+"/controlador/predio_control.php?predio=busca_codigo", {
             method: 'POST', // Enviar con el método POST
             mode: 'cors',
             cache: 'no-cache', // No guardar en caché

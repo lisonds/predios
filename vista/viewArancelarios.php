@@ -74,8 +74,6 @@ $conexion->close();
               
 
         
-
-            <!-- Tabla -->
             <!-- Tabla -->
 <div class="table-responsive">
     <table class="table table-bordered custom-table small text center">
