@@ -38,45 +38,35 @@ class ArancelariosModel {
     }
 
     // Agregar un nuevo año y sus datos
-    public function addYear($anio, $categoria, $muros_columnas, $techos, $pisos, $puertas_ventanas, $revestimientos, $banos, $instalaciones) {
-    try {
-        $sql = "INSERT INTO arancelarios (
-            anio,
-            categoria,
-            muros_columnas,
-            techos,
-            pisos,
-            puertas_ventanas,
-            revestimientos,
-            banos,
-            instalaciones
-        ) VALUES (
-            :anio,
-            :categoria,
-            :muros_columnas,
-            :techos,
-            :pisos,
-            :puertas_ventanas,
-            :revestimientos,
-            :banos,
-            :instalaciones
-        )";
-        $stmt = $this->db->prepare($sql);
-        $stmt->bindParam(':anio', $anio, PDO::PARAM_INT);
-        $stmt->bindParam(':categoria', $categoria, PDO::PARAM_STR);
-        $stmt->bindParam(':muros_columnas', $muros_columnas, PDO::PARAM_STR);
-        $stmt->bindParam(':techos', $techos, PDO::PARAM_STR);
-        $stmt->bindParam(':pisos', $pisos, PDO::PARAM_STR);
-        $stmt->bindParam(':puertas_ventanas', $puertas_ventanas, PDO::PARAM_STR);
-        $stmt->bindParam(':revestimientos', $revestimientos, PDO::PARAM_STR);
-        $stmt->bindParam(':banos', $banos, PDO::PARAM_STR);
-        $stmt->bindParam(':instalaciones', $instalaciones, PDO::PARAM_STR);
-        return $stmt->execute();
-    } catch (PDOException $e) {
-        error_log("Error al agregar valores arancelarios: " . $e->getMessage());
-        return false;
-    }
-}
+    public function addYear($year, $categoria, $muros_columnas, $techos, $pisos, $puertas_ventanas, $revestimientos, $banos, $instalaciones) {
+        try {
+            $sql = "INSERT INTO valores_edificacion (
+                anio_construccion,
+                categoria,
+                muros_columnas,
+                techos,
+                pisos,
+                puertas_ventanas,
+                revestimientos,
+                banos,
+                instalaciones
+            ) VALUES (:anio_construccion, :categoria, :muros_columnas, :techos, :pisos, :puertas_ventanas, :revestimientos, :banos, :instalaciones)";
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindParam(':anio_construccion', $year, PDO::PARAM_INT);
+            $stmt->bindParam(':categoria', $categoria, PDO::PARAM_STR);
+            $stmt->bindParam(':muros_columnas', $muros_columnas, PDO::PARAM_STR);
+            $stmt->bindParam(':techos', $techos, PDO::PARAM_STR);
+            $stmt->bindParam(':pisos', $pisos, PDO::PARAM_STR);
+            $stmt->bindParam(':puertas_ventanas', $puertas_ventanas, PDO::PARAM_STR);
+            $stmt->bindParam(':revestimientos', $revestimientos, PDO::PARAM_STR);
+            $stmt->bindParam(':banos', $banos, PDO::PARAM_STR);
+            $stmt->bindParam(':instalaciones', $instalaciones, PDO::PARAM_STR);
+            return $stmt->execute();
+            } catch (PDOException $e) {
+            error_log("Error al insertar datos: " . $e->getMessage());
+            return false;
+            }
+        }
 
     // Eliminar un año
     public function deleteYear(int $idArancelario) {

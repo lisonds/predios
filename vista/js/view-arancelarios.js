@@ -50,48 +50,17 @@ document.addEventListener('DOMContentLoaded', function () {
             });
     });
 
-    // Función para cargar los años disponibles desde el servidor
-    function fetchYears() {
-        fetch('../../controlador/arancelarios_control.php?option=getYears')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Respuesta del servidor no exitosa (' + response.status + ')');
-                }
-                return response.json();
-            })
-            .then(data => {
-                if (data.status) {
-                    const yearSelect = document.getElementById('yearSelect');
-                    yearSelect.innerHTML = ''; // Limpiar el select
     
-                    data.data.forEach(year => {
-                        const option = document.createElement('option');
-                        option.value = year;
-                        option.textContent = year;
-                        yearSelect.appendChild(option);
-                    });
-                } else {
-                    alert('Ocurrió un error al cargar los años: ' + data.msg);
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Ocurrió un error al cargar los años.');
-            });
-    }
-    
-    // Llamar a la función al cargar la página
-    document.addEventListener('DOMContentLoaded', fetchYears);
 
-    // Función para cargar los datos de un año específico
-    // Función para cargar los datos de un año específico
-    function loadDataByYear(year) {
+        // Función para cargar los datos de un año específico
+        // Función para cargar los datos de un año específico
+        function loadData(year) {
         fetch(`../controlador/arancelarios_control.php?option=getDataByYear&year=${year}`)
             .then(response => response.json())
             .then(result => {
                 const tableBody = document.getElementById('tablaArancelarios');
                 tableBody.innerHTML = ''; // Limpiar la tabla
-
+    
                 if (result.status && result.data.length > 0) {
                     // Generar las filas de la tabla
                     result.data.forEach(row => {
@@ -119,7 +88,16 @@ document.addEventListener('DOMContentLoaded', function () {
                 console.error('Error:', error);
                 alert('Ocurrió un error al cargar los datos.');
             });
-    }
+        }
+    
+        // Cargar datos del año seleccionado inicialmente
+        document.addEventListener('DOMContentLoaded', function () {
+            const yearSelect = document.getElementById('yearSelect');
+            const initialYear = yearSelect.value;
+            if (initialYear) {
+                loadData(initialYear);
+            }
+        });
 });
 
 

@@ -4,7 +4,7 @@
     //creando la instancia para acceder a modelo
     $objPropietario=new Propietario();
 
- if ($option == "generateCodigo") {
+    if ($option == "generateCodigo") {
         $arrayPropietario= $objPropietario->GenerarCodigo();
         if(empty($arrayPropietario)){
             $arrayResponse = array('status' => false, 'msg' => 'Error Al Retornar');
@@ -16,6 +16,7 @@
     } 
 
     if ($option == "busca_codigo") {
+        
         if ($_POST) {
             $codIdentificador = $_POST["codigo"];
             $arrayPropietarios = $objPropietario->getCodPropietario($codIdentificador);
@@ -54,44 +55,44 @@
     
 
 
-if ($option == "agregar_propietario") {
-    if ($_POST) { // Validar si es un POST
-        if (empty($_POST['codigoGenerado']) || empty($_POST['contribuyente']) || empty($_POST['R_social']) || empty($_POST['dni'])
-        || empty($_POST['nombres'])|| empty($_POST['apellido_p'])|| empty($_POST['apellido_m'])|| empty($_POST['direccion'])
-        || empty($_POST['distrito'])|| empty($_POST['provincia'])|| empty($_POST['departamento'])) {
-            $arrayResponse = array('status' => false, 'msg' => 'Error de datos');
-        } else {
-            $strCodigo = ucwords(trim($_POST['codigoGenerado'])); 
-            $strcontribuyente= ucwords($_POST['contribuyente']); 
-            $strRsocial = ucwords($_POST['R_social']);
-            $strDni = ucwords($_POST['dni']);
-            $strNombre = ucwords($_POST['nombres']);
-            $strApellidoP = ucwords($_POST['apellido_p']);
-            $strApellidoM = ucwords($_POST['apellido_m']);
-            $strDireccion = ucwords($_POST['direccion']);
-            $strDistrito = ucwords($_POST['distrito']);
-            $strProvincia = ucwords($_POST['provincia']);
-            $strDepartamento = ucwords($_POST['departamento']);
-                            
-            // Enviando datos al modelo
-            $idPropietario = $objPropietario->insertPropietario($strCodigo, $strcontribuyente, $strRsocial, $strDni,
-            $strNombre,$strApellidoP,$strApellidoM,$strDireccion,$strDistrito,$strProvincia,$strDepartamento);
-            if ($idPropietario) {
-                $arrayResponse = array('status' => true, 'msg' => "Se Guardo Correctamente");
+    if ($option == "agregar_propietario") {
+        if ($_POST) { // Validar si es un POST
+            if (empty($_POST['codigoGenerado']) || empty($_POST['contribuyente']) || empty($_POST['R_social']) || empty($_POST['dni'])
+            || empty($_POST['nombres'])|| empty($_POST['apellido_p'])|| empty($_POST['apellido_m'])|| empty($_POST['direccion'])
+            || empty($_POST['distrito'])|| empty($_POST['provincia'])|| empty($_POST['departamento'])) {
+                $arrayResponse = array('status' => false, 'msg' => 'Error de datos');
             } else {
-                $arrayResponse = array('status' => false, 'msg' => "Hay un error en Guardar ");
-            }
+                $strCodigo = ucwords(trim($_POST['codigoGenerado'])); 
+                $strcontribuyente= ucwords($_POST['contribuyente']); 
+                $strRsocial = ucwords($_POST['R_social']);
+                $strDni = ucwords($_POST['dni']);
+                $strNombre = ucwords($_POST['nombres']);
+                $strApellidoP = ucwords($_POST['apellido_p']);
+                $strApellidoM = ucwords($_POST['apellido_m']);
+                $strDireccion = ucwords($_POST['direccion']);
+                $strDistrito = ucwords($_POST['distrito']);
+                $strProvincia = ucwords($_POST['provincia']);
+                $strDepartamento = ucwords($_POST['departamento']);
+                                
+                // Enviando datos al modelo
+                $idPropietario = $objPropietario->insertPropietario($strCodigo, $strcontribuyente, $strRsocial, $strDni,
+                $strNombre,$strApellidoP,$strApellidoM,$strDireccion,$strDistrito,$strProvincia,$strDepartamento);
+                if ($idPropietario) {
+                    $arrayResponse = array('status' => true, 'msg' => "Se Guardo Correctamente");
+                } else {
+                    $arrayResponse = array('status' => false, 'msg' => "Hay un error en Guardar ");
+                }
 
            
-        }
+             }
         
-        // Enviar la respuesta en formato JSON
-        echo json_encode($arrayResponse);
+             // Enviar la respuesta en formato JSON
+             echo json_encode($arrayResponse);
+        }
+        die();
     }
-    die();
-}
 
- if ($option == "verPropietario") {
+    if ($option == "verPropietario") {
         if($_POST){
             $idPropietario=intval($_POST["idPropietario"]);
             $arrayPredio = $objPredio->VerPropietarioId($idPropietario);

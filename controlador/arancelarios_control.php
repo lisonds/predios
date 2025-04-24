@@ -24,9 +24,6 @@ class ArancelariosController {
             case 'addYear':
                 $this->addYear();
                 break;
-            case 'editYear':
-                $this->editYear();
-                break;
             case 'deleteYear':
                 $this->deleteYear();
                 break;
@@ -57,47 +54,50 @@ class ArancelariosController {
     // Agregar un nuevo año y sus datos
     private function addYear() {
     if ($_POST) {
-        // Validar que el año esté presente
-        if (empty($_POST['nuevo_anio'])) {
-            echo json_encode(['status' => false, 'msg' => 'El año es obligatorio']);
+        // Validar que todos los campos estén presentes
+        if (
+            empty($_POST['anioSelect']) || empty($_POST['categoriaSelect']) ||
+            empty($_POST['muros_columnas']) || empty($_POST['techos']) ||
+            empty($_POST['pisos']) || empty($_POST['puertas_ventanas']) ||
+            empty($_POST['revestimientos']) || empty($_POST['banos']) ||
+            empty($_POST['instalaciones'])
+        ) {
+            echo json_encode(['status' => false, 'msg' => 'Error en los datos']);
             die();
         }
 
-        $year = trim($_POST['nuevo_anio']);
-        $categorias = $_POST['muros_columnas']; // Obtiene las categorías desde los datos enviados
+        // Obtener los datos del formulario
+        $year = intval($_POST['anioSelect']);
+        $categoria = trim($_POST['categoriaSelect']);
+        $muros_columnas = floatval($_POST['muros_columnas']);
+        $techos = floatval($_POST['techos']);
+        $pisos = floatval($_POST['pisos']);
+        $puertas_ventanas = floatval($_POST['puertas_ventanas']);
+        $revestimientos = floatval($_POST['revestimientos']);
+        $banos = floatval($_POST['banos']);
+        $instalaciones = floatval($_POST['instalaciones']);
 
-        foreach ($categorias as $categoria => $valor) {
-            $muros_columnas = floatval($_POST['muros_columnas'][$categoria]);
-            $techos = floatval($_POST['techos'][$categoria]);
-            $pisos = floatval($_POST['pisos'][$categoria]);
-            $puertas_ventanas = floatval($_POST['puertas_ventanas'][$categoria]);
-            $revestimientos = floatval($_POST['revestimientos'][$categoria]);
-            $banos = floatval($_POST['banos'][$categoria]);
-            $instalaciones = floatval($_POST['instalaciones'][$categoria]);
+        // Guardar los datos en la base de datos
+        $success = $this->model->addYear(
+            $year,
+            $categoria,
+            $muros_columnas,
+            $techos,
+            $pisos,
+            $puertas_ventanas,
+            $revestimientos,
+            $banos,
+            $instalaciones
+        );
 
-            // Insertar los datos en la base de datos
-            $success = $this->model->addYear(
-                $year,
-                $categoria,
-                $muros_columnas,
-                $techos,
-                $pisos,
-                $puertas_ventanas,
-                $revestimientos,
-                $banos,
-                $instalaciones
-            );
-
-            if (!$success) {
-                echo json_encode(['status' => false, 'msg' => 'Error al guardar la categoría ' . $categoria]);
-                die();
-            }
+        if ($success) {
+            echo json_encode(['status' => true, 'msg' => 'Datos guardados correctamente']);
+        } else {
+            echo json_encode(['status' => false, 'msg' => 'Error al guardar los datos']);
         }
-
-        echo json_encode(['status' => true, 'msg' => 'Datos guardados correctamente']);
         die();
+        }
     }
-}
 
 
     // Eliminar un año
@@ -117,9 +117,9 @@ class ArancelariosController {
                 echo json_encode(['status' => false, 'msg' => 'Error al eliminar']);
             }
             die();
+            }
         }
     }
-}
 
 // Instanciar el controlador y manejar la solicitud
 $controller = new ArancelariosController();

@@ -261,7 +261,7 @@ if (document.querySelector("#formRegistroPropietarios")) {//AQUI se valida si ex
         }
         try {
             const data=new FormData(formRegistroPropietarios);//a qui le mandamos todo el objeto del formulario por que tienen todo los elementos del frm
-            let resp=await fetch(base_url+"/controlador/propietarios_control.php?propietario=agregar_propietario",{
+            let resp=await fetch(`${base_url}/controlador/propietarios_control.php?propietario=agregar_propietario`,{
                 method:'POST',//mandar post
                 mode:'cors',
                 cache:'no-cache',// para que no guarde en cache
