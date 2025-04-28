@@ -139,223 +139,232 @@
                         <div class="slider-pill"></div>
                     </div>
                 </div>
-                </div>
+            </div>
 
                 <div class="container">
                     <div class="info-row">
                     </div>
                 </div>
-                <!-- Modal Predio Rural -->
-                <div class="modal fade" id="modalRural" tabindex="-1" aria-labelledby="modalPredioLabel" aria-hidden="true">
+                
+
+
+    </main>
+    <!-- end: Main -->
+    <!-- Modal Predio Rural -->
+    <div class="modal fade" id="modalRural" tabindex="-1" aria-labelledby="modalPredioLabel" aria-modal="true" style="display: none;" inert>
+            
                 <div class="modal-dialog modal-xl modal-dialog-centered">
                     <div class="modal-content rounded-4 shadow-lg">
-                    <div class="modal-header bg-success text-white">
-                        <h5 class="modal-title" id="modalPredioLabel">
-                        <i class="ri-survey-fill me-2"></i> FORMULARIO DE PREDIO RURAL
-                        </h5>
-                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-                    </div>
+                        <div class="modal-header bg-success text-white">
+                            <h5 class="modal-title" id="modalPredioLabel">
+                                <i class="ri-survey-fill me-2"></i> FORMULARIO DE PREDIO RURAL
+                            </h5>
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                        </div>
 
-                    <div class="modal-body">
-                        <form id="formPredioRuralCal">
-                            <div class="row g-3">
+                        <div class="modal-body">
+                            <form id="formPredioRuralCal">
+                                    <div class="row g-3">
 
-                                <!-- AÑO -->
-                                <div class="col-md-2">
-                                <label for="anio" class="form-label">AÑO</label>
-                                    <input type="number" class="form-control" id="anio" name="anio">
-                                </div>
-
-                                <!-- TIPO DE TERRENO -->
-                                <div class="col-md-3">
-                                <label for="tipoTerreno" class="form-label">TIPO DE TERRENO</label>
-                                <select class="form-select" id="tipoTerreno" name="tipoTerreno" required>
-                                    <option selected disabled>SELECCIONE...</option>
-                                    <option>LOTE</option>
-                                    <option>PARCELA</option>
-                                    <option>CHACRA</option>
-                                    <option>ESTABLO</option>
-                                    <option>HACIENDA</option>
-                                </select>
-                                </div>
-
-                                <!-- USO DEL TERRENO -->
-                                <div class="col-md-3">
-                                <label for="usoTerreno" class="form-label">USO DEL TERRENO</label>
-                                <select class="form-select" id="usoTerreno" name="usoTerreno" required>
-                                    <option selected disabled>SELECCIONE...</option>
-                                    <option>AGRÍCOLA</option>
-                                    <option>GANADERÍA</option>
-                                    <option>AVÍCOLA</option>
-                                    <option>FORESTAL</option>
-                                    <option>OTROS</option>
-                                </select>
-                                </div>
-
-                                <!-- TIERRAS APTAS -->
-                                <div class="col-md-4">
-                                <label for="tierrasAptas" class="form-label">TIERRAS APTAS</label>
-                                <select class="form-select" id="tierrasAptas" name="tierrasAptas" required>
-                                    <option selected disabled>SELECCIONE...</option>
-                                    <option>CULTIVO EN LIMPIO</option>
-                                    <option>CULTIVO PERMANENTE</option>
-                                    <option>PASTOS</option>
-                                    <option>TIERRAS ÁRIDAS</option>
-                                </select>
-                                </div>
-
-                                <!-- ALTITUD DEL TERRENO -->
-                                <div class="col-md-3">
-                                <label for="altitud" class="form-label">ALTITUD DEL TERRENO</label>
-                                <select class="form-select" id="altitud" name="altitud" required>
-                                    <option selected disabled>SELECCIONE...</option>
-                                    <option>500 m.s.n.m - 2000 m.s.n.m</option>
-                                    <option>2001 m.s.n.m - 3000 m.s.n.m</option>
-                                    <option>3001 m.s.n.m - 4000 m.s.n.m</option>
-                                    <option>4001 m.s.n.m - A MÁS</option>
-                                </select>
-                                </div>
-
-                                <!-- CALIDAD AGROLÓGICA -->
-                                <div class="col-md-3">
-                                <label for="calidad" class="form-label">CALIDAD AGROLÓGICA</label>
-                                <select class="form-select" id="calidad" name="calidad" required>
-                                    <option selected disabled>SELECCIONE...</option>
-                                    <option>ALTA</option>
-                                    <option>MEDIA</option>
-                                    <option>BAJA</option>
-                                </select>
-                                </div>
-
-                                <!-- TOTAL DE HECTÁREAS -->
-                                <div class="row align-items-end col-md-3">
-                                    <div class="col-md-12">
-                                        <label for="hectareas" class="form-label">TOTAL DE HECTÁREAS</label>
-                                        <input type="text" class="form-control" id="hectareas" name="hectareas" placeholder="Ej: 10.5"  required>
-                                    </div>
-                                </div>
-                                <div class="row align-items-end col-md-3">
-                                    <div class="col-md-12">
-                                        <label class="form-label d-block">¿TIENE CONSTRUCCIÓN?</label>
-                                        <div class="btn-group btn-group-sm" role="group" aria-label="Toggle acceso">
-                                        <input type="radio" class="btn-check" name="acceso" id="acceso-si" autocomplete="off">
-                                        <label class="btn btn-outline-success" for="acceso-si" onclick="mostrarConstruccion(true)">SÍ</label>
-
-                                        <input type="radio" class="btn-check" name="acceso" id="acceso-no" autocomplete="off" checked>
-                                        <label class="btn btn-outline-danger" for="acceso-no" onclick="mostrarConstruccion(false)">NO</label>
+                                        <!-- AÑO -->
+                                        <div class="col-md-2">
+                                        <label for="anio" class="form-label">AÑO</label>
+                                            <input type="number" class="form-control" id="anio" name="anio">
                                         </div>
 
-                                        
-                                    </div>
-                                </div>
-                                <!-- Collapse PARA AGREGAR EL CONSTRUCCION -->
-                                <div class="collapse mt-2" id="contenidoConstruccion">
-                                    <h5 class="modal-title" id="modalPredioLabel">
-                                        <i class="ri-survey-fill me-2"></i> Ingresando Datos de Construccion
-                                    </h5>
-                                    <div class="alert alert-info p-2">
-                                        <div class="row g-3">
+                                        <!-- TIPO DE TERRENO -->
                                         <div class="col-md-3">
-                                                <label for="clasPredio" class="form-label">Clasificacion del Predio</label>
-                                                <select class="form-select" id="clasPredio" name="clasPredio" required>
-                                                    <option selected disabled>SELECCIONE...</option>
-                                                    <option>Casa Habitacion</option>
-                                                    <option>Tienda, Depositos</option>
-                                                    <option>Centros de Recreacion o Esparcimiento</option>
-                                                    <option>Clinica, Hospital,Cine, Colegio, Taller.</option>                        
-                                                </select>
-                                            </div>
-                                            <!-- TIPO DE TERRENO -->
-                                            <div class="col-md-3">
-                                                <label for="MaterialCons" class="form-label">Material de Construccion</label>
-                                                <select class="form-select" id="MaterialCons" name="MaterialCons" required>
-                                                    <option selected disabled>SELECCIONE...</option>
-                                                    <option>Concreto</option>
-                                                    <option>Ladrillo</option>
-                                                    <option>Adobe (Quincha, Madera)</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label for="EstConservacion" class="form-label">Material de Construccion</label>
-                                                <select class="form-select" id="EstConservacion" name="EstConservacion" required>
-                                                    <option selected disabled>SELECCIONE...</option>
-                                                    <option>Muy Bueno</option>
-                                                    <option>Bueno</option>
-                                                    <option>Regular</option>
-                                                    <option>Malo</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label for="tipoUso" class="form-label">Tipo de Uso</label>
-                                                <select class="form-select" id="tipoUso" name="tipoUso" required>
-                                                    <option selected disabled>SELECCIONE...</option>
-                                                    <option>Unifamiliar</option>
-                                                    <option>Multifamiliar</option>
-                                                    <option>Almacen</option>
-                                                    <option>Deposito</option>
-                                                    <option>Tienda</option>
-                                                    <option>Oficina</option>
-                                                    <option>Servicios</option>
-                                                    <option>Estractiva</option>
-                                                    <option>Manofactura</option>
-                                                    <option>Deportivo</option>
-                                                    <option>Cultural</option>
-                                                    <option>Diversion</option>
+                                        <label for="tipoTerreno" class="form-label">TIPO DE TERRENO</label>
+                                        <select class="form-select" id="tipoTerreno" name="tipoTerreno" required>
+                                            <option selected disabled>SELECCIONE...</option>
+                                            <option>LOTE</option>
+                                            <option>PARCELA</option>
+                                            <option>CHACRA</option>
+                                            <option>ESTABLO</option>
+                                            <option>HACIENDA</option>
+                                        </select>
+                                        </div>
 
-                                                </select>
+                                        <!-- USO DEL TERRENO -->
+                                        <div class="col-md-3">
+                                        <label for="usoTerreno" class="form-label">USO DEL TERRENO</label>
+                                        <select class="form-select" id="usoTerreno" name="usoTerreno" required>
+                                            <option selected disabled>SELECCIONE...</option>
+                                            <option>AGRÍCOLA</option>
+                                            <option>GANADERÍA</option>
+                                            <option>AVÍCOLA</option>
+                                            <option>FORESTAL</option>
+                                            <option>OTROS</option>
+                                        </select>
+                                        </div>
+
+                                        <!-- TIERRAS APTAS -->
+                                        <div class="col-md-4">
+                                        <label for="tierrasAptas" class="form-label">TIERRAS APTAS</label>
+                                        <select class="form-select" id="tierrasAptas" name="tierrasAptas" required>
+                                            <option selected disabled>SELECCIONE...</option>
+                                            <option>CULTIVO EN LIMPIO</option>
+                                            <option>CULTIVO PERMANENTE</option>
+                                            <option>PASTOS</option>
+                                            <option>TIERRAS ÁRIDAS</option>
+                                        </select>
+                                        </div>
+
+                                        <!-- ALTITUD DEL TERRENO -->
+                                        <div class="col-md-3">
+                                        <label for="altitud" class="form-label">ALTITUD DEL TERRENO</label>
+                                        <select class="form-select" id="altitud" name="altitud" required>
+                                            <option selected disabled>SELECCIONE...</option>
+                                            <option>500 m.s.n.m - 2000 m.s.n.m</option>
+                                            <option>2001 m.s.n.m - 3000 m.s.n.m</option>
+                                            <option>3001 m.s.n.m - 4000 m.s.n.m</option>
+                                            <option>4001 m.s.n.m - A MÁS</option>
+                                        </select>
+                                        </div>
+
+                                        <!-- CALIDAD AGROLÓGICA -->
+                                        <div class="col-md-3">
+                                        <label for="calidad" class="form-label">CALIDAD AGROLÓGICA</label>
+                                        <select class="form-select" id="calidad" name="calidad" required>
+                                            <option selected disabled>SELECCIONE...</option>
+                                            <option>ALTA</option>
+                                            <option>MEDIA</option>
+                                            <option>BAJA</option>
+                                        </select>
+                                        </div>
+
+                                        <!-- TOTAL DE HECTÁREAS -->
+                                        <div class="row align-items-end col-md-3">
+                                            <div class="col-md-12">
+                                                <label for="hectareas" class="form-label">TOTAL DE HECTÁREAS</label>
+                                                <input type="text" class="form-control" id="hectareas" name="hectareas" placeholder="Ej: 10.5"  required>
                                             </div>
-                                            <div class="container mt-5">
-                                            <div class="d-flex align-items-center gap-3 mb-3">
-                                                <button id="agregarFila" class="btn btn-primary">Agregar Fila</button>
-                                                <button id="quitarFila" class="btn btn-danger">Quitar Última Fila</button>
-                                                <h2 class="mb-0">Formulario de Datos de Construcción</h2>
-                                            </div>
+                                        </div>
+                                        <div class="row align-items-end col-md-3">
+                                            <div class="col-md-12">
+                                                <label class="form-label d-block">¿TIENE CONSTRUCCIÓN?</label>
+                                                <div class="btn-group btn-group-sm" role="group" aria-label="Toggle acceso">
+                                                <input type="radio" class="btn-check" name="acceso-si" id="acceso-si" autocomplete="off">
+                                                <label class="btn btn-outline-success" for="acceso-si" onclick="mostrarConstruccion(true)">SÍ</label>
+
+                                                <input type="radio" class="btn-check" name="acceso-no" id="acceso-no" autocomplete="off" checked>
+                                                <label class="btn btn-outline-danger" for="acceso-no" onclick="mostrarConstruccion(false)">NO</label>
+                                                </div>
 
                                                 
-
-                                                <!-- Tabla donde se agregarán las filas -->
-                                                <table class="table table-bordered table-striped table-hover">
-                                                    <thead class="table-dark">
-                                                        <tr>
-                                                            <th>Bloque</th>
-                                                            <th>Piso</th>
-                                                            <th>Año de Construcción</th>
-                                                            <th class="igual-ancho">Muro</th>
-                                                            <th class="igual-ancho">Techo</th>
-                                                            <th class="igual-ancho">Pisos</th>
-                                                            <th class="igual-ancho">Puerta-Ventana</th>
-                                                            <th class="igual-ancho">Revestimiento</th>
-                                                            <th class="igual-ancho">Baño</th>
-                                                            <th class="igual-ancho">Instalaciones Eléctricas</th>
-                                                            <th>Área Construida (m²)</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody id="tablaCuerpo">
-                                                        <!-- Aquí se agregarán las filas -->
-                                                        
-                                                    </tbody>
-                                                </table>
                                             </div>
-
                                         </div>
+
+                                        <!-- Collapse PARA AGREGAR EL CONSTRUCCION -->
+                                         <!-- 
+                                        <div class="collapse mt-2" id="contenidoConstruccion">
+                                            <h5 class="modal-title" id="modalPredioLabel">
+                                                <i class="ri-survey-fill me-2"></i> Ingresando Datos de Construccion
+                                            </h5>
+                                            <div class="alert alert-info p-2">
+                                                <div class="row g-3">
+                                                <div class="col-md-3">
+                                                        <label for="clasPredio" class="form-label">Clasificacion del Predio</label>
+                                                        <select class="form-select" id="clasPredio" name="clasPredio" required>
+                                                            <option selected disabled>SELECCIONE...</option>
+                                                            <option>Casa Habitacion</option>
+                                                            <option>Tienda, Depositos</option>
+                                                            <option>Centros de Recreacion o Esparcimiento</option>
+                                                            <option>Clinica, Hospital,Cine, Colegio, Taller.</option>                        
+                                                        </select>
+                                                    </div>
+                                                   
+                                                    <div class="col-md-3">
+                                                        <label for="MaterialCons" class="form-label">Material de Construccion</label>
+                                                        <select class="form-select" id="MaterialCons" name="MaterialCons" required>
+                                                            <option selected disabled>SELECCIONE...</option>
+                                                            <option>Concreto</option>
+                                                            <option>Ladrillo</option>
+                                                            <option>Adobe (Quincha, Madera)</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <label for="EstConservacion" class="form-label">Material de Construccion</label>
+                                                        <select class="form-select" id="EstConservacion" name="EstConservacion" required>
+                                                            <option selected disabled>SELECCIONE...</option>
+                                                            <option>Muy Bueno</option>
+                                                            <option>Bueno</option>
+                                                            <option>Regular</option>
+                                                            <option>Malo</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <label for="tipoUso" class="form-label">Tipo de Uso</label>
+                                                        <select class="form-select" id="tipoUso" name="tipoUso" required>
+                                                            <option selected disabled>SELECCIONE...</option>
+                                                            <option>Unifamiliar</option>
+                                                            <option>Multifamiliar</option>
+                                                            <option>Almacen</option>
+                                                            <option>Deposito</option>
+                                                            <option>Tienda</option>
+                                                            <option>Oficina</option>
+                                                            <option>Servicios</option>
+                                                            <option>Estractiva</option>
+                                                            <option>Manofactura</option>
+                                                            <option>Deportivo</option>
+                                                            <option>Cultural</option>
+                                                            <option>Diversion</option>
+
+                                                        </select>
+                                                    </div>
+                                                    <div class="container mt-5">
+                                                    <div class="d-flex align-items-center gap-3 mb-3">
+                                                        <button id="agregarFila" class="btn btn-primary">Agregar Fila</button>
+                                                        <button id="quitarFila" class="btn btn-danger">Quitar Última Fila</button>
+                                                        <h2 class="mb-0">Formulario de Datos de Construcción</h2>
+                                                    </div>
+
+                                                        
+                                                        -->
+                                                        <!-- Tabla donde se agregarán las filas --> <!-- 
+                                                        <table class="table table-bordered table-striped table-hover">
+                                                            <thead class="table-dark">
+                                                                <tr>
+                                                                    <th>Bloque</th>
+                                                                    <th>Piso</th>
+                                                                    <th>Año de Construcción</th>
+                                                                    <th class="igual-ancho">Muro</th>
+                                                                    <th class="igual-ancho">Techo</th>
+                                                                    <th class="igual-ancho">Pisos</th>
+                                                                    <th class="igual-ancho">Puerta-Ventana</th>
+                                                                    <th class="igual-ancho">Revestimiento</th>
+                                                                    <th class="igual-ancho">Baño</th>
+                                                                    <th class="igual-ancho">Instalaciones Eléctricas</th>
+                                                                    <th>Área Construida (m²)</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody id="tablaCuerpo">
+                                                                <!-- Aquí se agregarán las filas -->
+                                                                <!--
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div> -->
+
                                     </div>
-                                </div>
-
+                                </form>
                             </div>
-                        </form>
-                    </div>
 
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CANCELAR</button>
-                        <button type="submit" form="formPredioRuralCal" class="btn btn-success">GUARDAR</button>
-                    </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CANCELAR</button>
+                                <button type="submit" form="formPredioRuralCal" class="btn btn-success">GUARDAR</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                </div>
-
-
+            </div>                              
+ <!-- end: Sidebar -->
+  
                 <!-- Modal Predio Urbano -->
-                <div class="modal fade" id="modalUrbano" tabindex="-1" aria-labelledby="modalPredioLabel" aria-hidden="true">
+                <div class="modal fade" id="modalUrbano" tabindex="-1" aria-labelledby="modalPredioLabel" aria-hidden="false">
                     <div class="modal-dialog modal-xl modal-dialog-centered">
                         <div class="modal-content rounded-4 shadow-lg">
                         <div class="modal-header bg-success text-white">
@@ -453,13 +462,16 @@
                         </div>
                     </div>
                 </div>
-    </main>
-    <!-- end: Main -->
-
- <!-- end: Sidebar -->
+  
  <script>
      const base_url="<?=BASE_URL?>";//AQUI ENVIAMOS LAS DIRECCIONES A JS
 </script>
+<script>
+    // Se asigna automáticamente cuando carga la página
+    var id = <?php echo json_encode($codigo); ?>;
+    
+</script>
+
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="../assets/js/jquery.min.js"></script>
 <script src="../assets/js/script-msm.js"></script>

@@ -1,45 +1,67 @@
-/*Para activar el btn y seleccionar los modal que se va abrir en RUral Urbano */
 document.addEventListener("DOMContentLoaded", function () {
     const btnIngresar = document.getElementById("btnIngresar");
     const ruralRadio = document.getElementById("rural");
     const urbanoRadio = document.getElementById("urbano");
     const offRadio = document.getElementById("no-seleccionado");
-
-    const modalRural = new bootstrap.Modal(document.getElementById('modalRural'));
-    const modalUrbano = new bootstrap.Modal(document.getElementById('modalUrbano'));
-
+  
+    const modalRural = document.getElementById('modalRural');
+    const modalUrbano = document.getElementById('modalUrbano');
+  
+    // Función para actualizar el estado del botón y el modal
     function updateButton() {
       if (ruralRadio.checked) {
         btnIngresar.disabled = false;
-        btnIngresar.onclick = () => modalRural.show();
+        btnIngresar.onclick = () => {
+          modalRural.setAttribute('inert', 'true'); // Aplica inert cuando el modal no está visible
+          modalRural.style.display = 'block'; // Muestra el modal
+          new bootstrap.Modal(modalRural).show();
+        };
       } else if (urbanoRadio.checked) {
         btnIngresar.disabled = false;
-        btnIngresar.onclick = () => modalUrbano.show();
+        btnIngresar.onclick = () => {
+          modalUrbano.setAttribute('inert', 'true'); // Aplica inert cuando el modal no está visible
+          modalUrbano.style.display = 'block'; // Muestra el modal
+          new bootstrap.Modal(modalUrbano).show();
+        };
       } else {
         btnIngresar.disabled = true;
         btnIngresar.onclick = null;
       }
     }
-
+  
+    // Detectar cambio en los botones de radio
     ruralRadio.addEventListener("change", updateButton);
     urbanoRadio.addEventListener("change", updateButton);
     offRadio.addEventListener("change", updateButton);
-
+  
     updateButton();
+  
+    // Función para asegurar que el modal no pierda foco
+    document.querySelectorAll('.modal').forEach(modal => {
+      modal.addEventListener('shown.bs.modal', () => {
+        modal.removeAttribute('inert'); // Elimina inert cuando el modal está visible
+      });
+  
+      modal.addEventListener('hidden.bs.modal', () => {
+        modal.setAttribute('inert', 'true'); // Vuelve a aplicar inert cuando el modal se oculta
+      });
+    });
   });
-
+  
+  // Establecer el año actual en el campo "anio"
   document.addEventListener("DOMContentLoaded", function() {
     const anioInput = document.getElementById("anio");
     const currentYear = new Date().getFullYear();
     anioInput.value = currentYear;
   });
-
+  
+  // Función para mostrar/ocultar el contenido de la construcción
   function mostrarConstruccion(mostrar) {
     const collapse = document.getElementById('contenidoConstruccion');
     const bsCollapse = new bootstrap.Collapse(collapse, {
       toggle: false
     });
-
+  
     if (mostrar) {
       bsCollapse.show();
     } else {
@@ -47,7 +69,10 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-
+  
+  $('#modalRural').on('shown.bs.modal', function () {
+    $(this).find('button.btn-close').focus();
+});
   /**PARA AGREGAR FILA A LA TABLA */
   document.getElementById("agregarFila").addEventListener("click", function(event) {
     // Detener la propagación del evento para que no se active otras funciones
