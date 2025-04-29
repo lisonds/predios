@@ -1,83 +1,79 @@
-<?php
-// modelo/arancelarios_model.php
+<?php 
+require_once "../libreria/conexion.php";
+    class ArancelariosModel{
+        private $conexion;
+        function __construct(){
+            $this->conexion=new Conexion();
+            $this->conexion=$this->conexion->conect();
 
-class ArancelariosModel {
-    private $conexion;
-    private $db;
-
-    public function __construct() {
-        require_once "../libreria/conexion.php";
-        $this->conexion = new Conexion();
-        $this->conexion = $this->conexion->conect();
-    }
-
-    // Obtener todos los años disponibles
-    public function getYears() {
-        $query = "SELECT DISTINCT anio FROM valores_edificacion ORDER BY anio DESC";
-        $result = $this->conexion->query($query);
-        $years = [];
-        while ($row = $result->fetch_assoc()) {
-            $years[] = $row['anio'];
-        }
-        return $years;
-    }
-
-    // Obtener datos de un año específico
-    public function getDataByYear($year) {
-        var_dump($this->db);
-    try {
-        $sql = "SELECT * FROM valores_edificacion WHERE anio = :anio";
-        $stmt = $this->db->prepare($sql);
-        $stmt->bindParam(':anio', $year, PDO::PARAM_INT);
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC); // Devuelve los datos como un array asociativo
-    } catch (PDOException $e) {
-        error_log("Error al obtener datos por año: " . $e->getMessage());
-        return [];
-    }
-    }
-
-    // Agregar un nuevo año y sus datos
-    public function addYear($year, $categoria, $muros_columnas, $techos, $pisos, $puertas_ventanas, $revestimientos, $banos, $instalaciones) {
-        try {
-            $sql = "INSERT INTO valores_edificacion (
-                anio_construccion,
-                categoria,
-                muros_columnas,
-                techos,
-                pisos,
-                puertas_ventanas,
-                revestimientos,
-                banos,
-                instalaciones
-            ) VALUES (:anio_construccion, :categoria, :muros_columnas, :techos, :pisos, :puertas_ventanas, :revestimientos, :banos, :instalaciones)";
-            $stmt = $this->db->prepare($sql);
-            $stmt->bindParam(':anio_construccion', $year, PDO::PARAM_INT);
-            $stmt->bindParam(':categoria', $categoria, PDO::PARAM_STR);
-            $stmt->bindParam(':muros_columnas', $muros_columnas, PDO::PARAM_STR);
-            $stmt->bindParam(':techos', $techos, PDO::PARAM_STR);
-            $stmt->bindParam(':pisos', $pisos, PDO::PARAM_STR);
-            $stmt->bindParam(':puertas_ventanas', $puertas_ventanas, PDO::PARAM_STR);
-            $stmt->bindParam(':revestimientos', $revestimientos, PDO::PARAM_STR);
-            $stmt->bindParam(':banos', $banos, PDO::PARAM_STR);
-            $stmt->bindParam(':instalaciones', $instalaciones, PDO::PARAM_STR);
-            return $stmt->execute();
-            } catch (PDOException $e) {
-            error_log("Error al insertar datos: " . $e->getMessage());
-            return false;
-            }
+        }//este constructor esta que trae la conexion del base de datos
+        public function getDataByYear($year){
+            $arrayLista=array();//crear array para extraer todo los registros
+            $rs=$this->conexion->query("CALL ObtenerArancelarioPorAnio('{$year}')");
+            while($obj=$rs->fetch_object()){
+                array_push($arrayLista,$obj);//ingresamos cada objeto a array
+            };
+            return $arrayLista;
         }
 
-    // Eliminar un año
-    public function deleteYear(int $idArancelario) {
-        $query = "DELETE FROM valores_edificacion WHERE id_arancelario = ?";
-        $stmt = $this->conexion->prepare($query);
-        $stmt->bind_param("i", $idArancelario);
+        public function insertArancelario(string $stranioSelect,  string $strcategoriaSelect, string $strmuros_columnas, $strtechos,
+                string $strpisos,string $strpuertas_ventanas, string $strrevestimientos, string $strbanos, string $strinstalaciones) {
+            $query = "CALL agregarArancelarioEdificacion(
+                        '{$stranioSelect}', 
+                        '{$strcategoriaSelect}', 
+                        '{$strmuros_columnas}', 
+                        '{$strtechos}', 
+                        '{$strpisos}', 
+                        '{$strpuertas_ventanas}', 
+                        '{$strrevestimientos}', 
+                        '{$strbanos}', 
+                        '{$strinstalaciones}'
+                        
+                    )";
+            
+                    $result = $this->conexion->query($query);
 
-        if ($stmt->execute()) {
-            return true;
-        } else {
-            return false;
+                    if ($result) {
+                        // Recuperar el valor del parámetro OUT (@idvalores_edificacion)
+                        $queryResult = $this->conexion->query("SELECT @idvalores_edificacion AS idValores_edificacion");
+                
+                        if ($queryResult) {
+                            $row = $queryResult->fetch_assoc();
+                            $idValores_edificacion = $row['idValores_edificacion'] ?? null;
+                
+                            if ($idValores_edificacion) {
+                                // Retornar el ID del predio y el mensaje de éxito
+                                return (object) [
+                                    "status" => true,
+                                    "idValores_edificacion" => $idValores_edificacion,
+                                    "msg" => "Se registró correctamente una lista "
+                                ];
+                            } else {
+                                // Manejo en caso de no obtener un ID válido
+                                return (object) [
+                                    "status" => false,
+                                    "msg" => "El procedimiento no devolvió un ID válido"
+                                ];
+                            }
+                        } else {
+                            // Error al ejecutar la consulta de recuperación de @idpredios
+                            return (object) [
+                                "status" => false,
+                                "msg" => "Error al recuperar el ID: " . $this->conexion->error
+                            ];
+                        }
+                    } else {
+                        // Error al ejecutar el procedimiento almacenado
+                        return (object) [
+                            "status" => false,
+                            "msg" => "Error al ejecutar el procedimiento almacenado: " . $this->conexion->error
+                        ];
+                    }
+                
         }
+
     }
-}
+
+    
+
+?>

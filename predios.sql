@@ -903,4 +903,122 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
+DELIMITER $$
+
+CREATE PROCEDURE eliminarPropietario(IN p_idpropietarios INT)
+BEGIN
+    -- Verificar si el propietario existe
+    IF NOT EXISTS (SELECT 1 FROM propietarios WHERE idpropietarios = p_idpropietarios) THEN
+        SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'Error: Propietario no encontrado.';
+    END IF;
+
+    -- Eliminar el propietario
+    DELETE FROM propietarios
+    WHERE idpropietarios = p_idpropietarios;
+
+    -- Confirmar éxito
+    SELECT 'Propietario eliminado correctamente' AS mensaje;
+END$$
+
+DELIMITER ;
+
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `agregarArancelarioEdificacion`(
+    IN p_anio_construccion VARCHAR(4),
+    IN p_categoria VARCHAR(1),
+    IN p_muro_columna VARCHAR(7),
+    IN p_techos VARCHAR(7),
+    IN p_pisos VARCHAR(7),
+    IN p_puerta_ventana VARCHAR(7),
+    IN p_revistimiento VARCHAR(7),
+    IN p_banios VARCHAR(7),
+    IN p_instalaciones VARCHAR(7)
+)
+BEGIN
+    DECLARE v_idanual_construccion INT DEFAULT 0;
+    DECLARE v_idvalores_edificacion INT DEFAULT 0;
+
+    -- Buscar año
+    SELECT idanual_construccion INTO v_idanual_construccion
+    FROM anual_construccion
+    WHERE anio_construccion = p_anio_construccion
+    LIMIT 1;
+
+    -- Insertar año si no existe
+    IF v_idanual_construccion IS NULL OR v_idanual_construccion = 0 THEN
+        INSERT INTO anual_construccion (anio_construccion)
+        VALUES (p_anio_construccion);
+        
+        SET v_idanual_construccion = LAST_INSERT_ID();
+    END IF;
+
+    -- Insertar en valores_edificacion
+    INSERT INTO valores_edificacion (
+        categoria,
+        muro_columna,
+        techos,
+        pisos,
+        puertas_ventanas,
+        revistimiento,
+        banios,
+        instalaciones,
+        anual_construccion_idanual_construccion
+    ) VALUES (
+        p_categoria,
+        p_muro_columna,
+        p_techos,
+        p_pisos,
+        p_puerta_ventana,
+        p_revistimiento,
+        p_banios,
+        p_instalaciones,
+        v_idanual_construccion
+    );
+
+    SET v_idvalores_edificacion = LAST_INSERT_ID();
+
+    -- Retornar ambos IDs en un SELECT
+    SELECT 
+        v_idanual_construccion AS idanual_construccion,
+        v_idvalores_edificacion AS idvalores_edificacion;
+
+END$$
+DELIMITER ;
+
+
+DELIMITER $$
+
+CREATE PROCEDURE ObtenerArancelarioPorAnio(IN p_anio VARCHAR(4))
+BEGIN
+    -- Validar si existen registros para el año seleccionado
+    SELECT COUNT(*) INTO @count
+    FROM valores_edificacion ve
+    INNER JOIN anual_construccion ac ON ve.anual_construccion_idanual_construccion = ac.idanual_construccion
+    WHERE ac.anio_construccion = p_anio;
+
+    IF @count > 0 THEN
+        -- Devolver los datos correspondientes al año
+        SELECT 
+            ve.categoria,
+            ve.muro_columna AS "Muros y Columnas",
+            ve.techos AS Techos,
+            ve.pisos AS Pisos,
+            ve.puertas_ventanas AS "Puertas y Ventanas",
+            ve.revistimientos AS Revestimientos, -- Corregido aquí
+            ve.banios AS Baños,
+            ve.instalaciones AS Instalaciones
+        FROM valores_edificacion ve
+        INNER JOIN anual_construccion ac ON ve.anual_construccion_idanual_construccion = ac.idanual_construccion
+        WHERE ac.anio_construccion = p_anio;
+    ELSE
+        -- Si no hay datos, devolver un mensaje de error
+        SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'No hay datos disponibles para este año.';
+    END IF;
+END$$
+
+DELIMITER ;
+
 -- Dump completed on 2025-04-20  8:59:15

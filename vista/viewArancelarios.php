@@ -16,7 +16,7 @@ $conexion->close();
         <!-- start: Navbar -->
             <nav class="px-3 py-2 bg-white rounded shadow">
                 <i class="ri-menu-line sidebar-toggle me-3 d-block d-md-none"></i>
-                <h5 class="fw-bold mb-0 me-auto">VALORES POR PARTIDAS EN NUEVOS SOLES POR METRO CUadrado DE ÁREA TECHADA<</h5>
+                <h5 class="fw-bold mb-0 me-auto">VALORES POR PARTIDAS EN NUEVOS SOLES POR METRO CUADRADO DE ÁREA TECHADA<</h5>
                 <div class="dropdown me-3 d-none d-sm-block">
                     <div class="cursor-pointer dropdown-toggle navbar-link" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="ri-notification-line"></i>
@@ -83,7 +83,7 @@ $conexion->close();
                 <th rowspan="2" class="text-center align-middle">CATEGORÍA</th>
                 <th colspan="2" class="text-center">ESTRUCTURAS</th>
                 <th colspan="3" class="text-center">ACABADOS</th>
-                <th rowspan="2" class="text-center align-middle">INSTALACIONES ELéCTRICAS Y SANITARIAS</th>
+                <th rowspan="2" class="text-center align-middle">INSTALACIONES </th>
             </tr>
             <tr>
                 <th>MUROS Y COLUMNAS </th>
@@ -128,16 +128,24 @@ $conexion->close();
 
                         <!-- Selector de Categoría -->
                         <div class="col-md-6">
-                            <label for="categoriaSelect" class="form-label fw-bold">Selecciona Categoría:</label>
-                            <select id="categoriaSelect" name="categoriaSelect" class="form-select" required>
-                                <?php
-                                $categorias = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'];
-                                foreach ($categorias as $categoria) {
-                                    echo "<option value='$categoria'>$categoria</option>";
-                                }
-                                ?>
-                            </select>
+                            <label for="categoriaSelect" class="form-label fw-bold">Categoria</label>
+                            <div class="input-group">
+                                <select class="form-select" id="categoriaSelect" name="categoriaSelect">
+                                    <option value="" selected disabled>Seleccione Categoria</option>
+                                        <option value="A">A</option>
+                                        <option value="B">B</option>
+                                        <option value="C">C</option>
+                                        <option value="D">D</option>
+                                        <option value="E">F</option>
+                                        <option value="F">F</option>
+                                        <option value="G">G</option>
+                                        <option value="H">H</option>
+                                        <option value="I">I</option>
+                                            
+                                </select>
+                            </div>
                         </div>
+                        
 
                         <!-- Campos para los valores -->
                         <div class="col-md-6">
@@ -165,7 +173,7 @@ $conexion->close();
                             <input type="number" step="0.01" class="form-control" id="banos" name="banos" placeholder="Ej: 106.57" required>
                         </div>
                         <div class="col-md-6">
-                            <label for="instalaciones" class="form-label fw-bold">Instalaciones eléctricas y sanitarias</label>
+                            <label for="instalaciones" class="form-label fw-bold">Instalaciones </label>
                             <input type="number" step="0.01" class="form-control" id="instalaciones" name="instalaciones" placeholder="Ej: 379.76" required>
                         </div>
                     </div>
@@ -191,7 +199,10 @@ $conexion->close();
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../assets/js/jquery.min.js"></script>
     <script src="../assets/js/script-msm.js"></script>
+     <script>
+    console.log("¡JavaScript está funcionando!");
+  </script>
     <script src="js/view-arancelarios.js"></script>
-    <script src="../assets/js/script-general.js"></script>
+   
 </body>
 </html>

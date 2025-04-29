@@ -1,126 +1,51 @@
 <?php
-// controlador/arancelarios_control.php
-
-require_once '../modelo/arancelarios_model.php';
-
-class ArancelariosController {
-    private $model;
-
-    public function __construct() {
-        $this->model = new ArancelariosModel();
-    }
-
-    // Manejador principal para procesar las solicitudes
-    public function handleRequest() {
-        $option = $_REQUEST['option'] ?? '';
-
-        switch ($option) {
-            case 'getYears':
-                $this->getYears();
-                break;
-            case 'getDataByYear':
-                $this->getDataByYear();
-                break;
-            case 'addYear':
-                $this->addYear();
-                break;
-            case 'deleteYear':
-                $this->deleteYear();
-                break;
-            default:
-                echo json_encode(['status' => false, 'msg' => 'Acción no válida']);
-                break;
+    require_once "../modelo/predio_model.php";
+    $option=$_REQUEST['data'];
+    //creando la instancia para acceder a modelo
+    $objArancelario=new ArancelariosModel();
+    /*
+    if ($option == "busca_codigo") {
+        if($_POST){
+            $codIdentificador=$_POST["codigo"];
+            $arrayPredios = $objArancelario->getCodPredios($codIdentificador);
+                     
+            if(empty($arrayPredios)){
+                $arrayResponse = array('status' => false,'data'=>'', 'msg' => 'No hay Registros de Predios Con Este Codigo');
+            }else{
+                for ($i=0; $i <count($arrayPredios) ; $i++) { 
+                    $idpredio=$arrayPredios[$i]->idpredios;//estamos sacando el id del tabla
+                    $options = '<a href="#" class="btn btn-primary btn-sm" 
+                                    data-bs-toggle="modal" 
+                                    data-bs-target="#modalEditarPredio" 
+                                    data-idpredio="'.$idpredio.'"><i class="ri-file-edit-line"></i></a>
+                                <a class="btn btn-danger btn-sm" onclick="DeletePredio('.$idpredio.')"><i class="ri-delete-bin-6-line"></i></a>
+                                <a href="viewRuralUrbano.php?idpredio='.$idpredio.'" 
+                                class="btn btn-success btn-sm" 
+                                target="_blank">
+                                Calcular Autovaluo
+                                </a>';
+                    $arrayPredios[$i]->options=$options;
+    
+                }
+                //btn fin
+                $arrayResponse['status']=true;
+                $arrayResponse['data']=$arrayPredios;//aqui se le asigna a la data los datos de base de datos
+                $arrayResponse['msg']='Datos Encontrados';
+                
+            }
+            echo json_encode($arrayResponse);
         }
-    }
-
-    // Obtener todos los años disponibles
-    private function getYears() {
-        $years = $this->model->getYears();
-
-        echo json_encode(['status' => true, 'data' => $years]);
         die();
-    }
 
-    // Obtener datos de un año específico
+    
+
     private function getDataByYear() {
     if ($_GET) {
         $year = $_GET['year'];
-        $data = $this->model->getDataByYear($year); // Obtener datos del modelo
+        $data = $this->model->getDataByYear($year);
         echo json_encode(['status' => true, 'data' => $data]);
         die();
     }
-    }
+}
 
-    // Agregar un nuevo año y sus datos
-    private function addYear() {
-    if ($_POST) {
-        // Validar que todos los campos estén presentes
-        if (
-            empty($_POST['anioSelect']) || empty($_POST['categoriaSelect']) ||
-            empty($_POST['muros_columnas']) || empty($_POST['techos']) ||
-            empty($_POST['pisos']) || empty($_POST['puertas_ventanas']) ||
-            empty($_POST['revestimientos']) || empty($_POST['banos']) ||
-            empty($_POST['instalaciones'])
-        ) {
-            echo json_encode(['status' => false, 'msg' => 'Error en los datos']);
-            die();
-        }
-
-        // Obtener los datos del formulario
-        $year = intval($_POST['anioSelect']);
-        $categoria = trim($_POST['categoriaSelect']);
-        $muros_columnas = floatval($_POST['muros_columnas']);
-        $techos = floatval($_POST['techos']);
-        $pisos = floatval($_POST['pisos']);
-        $puertas_ventanas = floatval($_POST['puertas_ventanas']);
-        $revestimientos = floatval($_POST['revestimientos']);
-        $banos = floatval($_POST['banos']);
-        $instalaciones = floatval($_POST['instalaciones']);
-
-        // Guardar los datos en la base de datos
-        $success = $this->model->addYear(
-            $year,
-            $categoria,
-            $muros_columnas,
-            $techos,
-            $pisos,
-            $puertas_ventanas,
-            $revestimientos,
-            $banos,
-            $instalaciones
-        );
-
-        if ($success) {
-            echo json_encode(['status' => true, 'msg' => 'Datos guardados correctamente']);
-        } else {
-            echo json_encode(['status' => false, 'msg' => 'Error al guardar los datos']);
-        }
-        die();
-        }
-    }
-
-
-    // Eliminar un año
-    private function deleteYear() {
-        if ($_POST) {
-            if (empty($_POST['idArancelario'])) {
-                echo json_encode(['status' => false, 'msg' => 'Error en los datos']);
-                die();
-            }
-
-            $idArancelario = intval($_POST['idArancelario']);
-            $success = $this->model->deleteYear($idArancelario);
-
-            if ($success) {
-                echo json_encode(['status' => true, 'msg' => 'Registro eliminado']);
-            } else {
-                echo json_encode(['status' => false, 'msg' => 'Error al eliminar']);
-            }
-            die();
-            }
-        }
-    }
-
-// Instanciar el controlador y manejar la solicitud
-$controller = new ArancelariosController();
-$controller->handleRequest();
+?>

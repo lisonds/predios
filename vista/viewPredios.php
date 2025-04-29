@@ -251,7 +251,7 @@
 <script src="../assets/js/jquery.min.js"></script>
 <script src="../assets/js/script-msm.js"></script>
 <script src="js/view-predios.js"></script>
-<script src="../assets/js/script-general.js"></script>
+//<script src="../assets/js/script-general.js"></script>
 
  <?php
     require 'template/header.php';  // Incluye el header

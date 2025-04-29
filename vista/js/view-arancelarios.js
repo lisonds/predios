@@ -1,104 +1,98 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const yearSelect = document.getElementById('yearSelect');
-    const formAgregarAnio = document.getElementById('formAgregarAnio');
-    const tablaArancelarios = document.getElementById('tablaArancelarios');
+/*ESTE VA SER EL QUE CAPTURA FORMULARIO */
+console.log("llego aqui.....");
+if (document.querySelector("#formAgregarAnio")) {//AQUI se valida si existe el id formulario en html
+    let frmArancelarios=document.querySelector("#formAgregarAnio");//
+    frmArancelarios.onsubmit=function(e){//ejecutar al dar btn guardar
+        e.preventDefault();//evitar que se recargue cuando damos el btn guardar
+        btnGuardararancelario();//lamar funcion guardar
+    }
 
-    // Cargar años disponibles al iniciar la página
-    fetchYears();
+    async function btnGuardararancelario() {
+        //extraer datos de cada input
+        let stranio=document.querySelector("#anioSelect").value;
+        let strCategoria=document.querySelector("#categoriaSelect").value;
+        let strmuros_columnas=document.querySelector("#muros_columnas").value;
+        let strtechos=document.querySelector("#techos").value;
+        let strpisos=document.querySelector("#pisos").value;
+        let strpuertas_ventanas=document.querySelector("#puertas_ventanas").value;
+        let strrevestimientos=document.querySelector("#revestimientos").value;
+        let strbanos=document.querySelector("#banos").value;
+        let strinstalaciones=document.querySelector("#instalaciones").value;
 
-    // Evento para cargar datos cuando se selecciona un año
-    yearSelect.addEventListener('change', function () {
-        const selectedYear = this.value;
-        if (selectedYear) {
-            loadDataByYear(selectedYear);
+        if (stranio==""||strCategoria==""||strmuros_columnas==""||strtechos==""
+            ||strpisos==""||strpuertas_ventanas==""||strrevestimientos==""||strbanos=="" || strinstalaciones==""
+        ) {
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Todo Los datos Son Inportantes",
+                footer: '<a href="#">Why do I have this issue?</a>'
+              });
+            return;
         }
-    });
+        try {
+                        
+            const data=new FormData(formAgregarAnio);//a qui le mandamos todo el objeto del formulario por que tienen todo los elementos del frm
+            let resp=await fetch(base_url+"/controlador/arancelarios_control.php?data=agregar_datos_construccion",{
+                method:'POST',//mandar post
+                mode:'cors',
+                cache:'no-cache',// para que no guarde en cache
+                body: data
+            });//con este codigo se mando un POST  AL ESE URL 
+            const responseText = await resp.text(); // Leer como texto primero LO QUE deberia retornar en json
+                 
+            // Intenta convertir el texto a JSON
+            const json = JSON.parse(responseText);
+             
+            if(json.status){//el mensaje de error se debe mostrar en SWALLLL
+                Swal.fire({//mostrar mensaje
+                    icon: "success",
+                    title: json.msg,//aqui vamos mostrar mensaje
+                    showConfirmButton: false,
+                    timer: 1500
+                  });
+                  
+                  frmArancelarios.reset();
+                  //salir del modal
+                  var modal = bootstrap.Modal.getInstance(document.getElementById('addYearModal'));
+                    modal.hide();
 
-    // Evento para manejar el envío del formulario del modal
-    formAgregarAnio.addEventListener('submit', function (e) {
-        e.preventDefault();
-        const formData = new FormData(this);
+                    document.querySelector("#tablaArancelarios").innerHTML = ""; // Limpiar la tabla para mosttrar de manera dinamica
+                    buscarCodigo(strCodigo); // Llamar a la función para cargar la tabla actualizada
+                    
+                    //location.reload();//volver a cargar la pagina para ver los resultados 
 
-        // Convertir los datos del formulario a un objeto JSON
-        const data = {};
-        formData.forEach((value, key) => {
-            data[key] = value;
-        });
-
-        // Enviar los datos al servidor para agregar un nuevo año
-        fetch('../controlador/arancelarios_control.php?option=addYear', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-        })
-            .then(response => response.json())
-            .then(result => {
-                if (result.status) {
-                    alert(result.msg); // Mostrar mensaje de éxito
-                    $('#addYearModal').modal('hide'); // Cerrar el modal
-                    formAgregarAnio.reset(); // Limpiar el formulario
-                    fetchYears(); // Actualizar el selector de años
-                } else {
-                    alert(result.msg); // Mostrar mensaje de error
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Ocurrió un error al guardar los datos.');
-            });
-    });
-
-    
-
-        // Función para cargar los datos de un año específico
-        // Función para cargar los datos de un año específico
-        function loadData(year) {
-        fetch(`../controlador/arancelarios_control.php?option=getDataByYear&year=${year}`)
-            .then(response => response.json())
-            .then(result => {
-                const tableBody = document.getElementById('tablaArancelarios');
-                tableBody.innerHTML = ''; // Limpiar la tabla
-    
-                if (result.status && result.data.length > 0) {
-                    // Generar las filas de la tabla
-                    result.data.forEach(row => {
-                        const tr = document.createElement('tr');
-                        tr.innerHTML = `
-                            <td>${row.categoria}</td>
-                            <td>${row.muros_columnas}</td>
-                            <td>${row.techos}</td>
-                            <td>${row.pisos}</td>
-                            <td>${row.puertas_ventanas}</td>
-                            <td>${row.revestimientos}</td>
-                            <td>${row.banos}</td>
-                            <td>${row.instalaciones}</td>
-                        `;
-                        tableBody.appendChild(tr);
-                    });
-                } else {
-                    // Mostrar mensaje si no hay datos disponibles
-                    const tr = document.createElement('tr');
-                    tr.innerHTML = '<td colspan="8" class="text-center">No hay datos disponibles para este año.</td>';
-                    tableBody.appendChild(tr);
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Ocurrió un error al cargar los datos.');
-            });
-        }
-    
-        // Cargar datos del año seleccionado inicialmente
-        document.addEventListener('DOMContentLoaded', function () {
-            const yearSelect = document.getElementById('yearSelect');
-            const initialYear = yearSelect.value;
-            if (initialYear) {
-                loadData(initialYear);
+            }else{
+               
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: json.msg,
+                    footer: '<a href="#">Why do I have this issue?</a>'
+                  });
             }
-        });
+            
+
+
+            
+        } catch (error) {
+            console.log("Ocurrio un Error: "+error);
+        }
+    }
+}
+
+
+// Evento onchange para el selector de año
+document.getElementById('yearSelect').addEventListener('change', function () {
+    const selectedYear = this.value;
+    loadData(selectedYear);
 });
 
-
-
+// Cargar datos del año seleccionado inicialmente
+document.addEventListener('DOMContentLoaded', function () {
+    const yearSelect = document.getElementById('yearSelect');
+    const initialYear = yearSelect.value;
+    if (initialYear) {
+        loadData(initialYear);
+    }
+});
