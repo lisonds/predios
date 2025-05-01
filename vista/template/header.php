@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="../assets/css/styles_propios.css">
     <!-- end: CSS -->
-    <title>Foxy - Blank Page</title>
+    <title>IMPUESTOS PREDIALES </title>
 </head>
 
 <body>
@@ -25,14 +25,14 @@
     <!-- start: Sidebar -->
     <div class="sidebar position-fixed top-0 bottom-0 bg-white border-end">
         <div class="d-flex align-items-center p-3">
-            <a href="#" class="sidebar-logo text-uppercase fw-bold text-decoration-none text-indigo fs-4">Foxy</a>
+            <a href="#" class="sidebar-logo text-uppercase fw-bold text-decoration-none text-indigo fs-4">FOXY</a>
             <i class="sidebar-toggle ri-arrow-left-circle-line ms-auto fs-5 d-none d-md-block"></i>
         </div>
         <ul class="sidebar-menu p-3 m-0 mb-0">
             <li class="sidebar-menu-item active">
                 <a href="#">
                     <i class="ri-dashboard-line sidebar-menu-item-icon"></i>
-                    Dashboard
+                    IMPUESTOS PREDIALES
                 </a>
             </li>
             <li class="sidebar-menu-divider mt-3 mb-1 text-uppercase">Custom</li>
@@ -134,7 +134,7 @@
             <li class="sidebar-menu-item has-dropdown">
                 <a href="#">
                     <i class="ri-user-line sidebar-menu-item-icon"></i>
-                    Autenticacion
+                    USUARIOS
                     <i class="ri-arrow-down-s-line sidebar-menu-item-accordion ms-auto"></i>
                 </a>
                 <ul class="sidebar-dropdown-menu">

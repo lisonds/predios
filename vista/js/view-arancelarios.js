@@ -1,5 +1,123 @@
+async function SeleccionarAnio(item) {
+    //limipiamos la tabla 
+    document.getElementById("tablaArancelarios").innerHTML = '';
+
+    let formData = new FormData();
+    formData.append('anio', item);
+    //print_er
+    try {
+        let resp = await fetch(`${base_url}/controlador/propietarios_control.php?data=busca_anio`, {
+            method: 'POST', // Enviar con el método POST
+            mode: 'cors',
+            cache: 'no-cache', // No guardar en caché
+            body: formData
+          });
+          // Convertimos la respuesta a JSON
+            let json = await resp.json(); 
+
+            // Verificamos el estado de la respuesta
+            if (json.status) { 
+                let data = json.data; // Asignamos los datos de la respuesta a `data`
+
+                // Iteramos por cada elemento en `data`
+                data.forEach(item => {
+                    // Creamos una nueva fila
+                    let newtr = document.createElement("tr");
+                    newtr.id = "row_" + item.idpropietarios;
+
+                    // Asignamos el contenido HTML a la fila
+                    newtr.innerHTML = `
+                        <td>${item.idpropietarios}</td>
+                        <td>
+                            <button 
+                                class="btn btn-primary btn-sm" 
+                                type="button" 
+                                data-bs-toggle="collapse" 
+                                data-bs-target="#info${item.idpropietarios}" 
+                                aria-expanded="false" 
+                                aria-controls="info${item.idpropietarios}">
+                                <i class="ri-menu-add-fill"></i>
+                            </button>
+                        </td>
+                        <td style="text-transform: uppercase;">${item.nombre_completo}</td>
+                        <td>${item.options}</td>
+                        
+                         `;
+
+                    // Creamos la fila colapsable para la información extra
+                    let collapseRow = document.createElement("tr");
+                    collapseRow.className = "collapse";
+                    collapseRow.id = `info${item.idpropietarios}`;
+                    collapseRow.innerHTML = `
+                        <td colspan="7" class="bg-light">
+                            <div class="p-3 rounded border">
+                                <!-- Diseño Vertical para Ubicación -->
+                                <div class="d-flex flex-wrap gap-4 align-items-center">
+                                    <div>
+                                        <strong><i class="bi bi-geo-alt-fill"></i> Nombres:</strong> 
+                                        <span class="text-primary">${item.direccion}</span>
+                                    </div>
+                                    
+                                    
+                                </div>
+
+                                <hr class="my-2">
+
+                                <!-- Diseño Horizontal para los Códigos -->
+                                <div class="d-flex flex-wrap gap-4">
+                                   <div>
+                                        <strong><i class="bi bi-key-fill"></i> Distrito</strong> 
+                                        <span class="text-success">${item.distrito}</span>
+                                    </div>
+                                    <div>
+                                        <strong><i class="bi bi-key-fill"></i> Provincia</strong> 
+                                        <span class="text-success">${item.provincia}</span>
+                                    </div>
+                                    <div>
+                                        <strong><i class="bi bi-code-slash"></i> Departamento:</strong> 
+                                        <span class="text-success">${item.departamento}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    `;
+
+                    // Agregamos ambas filas (principal y colapsable) a la tabla
+                    let tableBody = document.querySelector("#tablaPropietarios");
+                    tableBody.appendChild(newtr);
+                    tableBody.appendChild(collapseRow);
+                });
+            }else{
+                Swal.fire({
+                    title: "Error",
+                    text: json.msg,
+                    icon: "error"
+                  });
+            }
+    } catch (error) {
+        Swal.fire({
+            title: "Error",
+            text: `Se produjo un error : ${error.message}`,
+            icon: "error"
+          });
+    }
+}
+
+
+
+/*DEL BUSCAR CODIGO SELECCIONADO VA AGREGAR AL MODAL PARA REGISTRAR LISTA DE VALORES ARANCELARIOS*/
+document.getElementById('addArancelarioButton').addEventListener('click', function () {
+    // Obtener el valor del input
+    const anio = document.getElementById('yearSelect').value;
+
+    // Mostrar el valor en el modal
+    //document.getElementById('anioSelect').textContent = anio;
+    // Actualiza el input oculto con el código para enviarlo
+    //document.getElementById('anioSelect').value = anio;
+});
+
 /*ESTE VA SER EL QUE CAPTURA FORMULARIO */
-console.log("llego aqui.....");
+///console.log("llego aqui.....");
 if (document.querySelector("#formAgregarAnio")) {//AQUI se valida si existe el id formulario en html
     let frmArancelarios=document.querySelector("#formAgregarAnio");//
     frmArancelarios.onsubmit=function(e){//ejecutar al dar btn guardar
@@ -25,7 +143,7 @@ if (document.querySelector("#formAgregarAnio")) {//AQUI se valida si existe el i
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
-                text: "Todo Los datos Son Inportantes",
+                text: "Todo Los datos Son Importantes",
                 footer: '<a href="#">Why do I have this issue?</a>'
               });
             return;
@@ -82,17 +200,3 @@ if (document.querySelector("#formAgregarAnio")) {//AQUI se valida si existe el i
 }
 
 
-// Evento onchange para el selector de año
-document.getElementById('yearSelect').addEventListener('change', function () {
-    const selectedYear = this.value;
-    loadData(selectedYear);
-});
-
-// Cargar datos del año seleccionado inicialmente
-document.addEventListener('DOMContentLoaded', function () {
-    const yearSelect = document.getElementById('yearSelect');
-    const initialYear = yearSelect.value;
-    if (initialYear) {
-        loadData(initialYear);
-    }
-});

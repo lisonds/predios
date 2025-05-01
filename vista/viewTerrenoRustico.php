@@ -1,6 +1,5 @@
  <?php
     require 'template/header.php';  // Incluye el header
-    require '../configuracion/config.php';  // las configuraciones
     ?>
 $conexion->close();
     ?>
