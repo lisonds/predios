@@ -21,37 +21,40 @@ if ($dataOption == "obtener_datos_por_anio") {
 }
     die();
 
-if ($dataOption === "agregar_datos_construccion") {
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $requiredFields = [
-            'anioSelect', 'categoriaSelect', 'muros_columnas', 'techos',
-            'pisos', 'puertas_ventanas', 'revestimientos', 'banos', 'instalaciones'
-        ];
-
-        foreach ($requiredFields as $field) {
-            if (empty($_POST[$field])) {
-                echo json_encode(["status" => false, "msg" => "Todos los campos son obligatorios"]);
-                exit;
+if ($option == "agregar_predio") {
+        if ($_POST) { // Validar si es un POST
+            if (empty($_POST['anioSelect']) || empty($_POST['categoriaSelect']) || empty($_POST['muros_columnas']) || empty($_POST['techos'])
+            || empty($_POST['pisos'])|| empty($_POST['puertas_ventanas'])|| empty($_POST['revestimientos'])|| empty($_POST['banos']) || empty($_POST['instalaciones'])) {
+                $arrayResponse = array('status' => false, 'msg' => 'Error de datos');
+            } else {
+                $strAnioSelect = ucwords(trim($_POST['anioSelect'])); 
+                $strCategoriaSelect = ucwords($_POST['categoriaSelect']); 
+                $strMuros_columnas = ucwords($_POST['muros_columnas']);
+                $strTechos = ucwords($_POST['techos']);
+                $strPisos = ucwords($_POST['pisos']);
+                $strPuertas_ventanas = ucwords($_POST['puertas_ventanas']);
+                $strRevestimientos = ucwords($_POST['revestimientos']);
+                $strBanos = ucwords($_POST['banos']);
+                $strInstalaciones = ucwords($_POST['instalaciones']);
+                                
+                // Enviando datos al modelo
+                $arrayEdificacion = $objPredio->insertPredio($strAnioSelect, $strCategoriaSelect, $strMuros_columnas, $strTechos,
+                $strPisos,$strPuertas_ventanas, $strRevestimientos, $strBanos,$strInstalaciones);
+                
+                if ($arrayPredio->status) {
+                    $arrayResponse = array('status' => true, 'msg' => $arrayEdificacion->msg);
+                } else {
+                    $arrayResponse = array('status' => false, 'msg' => $arrayPredio->msg);
+                }
             }
+            
+            // Enviar la respuesta en formato JSON
+            echo json_encode($arrayResponse);
         }
-
-        $response = $objArancelario->insertArancelario(
-            trim($_POST['anioSelect']),
-            trim($_POST['categoriaSelect']),
-            trim($_POST['muros_columnas']),
-            trim($_POST['techos']),
-            trim($_POST['pisos']),
-            trim($_POST['puertas_ventanas']),
-            trim($_POST['revestimientos']),
-            trim($_POST['banos']),
-            trim($_POST['instalaciones'])
-        );
-
-        echo json_encode($response);
+        die();
     }
-} 
 
 
-    
+   
 
 ?>

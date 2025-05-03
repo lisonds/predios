@@ -1,4 +1,3 @@
- <!-- end: Sidebar -->
     <?php
     require 'template/footer.php';  // Incluye el header
 
@@ -111,7 +110,7 @@
 
             <!-- Modal para Agregar Año -->
 <!-- Modal para Agregar Año -->
-<div class="modal fade" id="addYearModal" tabindex="-1" aria-labelledby="addYearModalLabel" aria-hidden="true">
+<div class="modal fade" id="addYearModal" tabindex="-1" aria-labelledby="addYearModalLabel">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">

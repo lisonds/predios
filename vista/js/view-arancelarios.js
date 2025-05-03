@@ -150,7 +150,7 @@ if (document.querySelector("#formAgregarAnio")) {//AQUI se valida si existe el i
                     modal.hide();
 
                     document.querySelector("#tablaArancelarios").innerHTML = ""; // Limpiar la tabla para mosttrar de manera dinamica
-                    buscarCodigo(strCodigo); // Llamar a la función para cargar la tabla actualizada
+                    SeleccionarAnio(strCodigo); // Llamar a la función para cargar la tabla actualizada
                     
                     //location.reload();//volver a cargar la pagina para ver los resultados 
 
