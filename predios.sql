@@ -925,7 +925,7 @@ DELIMITER ;
 
 
 DELIMITER $$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `agregarArancelarioEdificacion`(
+CREATE PROCEDURE `agregarArancelarioEdificacion`(
     IN p_anio_construccion VARCHAR(4),
     IN p_categoria VARCHAR(1),
     IN p_muro_columna VARCHAR(7),
