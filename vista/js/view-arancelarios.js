@@ -1,108 +1,82 @@
+document.addEventListener("DOMContentLoaded", () => {
+    const inputElement = document.getElementById("selectAnio");
+
+    if (inputElement) {
+        // Variable para almacenar el número ingresado como cadena
+        let anioIngresado = "";
+
+        // Evento al quitar el foco (cuando el cursor deja de parpadear)
+        inputElement.addEventListener("blur", function () {
+            // Permitir solo números y rellenar con ceros a la izquierda
+            this.value = this.value.replace(/\D/g, '').padStart(6, '0');
+
+            // Actualizar la variable como una cadena
+            numeroIngresado = String(this.value); // Aseguramos que sea una cadena
+            
+
+            // Llamar a la función buscarCodigo con la cadena
+            SeleccionarAnio(anioIngresado);
+        });
+    }
+});
+
 async function SeleccionarAnio(item) {
-    //limipiamos la tabla 
+    // Limpiar la tabla antes de cargar nuevos datos
     document.getElementById("tablaArancelarios").innerHTML = '';
 
-    let formData = new FormData();
-    formData.append('anio', item);
-    //print_er
     try {
-        let resp = await fetch(`${base_url}/controlador/propietarios_control.php?data=busca_anio`, {
-            method: 'POST', // Enviar con el método POST
+        let formData = new FormData();
+        formData.append('anio', item);
+
+        let resp = await fetch(`${base_url}/controlador/arancelarios_control.php?data=obtener_datos_por_anio`, {
+            method: 'POST',
             mode: 'cors',
-            cache: 'no-cache', // No guardar en caché
+            cache: 'no-cache',
             body: formData
-          });
-          // Convertimos la respuesta a JSON
-            let json = await resp.json(); 
+        });
 
-            // Verificamos el estado de la respuesta
-            if (json.status) { 
-                let data = json.data; // Asignamos los datos de la respuesta a `data`
+        let json = await resp.json();
 
-                // Iteramos por cada elemento en `data`
+        if (json.status) {
+            let data = json.data;
+
+            if (data.length > 0) {
                 data.forEach(item => {
-                    // Creamos una nueva fila
-                    let newtr = document.createElement("tr");
-                    newtr.id = "row_" + item.idpropietarios;
-
-                    // Asignamos el contenido HTML a la fila
-                    newtr.innerHTML = `
-                        <td>${item.idpropietarios}</td>
-                        <td>
-                            <button 
-                                class="btn btn-primary btn-sm" 
-                                type="button" 
-                                data-bs-toggle="collapse" 
-                                data-bs-target="#info${item.idpropietarios}" 
-                                aria-expanded="false" 
-                                aria-controls="info${item.idpropietarios}">
-                                <i class="ri-menu-add-fill"></i>
-                            </button>
-                        </td>
-                        <td style="text-transform: uppercase;">${item.nombre_completo}</td>
-                        <td>${item.options}</td>
-                        
-                         `;
-
-                    // Creamos la fila colapsable para la información extra
-                    let collapseRow = document.createElement("tr");
-                    collapseRow.className = "collapse";
-                    collapseRow.id = `info${item.idpropietarios}`;
-                    collapseRow.innerHTML = `
-                        <td colspan="7" class="bg-light">
-                            <div class="p-3 rounded border">
-                                <!-- Diseño Vertical para Ubicación -->
-                                <div class="d-flex flex-wrap gap-4 align-items-center">
-                                    <div>
-                                        <strong><i class="bi bi-geo-alt-fill"></i> Nombres:</strong> 
-                                        <span class="text-primary">${item.direccion}</span>
-                                    </div>
-                                    
-                                    
-                                </div>
-
-                                <hr class="my-2">
-
-                                <!-- Diseño Horizontal para los Códigos -->
-                                <div class="d-flex flex-wrap gap-4">
-                                   <div>
-                                        <strong><i class="bi bi-key-fill"></i> Distrito</strong> 
-                                        <span class="text-success">${item.distrito}</span>
-                                    </div>
-                                    <div>
-                                        <strong><i class="bi bi-key-fill"></i> Provincia</strong> 
-                                        <span class="text-success">${item.provincia}</span>
-                                    </div>
-                                    <div>
-                                        <strong><i class="bi bi-code-slash"></i> Departamento:</strong> 
-                                        <span class="text-success">${item.departamento}</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </td>
+                    let newRow = document.createElement("tr");
+                    newRow.innerHTML = `
+                        <td>${item.categoria}</td>
+                        <td>${item["Muros y Columnas"]}</td>
+                        <td>${item.Techos}</td>
+                        <td>${item.Pisos}</td>
+                        <td>${item["Puertas y Ventanas"]}</td>
+                        <td>${item.Revestimientos}</td>
+                        <td>${item.Baños}</td>
+                        <td>${item.Instalaciones}</td>
                     `;
-
-                    // Agregamos ambas filas (principal y colapsable) a la tabla
-                    let tableBody = document.querySelector("#tablaPropietarios");
-                    tableBody.appendChild(newtr);
-                    tableBody.appendChild(collapseRow);
+                    document.getElementById("tablaArancelarios").appendChild(newRow);
                 });
-            }else{
+            } else {
                 Swal.fire({
-                    title: "Error",
-                    text: json.msg,
-                    icon: "error"
-                  });
+                    icon: "info",
+                    title: "Sin datos",
+                    text: "No hay datos disponibles para este año"
+                });
             }
+        } else {
+            Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: json.msg
+            });
+        }
     } catch (error) {
         Swal.fire({
+            icon: "error",
             title: "Error",
-            text: `Se produjo un error : ${error.message}`,
-            icon: "error"
-          });
+            text: `Se produjo un error: ${error.message}`
+        });
     }
 }
-
 
 
 /*DEL BUSCAR CODIGO SELECCIONADO VA AGREGAR AL MODAL PARA REGISTRAR LISTA DE VALORES ARANCELARIOS*/
@@ -194,7 +168,13 @@ if (document.querySelector("#formAgregarAnio")) {//AQUI se valida si existe el i
 
             
         } catch (error) {
-            console.log("Ocurrio un Error: "+error);
+            Swal.fire({
+                icon: "error",
+                title: "Oops error Try Cach",
+                text: error,
+                footer: '<a href="#">Why do I have this issue?</a>'
+              });
+            
         }
     }
 }

@@ -168,33 +168,11 @@
             <li class="sidebar-menu-divider mt-3 mb-1 text-uppercase">DATOS ESTATICOS</li>
             <li class="sidebar-menu-item has-dropdown">
                 <a href="#">
+                     <i class="ri-book-line sidebar-menu-item-icon"></i>
+                    NORMAS LEGALES 
                     
-                    <i class="ri-table-line sidebar-menu-item-icon"></i>
-                    TERRENOS RUSTICOS 
-                    <i class="ri-arrow-down-s-line sidebar-menu-item-accordion ms-auto"></i>
                 </a>
-                <ul class="sidebar-dropdown-menu">
-                    <li class="sidebar-dropdown-menu-item">
-                        <a href="#">
-                            tierras aptas para cultivo limpio
-                        </a>
-                    </li>
-                    <li class="sidebar-dropdown-menu-item">
-                        <a href="#">
-                            tierras aptas para cultivo permanente
-                        </a>
-                    </li>
-                    <li class="sidebar-dropdown-menu-item">
-                        <a href="#">
-                            Tierras aptas para Pastos
-                        </a>
-                    </li>
-                    <li class="sidebar-dropdown-menu-item">
-                        <a href="#">
-                            Wishlist
-                        </a>
-                    </li>
-                </ul>
+                
             </li>
             <li class="sidebar-menu-item">
                 <a href="viewArancelarios.php">
@@ -203,9 +181,9 @@
                 </a>
             </li>
             <li class="sidebar-menu-item">
-                <a href="#">
-                    <i class="ri-calendar-line sidebar-menu-item-icon"></i>
-                    Calendar
+                <a href="viewTerrenoRustico.php">
+                    <i class="ri-table-line sidebar-menu-item-icon"></i>
+                    TERRENOS RUSTICOS
                 </a>
             </li>
         </ul>

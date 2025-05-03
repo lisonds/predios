@@ -11,15 +11,11 @@ class ArancelariosModel {
 
     // Obtener datos por año usando el procedimiento almacenado
     public function getDataByYear($year) {
-        $arrayLista = [];
-        $query = "CALL ObtenerArancelarioPorAnio(?)";
-        $stmt = $this->conexion->prepare($query);
-        $stmt->bind_param("s", $year);
-        $stmt->execute();
-        $result = $stmt->get_result();
-
-        while ($row = $result->fetch_assoc()) {
-            $arrayLista[] = $row;
+        $arrayLista = array();
+        $rs = $this->conexion->query("CALL ObtenerArancelarioPorAnio('$year')");
+        
+        while ($obj = $rs->fetch_object()) {
+            array_push($arrayLista,$obj);
         }
 
         return $arrayLista;
@@ -37,32 +33,36 @@ class ArancelariosModel {
         string $banos,
         string $instalaciones
     ) {
-        $query = "CALL agregarArancelarioEdificacion(?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        $stmt = $this->conexion->prepare($query);
+        
+         $query = "CALL agregarArancelarioEdificacion(
+                '{$anioSelect}',
+                '{$categoriaSelect}',
+                '{$muros_columnas}',
+                '{$techos}',
+                '{$pisos}',
+                '{$puertas_ventanas}',
+                '{$revestimientos}',
+                '{$banos}',
+                '{$instalaciones}'
+            )";
 
-        if (!$stmt) {
-            return (object)["status" => false, "msg" => "Error al preparar la consulta: " . $this->conexion->error];
-        }
+            $result = $this->conexion->query($query);
 
-        $stmt->bind_param(
-            "sssssssss",
-            $anioSelect,
-            $categoriaSelect,
-            $muros_columnas,
-            $techos,
-            $pisos,
-            $puertas_ventanas,
-            $revestimientos,
-            $banos,
-            $instalaciones
-        );
-
-        if ($stmt->execute()) {
-            $idValores_edificacion = $stmt->insert_id;
-            return (object)["status" => true, "idValores_edificacion" => $idValores_edificacion, "msg" => "Se registró correctamente"];
-        } else {
-            return (object)["status" => false, "msg" => "Error al ejecutar el procedimiento almacenado: " . $stmt->error];
-        }
+            if ($result) {
+                $row = $result->fetch_assoc();
+                $idEdificacacion = $row['idvalores_edificacion'] ?? null;
+            
+                return (object)[
+                    "status" => true,
+                    "idEdificacion" => $idEdificacacion,
+                    "msg" => "Se registró correctamente datos de edifcicacion"
+                ];
+            } else {
+                return (object)[
+                    "status" => false,
+                    "msg" => "Error al ejecutar el procedimiento almacenado: " . $this->conexion->error
+                ];
+            } 
     }
 }
 ?>
