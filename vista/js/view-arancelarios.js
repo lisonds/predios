@@ -144,15 +144,7 @@ if (document.querySelector("#formAgregarAnio")) {//AQUI se valida si existe el i
                     timer: 1500
                   });
                   
-                  frmArancelarios.reset();
-                  //salir del modal
-                  var modal = bootstrap.Modal.getInstance(document.getElementById('addYearModal'));
-                    modal.hide();
-
-                    document.querySelector("#tablaArancelarios").innerHTML = ""; // Limpiar la tabla para mosttrar de manera dinamica
-                    SeleccionarAnio(strCodigo); // Llamar a la función para cargar la tabla actualizada
-                    
-                    //location.reload();//volver a cargar la pagina para ver los resultados 
+                 
 
             }else{
                
