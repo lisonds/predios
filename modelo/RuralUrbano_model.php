@@ -29,26 +29,30 @@ require_once "../libreria/conexion.php";
                         '{$strAltitud}', 
                         '{$strCalidad}', 
                         '{$strhectareas}', 
-                        '{$stracceso}',
+                        '{$stracceso}'
                         
                     )";
             
                     $result = $this->conexion->query($query);
 
                     if ($result) {
-                        // Obtiene el ID del rural si es retornado por el procedimiento
                         $row = $result->fetch_assoc();
+                        $cod = $row['estado_operacion'];
                         
-                        if (isset($row['idrural'])) {
-                            return (object) [
+                        if ($cod == 1) {
+                            return (object)[
                                 "status" => true,
-                                "msg" => "La información se guardó correctamente.",
-                                "idrural" => $row['idrural'] // Retorna el idrural si existe
+                                "msg" => "Se registraron correctamente los datos del año Registrado ."
+                            ];
+                        } elseif ($cod == 2) {
+                            return (object)[
+                                "status" => true,
+                                "msg" => "Los datos ingresados se actualizaron correctamente."
                             ];
                         } else {
-                            return (object) [
+                            return (object)[
                                 "status" => false,
-                                "msg" => "No se obtuvo el idrural del procedimiento almacenado."
+                                "msg" => "Operación desconocida o sin cambios."
                             ];
                         }
                     } else {

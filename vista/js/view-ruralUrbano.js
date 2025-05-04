@@ -4,7 +4,7 @@ if (document.querySelector("#formPredioRuralCal")) {//AQUI se valida si existe e
     let frmPredio=document.querySelector("#formPredioRuralCal");//
     frmPredio.onsubmit=function(e){//ejecutar al dar btn guardar
         e.preventDefault();//evitar que se recargue cuando damos el btn guardar
-        btnGuardarPredio();//lamar funcion guardar
+        btnGuardarPredio(this.id);//lamar funcion guardar
     }
 
     async function btnGuardarPredio() {
@@ -107,7 +107,7 @@ if (document.querySelector("#formPredioRuralCal")) {//AQUI se valida si existe e
             try {
                 const data = new FormData();
                 data.append('anio', stranio);
-                data.append('selectRural', 1);
+                data.append('selectRural', "1");
                 data.append('idPredio', idpredios);
                 data.append('tipoTerreno', strTipoTerreno);
                 data.append('usoTerreno', strUsoTerreno);
@@ -115,7 +115,7 @@ if (document.querySelector("#formPredioRuralCal")) {//AQUI se valida si existe e
                 data.append('altitud', strAltitud);
                 data.append('calidad', strCalidad);
                 data.append('hectareas', strHectareas);
-                data.append('acceso', 0);
+                data.append('acceso', "0");
                 let resp=await fetch(base_url+"/controlador/RuralUrbano_control.php?datos=agregar_dataRuralSinPredio",{
                     method:'POST',//mandar post
                     mode:'cors',

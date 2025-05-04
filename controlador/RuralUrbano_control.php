@@ -1,5 +1,5 @@
 <?php
-    require_once "../modelo/predio_model.php";
+    require_once "../modelo/RuralUrbano_model.php";
     $option=$_REQUEST['datos'];
     //creando la instancia para acceder a modelo
     $objRuralUrbano=new RuralUrbano();
@@ -40,9 +40,10 @@
     }
 
     if ($option == "agregar_dataRuralSinPredio") {
+              
         if ($_POST) { // Validar si es un POST
-            if (empty($_POST['anio']) || empty($_POST['selectRural']) || empty($_POST['tipoTerreno']) || empty($_POST['usoTerreno'])
-            || empty($_POST['tierrasAptas'])|| empty($_POST['altitud'])|| empty($_POST['calidad'])|| empty($_POST['hectareas'])|| empty($_POST['acceso'])) {
+            if (empty($_POST['anio']) || empty($_POST['selectRural']) ||empty($_POST['idPredio']) || empty($_POST['tipoTerreno']) || empty($_POST['usoTerreno'])
+                || empty($_POST['tierrasAptas'])|| empty($_POST['altitud'])|| empty($_POST['calidad'])|| empty($_POST['hectareas'])|| $_POST['acceso'] === '') {
                 $arrayResponse = array('status' => false, 'msg' => 'Error de datos en controler');
             } else {
                 $strAnio = trim($_POST['anio']); 
@@ -70,7 +71,7 @@
             // Enviar la respuesta en formato JSON
             echo json_encode($arrayResponse);
         }
-        die();
+        die(); 
     }
 
 

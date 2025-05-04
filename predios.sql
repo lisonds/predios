@@ -51,12 +51,12 @@ DROP TABLE IF EXISTS `anio_registro`;
 CREATE TABLE `anio_registro` (
   `idanio_registro` int NOT NULL AUTO_INCREMENT,
   `anio` varchar(4) NOT NULL,
-  `select_ruralurbano` double DEFAULT NULL,
+  `select_ruralurbano` tinyint NOT NULL,
   `predios_idpredios` int NOT NULL,
   PRIMARY KEY (`idanio_registro`),
   KEY `fk_anio_registro_predios1_idx` (`predios_idpredios`),
   CONSTRAINT `fk_anio_registro_predios1` FOREIGN KEY (`predios_idpredios`) REFERENCES `predios` (`idpredios`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -65,6 +65,7 @@ CREATE TABLE `anio_registro` (
 
 LOCK TABLES `anio_registro` WRITE;
 /*!40000 ALTER TABLE `anio_registro` DISABLE KEYS */;
+INSERT INTO `anio_registro` VALUES (1,'2025',1,16);
 /*!40000 ALTER TABLE `anio_registro` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -417,18 +418,18 @@ DROP TABLE IF EXISTS `rural`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `rural` (
   `idrural` int NOT NULL AUTO_INCREMENT,
-  `tipo` varchar(45) DEFAULT NULL,
-  `uso` varchar(45) DEFAULT NULL,
-  `tierras_aptas` varchar(45) DEFAULT NULL,
-  `altitud` varchar(50) DEFAULT NULL,
-  `calidad_agrologica` varchar(10) DEFAULT NULL,
-  `total_hectareas` varchar(45) DEFAULT NULL,
-  `existe_construccion` double DEFAULT NULL,
+  `tipo` varchar(45) NOT NULL,
+  `uso` varchar(45) NOT NULL,
+  `tierras_aptas` varchar(45) NOT NULL,
+  `altitud` varchar(50) NOT NULL,
+  `calidad_agrologica` varchar(10) NOT NULL,
+  `total_hectareas` varchar(45) NOT NULL,
+  `existe_construccion` tinyint NOT NULL,
   `anio_registro_idanio_registro` int NOT NULL,
   PRIMARY KEY (`idrural`),
   KEY `fk_rural_anio_registro1_idx` (`anio_registro_idanio_registro`),
   CONSTRAINT `fk_rural_anio_registro1` FOREIGN KEY (`anio_registro_idanio_registro`) REFERENCES `anio_registro` (`idanio_registro`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -437,6 +438,7 @@ CREATE TABLE `rural` (
 
 LOCK TABLES `rural` WRITE;
 /*!40000 ALTER TABLE `rural` DISABLE KEYS */;
+INSERT INTO `rural` VALUES (8,'LOTE','GANADERÍA','CULTIVO EN LIMPIO','2001 m.s.n.m - 3000 m.s.n.m','MEDIA','10.2',0,1);
 /*!40000 ALTER TABLE `rural` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -709,6 +711,98 @@ BEGIN
 
     -- Retornar el id generado
     SET p_idpredios = LAST_INSERT_ID();
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `agregarRuralUrbanoSinConstruccion` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `agregarRuralUrbanoSinConstruccion`(
+    IN p_anio VARCHAR(4),
+    IN p_select_ruralurbano TINYINT,
+    IN p_predios_idpredios INT,
+    IN p_tipo VARCHAR(45),
+    IN p_uso VARCHAR(45),
+    IN p_tierras_aptas VARCHAR(45),
+    IN p_altitud VARCHAR(50),
+    IN p_calidad_agrologica VARCHAR(10),
+    IN p_total_hectareas VARCHAR(45),
+    IN p_existe_construccion TINYINT
+)
+BEGIN
+    DECLARE v_idanio_registro INT DEFAULT 0;
+    DECLARE v_idrural INT DEFAULT 0;
+
+    -- Buscar idanio_registro
+    SELECT idanio_registro INTO v_idanio_registro
+    FROM anio_registro
+    WHERE anio = p_anio
+      AND select_ruralurbano = p_select_ruralurbano
+      AND predios_idpredios = p_predios_idpredios
+    LIMIT 1;
+
+    -- Si no existe, insertar en anio_registro
+    IF v_idanio_registro IS NULL OR v_idanio_registro = 0 THEN
+        INSERT INTO anio_registro (anio, select_ruralurbano, predios_idpredios)
+        VALUES (p_anio, p_select_ruralurbano, p_predios_idpredios);
+
+        SET v_idanio_registro = LAST_INSERT_ID();
+    END IF;
+
+    -- Verificar si ya existe en rural
+    SELECT idrural INTO v_idrural
+    FROM rural
+    WHERE anio_registro_idanio_registro = v_idanio_registro
+    LIMIT 1;
+
+    -- Si existe, actualizar
+    IF v_idrural IS NOT NULL AND v_idrural > 0 THEN
+        UPDATE rural
+        SET tipo = p_tipo,
+            uso = p_uso,
+            tierras_aptas = p_tierras_aptas,
+            altitud = p_altitud,
+            calidad_agrologica = p_calidad_agrologica,
+            total_hectareas = p_total_hectareas,
+            existe_construccion = p_existe_construccion
+        WHERE idrural = v_idrural;
+
+        SELECT 2 AS estado_operacion; -- Actualización
+    ELSE
+        -- Si no existe, insertar en rural
+        INSERT INTO rural (
+            tipo,
+            uso,
+            tierras_aptas,
+            altitud,
+            calidad_agrologica,
+            total_hectareas,
+            existe_construccion,
+            anio_registro_idanio_registro
+        ) VALUES (
+            p_tipo,
+            p_uso,
+            p_tierras_aptas,
+            p_altitud,
+            p_calidad_agrologica,
+            p_total_hectareas,
+            p_existe_construccion,
+            v_idanio_registro
+        );
+
+        SELECT 1 AS estado_operacion; -- Inserción
+    END IF;
+
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -1072,4 +1166,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-05-03 21:09:06
+-- Dump completed on 2025-05-03 22:58:39
