@@ -65,6 +65,66 @@ require_once "../libreria/conexion.php";
                 
         }
 
+        public function insertDatoConConstruccion(
+           string $strAnio, string  $strRural, string $idPredio, string $strTipoTerreno, string $strUsoTerreno,
+           string $strTierrasAptas, string $strAltitud, string $strCalidad, string $strHectareas, string $strAcceso,
+           string $strClasPredio, string $strMaterialCons, string $strEstConservacion, string $strTipoUso,$edificaciones_json
+        ){
+            $query = "CALL INSERT_DATOS_RURAL_CONSTRUCCION(
+                '{$strAnio}',
+                '{$strRural}',
+                '{$idPredio}',
+                '{$strTipoTerreno}',
+                '{$strUsoTerreno}',
+                '{$strTierrasAptas}',
+                '{$strAltitud}',
+                '{$strCalidad}',
+                '{$strHectareas}',
+                '{$strAcceso}',
+            
+                '{$strClasPredio}',
+                '{$strMaterialCons}',
+                '{$strEstConservacion}',
+                '{$strTipoUso}',
+                '{$edificaciones_json}'
+            )";
+            $result = $this->conexion->query($query);
+
+                    if ($result) {
+                        $row = $result->fetch_assoc();
+                        $cod = $row['estado_final'];
+                        
+                        if ($cod == 1) {
+                            return (object)[
+                                "status" => true,
+                                "msg" => "Se registraron correctamente los datos del año Registrado ."
+                            ];
+                        } elseif ($cod == 2) {
+                            return (object)[
+                                "status" => true,
+                                "msg" => "Los datos ingresados se actualizaron correctamente."
+                            ];
+                        }  elseif ($cod == 3) {
+                            return (object)[
+                                "status" => true,
+                                "msg" => "Los no se ingresaron todos los datos."
+                            ];
+                        }  else {
+                            return (object)[
+                                "status" => false,
+                                "msg" => "Operacion desconocida o sin cambios."
+                            ];
+                        }
+                    } else {
+                        // Error al ejecutar el procedimiento almacenado
+                        return (object) [
+                            "status" => false,
+                            "msg" => "Error al ejecutar el procedimiento almacenado: " . $this->conexion->error
+                        ];
+                    }
+                
+        }
+
         public function VerPredioId(int $idPredio){
             $sql=$this->conexion->query("SELECT * FROM predios where idpredios='{$idPredio}'");
             $sql=$sql->fetch_object();

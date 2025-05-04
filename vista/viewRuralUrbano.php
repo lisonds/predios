@@ -256,7 +256,7 @@
                                         </div>
 
                                         <!-- Collapse PARA AGREGAR EL CONSTRUCCION -->
-                                         <!-- 
+                                         
                                         <div class="collapse mt-2" id="contenidoConstruccion">
                                             <h5 class="modal-title" id="modalPredioLabel">
                                                 <i class="ri-survey-fill me-2"></i> Ingresando Datos de Construccion
@@ -320,8 +320,8 @@
                                                     </div>
 
                                                         
-                                                        -->
-                                                        <!-- Tabla donde se agregarán las filas --> <!-- 
+                                                        
+                                                        <!-- Tabla donde se agregarán las filas -->  
                                                         <table class="table table-bordered table-striped table-hover">
                                                             <thead class="table-dark">
                                                                 <tr>
@@ -340,14 +340,14 @@
                                                             </thead>
                                                             <tbody id="tablaCuerpo">
                                                                 <!-- Aquí se agregarán las filas -->
-                                                                <!--
+                                                                
                                                             </tbody>
                                                         </table>
                                                     </div>
 
                                                 </div>
                                             </div>
-                                        </div> -->
+                                        </div> 
 
                                     </div>
                                 </form>

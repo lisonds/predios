@@ -72,7 +72,64 @@
             echo json_encode($arrayResponse);
         }
         die(); 
+        //agregar_dataRuralConPredio
     }
+    if ($option == "agregar_dataRuralConPredio") {
+        if ($_POST) {
+            if (
+                empty($_POST['anio']) || empty($_POST['selectRural']) || empty($_POST['idPredio']) ||
+                empty($_POST['tipoTerreno']) || empty($_POST['usoTerreno']) || empty($_POST['tierrasAptas']) ||
+                empty($_POST['altitud']) || empty($_POST['calidad']) || empty($_POST['hectareas']) ||
+                $_POST['acceso'] === '' || empty($_POST['clasPredio']) || empty($_POST['MatConstruccion']) ||
+                empty($_POST['EstConservacion']) || empty($_POST['TipoUso']) 
+            ) {
+                $arrayResponse = array('success' => false, 'message' => 'Error: Faltan datos obligatorios');
+            } else {
+                  // Captura y limpieza de datos
+                    $strAnio             = trim($_POST['anio']);
+                    $strRural            = $_POST['selectRural'];
+                    $idPredio            = $_POST['idPredio'];
+                    $strTipoTerreno      = $_POST['tipoTerreno'];
+                    $strUsoTerreno       = $_POST['usoTerreno'];
+                    $strTierrasAptas     = $_POST['tierrasAptas'];
+                    $strAltitud          = $_POST['altitud'];
+                    $strCalidad          = $_POST['calidad'];
+                    $strHectareas        = $_POST['hectareas'];
+                    $strAcceso           = $_POST['acceso'];
+
+                    $strClasPredio       = $_POST['clasPredio'];
+                    $strMaterialCons     = $_POST['MatConstruccion'];
+                    $strEstConservacion  = $_POST['EstConservacion'];
+                    $strTipoUso          = $_POST['TipoUso'];
+                    
+                        // Procesar datos de edificaciones si existen
+                    $edificaciones = [];
+                    if (!empty($_POST['edificacion'])) {
+                        $decoded = json_decode($_POST['edificacion'], true);
+                        if (is_array($decoded)) {
+                            $edificaciones = $decoded;
+                        }
+                    }
+                    $edificaciones_json = json_encode($edificaciones, JSON_UNESCAPED_UNICODE);
+                     // Enviando datos al modelo
+                        $arrayRuralUrbano = $objRuralUrbano->insertDatoConConstruccion(
+                            $strAnio, $strRural, $idPredio, $strTipoTerreno, $strUsoTerreno,
+                            $strTierrasAptas, $strAltitud, $strCalidad, $strHectareas, $strAcceso,
+                            $strClasPredio, $strMaterialCons, $strEstConservacion, $strTipoUso, $edificaciones_json
+                        );
+
+                        // Respuesta
+                        if ($arrayRuralUrbano->status) {
+                            $arrayResponse = array('status' => true, 'msg' => $arrayRuralUrbano->msg);
+                        } else {
+                            $arrayResponse = array('status' => false, 'msg' => $arrayRuralUrbano->msg);
+                        }
+                    }
+
+                    echo json_encode($arrayResponse);
+
+            }
+        }
 
 
     if ($option == "verPredio") {
