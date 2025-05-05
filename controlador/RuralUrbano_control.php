@@ -4,6 +4,21 @@
     //creando la instancia para acceder a modelo
     $objRuralUrbano=new RuralUrbano();
 
+    //verDataRuralSinPredio
+    if ($option == "verDataRuralConSinPredio") {
+        if($_POST){
+            $idAnio=$_POST["acceso"];
+            // Llamas a tu método y capturas el resultado
+            $arrayPrediosRural = $objRuralUrbano->obtener_RuralUrbano_por_anio($idAnio);
+
+            // Devuelves la respuesta al frontend como JSON
+            header('Content-Type: application/json');
+            echo json_encode($arrayPrediosRural);
+            exit;
+        }
+        die();
+    }
+
     if ($option == "busca_codigo") {
         if($_POST){
             $codIdentificador=$_POST["codigo"];

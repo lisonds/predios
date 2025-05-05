@@ -56,7 +56,7 @@ CREATE TABLE `anio_registro` (
   PRIMARY KEY (`idanio_registro`),
   KEY `fk_anio_registro_predios1_idx` (`predios_idpredios`),
   CONSTRAINT `fk_anio_registro_predios1` FOREIGN KEY (`predios_idpredios`) REFERENCES `predios` (`idpredios`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -65,7 +65,7 @@ CREATE TABLE `anio_registro` (
 
 LOCK TABLES `anio_registro` WRITE;
 /*!40000 ALTER TABLE `anio_registro` DISABLE KEYS */;
-INSERT INTO `anio_registro` VALUES (1,'2025',1,16);
+INSERT INTO `anio_registro` VALUES (1,'2025',1,16),(2,'2023',1,16),(3,'2023',1,17),(4,'2024',1,17),(5,'2025',1,17);
 /*!40000 ALTER TABLE `anio_registro` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -157,14 +157,14 @@ CREATE TABLE `construccion` (
   `material` varchar(45) DEFAULT NULL,
   `conservacion` varchar(45) DEFAULT NULL,
   `tipo_uso` varchar(45) DEFAULT NULL,
-  `rural_idrural` int NOT NULL,
-  `urbano_idurbano` int NOT NULL,
+  `rural_idrural` int DEFAULT NULL,
+  `urbano_idurbano` int DEFAULT NULL,
   PRIMARY KEY (`idconstruccion`),
   KEY `fk_construccion_rural_idx` (`rural_idrural`),
   KEY `fk_construccion_urbano1_idx` (`urbano_idurbano`),
   CONSTRAINT `fk_construccion_rural` FOREIGN KEY (`rural_idrural`) REFERENCES `rural` (`idrural`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_construccion_urbano1` FOREIGN KEY (`urbano_idurbano`) REFERENCES `urbano` (`idurbano`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -173,6 +173,7 @@ CREATE TABLE `construccion` (
 
 LOCK TABLES `construccion` WRITE;
 /*!40000 ALTER TABLE `construccion` DISABLE KEYS */;
+INSERT INTO `construccion` VALUES (7,'Casa Habitacion','Ladrillo','Regular','Unifamiliar',10,NULL),(10,'Casa Habitacion','Ladrillo','Bueno','Unifamiliar',13,NULL),(11,'Casa Habitacion','Ladrillo','Bueno','Unifamiliar',14,NULL),(12,'Casa Habitacion','Ladrillo','Bueno','Unifamiliar',15,NULL);
 /*!40000 ALTER TABLE `construccion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -241,7 +242,7 @@ CREATE TABLE `edificacion` (
   `idedificacion` int NOT NULL AUTO_INCREMENT,
   `bloque` varchar(3) DEFAULT NULL,
   `piso` varchar(2) DEFAULT NULL,
-  `antiguedad` varchar(3) DEFAULT NULL,
+  `antiguedad` varchar(4) DEFAULT NULL,
   `Muro_columna` varchar(1) DEFAULT NULL,
   `techo` varchar(1) DEFAULT NULL,
   `pisos` varchar(1) DEFAULT NULL,
@@ -254,7 +255,7 @@ CREATE TABLE `edificacion` (
   PRIMARY KEY (`idedificacion`),
   KEY `fk_edificacion_construccion_idx` (`construccion_idconstruccion`),
   CONSTRAINT `fk_edificacion_construccion` FOREIGN KEY (`construccion_idconstruccion`) REFERENCES `construccion` (`idconstruccion`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -263,6 +264,7 @@ CREATE TABLE `edificacion` (
 
 LOCK TABLES `edificacion` WRITE;
 /*!40000 ALTER TABLE `edificacion` DISABLE KEYS */;
+INSERT INTO `edificacion` VALUES (14,'1','1','2020','D','H','F','E','D','E','D','50',10),(15,'1','2','2024','D','D','E','E','F','C','D','50',10),(16,'1','1','2020','D','H','F','E','D','E','D','50',11),(17,'1','2','2024','D','D','E','E','F','C','D','50',11),(18,'1','1','2020','D','H','F','E','D','E','D','50',12),(19,'1','2','2024','D','D','E','E','F','C','D','50',12);
 /*!40000 ALTER TABLE `edificacion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -329,7 +331,7 @@ CREATE TABLE `indentificador` (
   `id` int NOT NULL AUTO_INCREMENT,
   `codigo` varchar(6) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -338,7 +340,7 @@ CREATE TABLE `indentificador` (
 
 LOCK TABLES `indentificador` WRITE;
 /*!40000 ALTER TABLE `indentificador` DISABLE KEYS */;
-INSERT INTO `indentificador` VALUES (22,'000001');
+INSERT INTO `indentificador` VALUES (22,'000001'),(23,'000002');
 /*!40000 ALTER TABLE `indentificador` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -362,7 +364,7 @@ CREATE TABLE `predios` (
   PRIMARY KEY (`idpredios`),
   KEY `fk_predios_indentificador_idx` (`indentificador_id`),
   CONSTRAINT `fk_predios_indentificador` FOREIGN KEY (`indentificador_id`) REFERENCES `indentificador` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -371,7 +373,7 @@ CREATE TABLE `predios` (
 
 LOCK TABLES `predios` WRITE;
 /*!40000 ALTER TABLE `predios` DISABLE KEYS */;
-INSERT INTO `predios` VALUES (16,'Av. Los Angeles N° 125','Anansayocc','Quinua','Huamanga','Ayacucho','5698652','54_56645642_25',22);
+INSERT INTO `predios` VALUES (16,'Av. Los Angeles N° 125','Anansayocc','Quinua','Huamanga','Ayacucho','5698652','54_56645642_25',22),(17,'Chuchiqa','Ccalla','Huascahuara','Huamanga','Ayacucho','5698652','54_56645642_25',23);
 /*!40000 ALTER TABLE `predios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -396,7 +398,7 @@ CREATE TABLE `propietarios` (
   PRIMARY KEY (`idpropietarios`),
   KEY `fk_propietarios_indentificador_idx` (`indentificador_id`),
   CONSTRAINT `fk_propietarios_indentificador` FOREIGN KEY (`indentificador_id`) REFERENCES `indentificador` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -405,7 +407,7 @@ CREATE TABLE `propietarios` (
 
 LOCK TABLES `propietarios` WRITE;
 /*!40000 ALTER TABLE `propietarios` DISABLE KEYS */;
-INSERT INTO `propietarios` VALUES (12,'TULIO LISON ORE ICHACCAYA','70421319','Persona_natural','Propietario','Av. Los Angeles','Quinua','Huamanga','Ayacucho',22),(13,'NERY LUZ DE LA CRUZ AYME','71946323','Persona_natural','Conyugue','Av. Los Angeles','Quinua','Huamanga','Ayacucho',22);
+INSERT INTO `propietarios` VALUES (12,'TULIO LISON ORE ICHACCAYA','70421319','Persona_natural','Propietario','Av. Los Angeles','Quinua','Huamanga','Ayacucho',22),(13,'NERY LUZ DE LA CRUZ AYME','71946323','Persona_natural','Conyugue','Av. Los Angeles','Quinua','Huamanga','Ayacucho',22),(14,'JHON QUISPE JERI','70421320','Persona_natural','Propietario','Av. Los Angeles','Huascahuara','Huamanga','Ayacucho',23),(15,'MARY MARIBI QUISPE AGUILAR','70421318','Persona_natural','Conyugue','Av. Los Angeles','Huascahuara','Huamanga','Ayacucho',23);
 /*!40000 ALTER TABLE `propietarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -429,7 +431,7 @@ CREATE TABLE `rural` (
   PRIMARY KEY (`idrural`),
   KEY `fk_rural_anio_registro1_idx` (`anio_registro_idanio_registro`),
   CONSTRAINT `fk_rural_anio_registro1` FOREIGN KEY (`anio_registro_idanio_registro`) REFERENCES `anio_registro` (`idanio_registro`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -438,7 +440,7 @@ CREATE TABLE `rural` (
 
 LOCK TABLES `rural` WRITE;
 /*!40000 ALTER TABLE `rural` DISABLE KEYS */;
-INSERT INTO `rural` VALUES (8,'LOTE','GANADERÍA','CULTIVO EN LIMPIO','2001 m.s.n.m - 3000 m.s.n.m','MEDIA','10.2',0,1);
+INSERT INTO `rural` VALUES (8,'LOTE','AGRÍCOLA','CULTIVO EN LIMPIO','2001 m.s.n.m - 3000 m.s.n.m','MEDIA','10.2',0,1),(10,'LOTE','AGRÍCOLA','CULTIVO EN LIMPIO','2001 m.s.n.m - 3000 m.s.n.m','ALTA','10.5',1,2),(13,'PARCELA','AGRÍCOLA','CULTIVO EN LIMPIO','2001 m.s.n.m - 3000 m.s.n.m','MEDIA','0.58',1,3),(14,'PARCELA','AGRÍCOLA','CULTIVO EN LIMPIO','2001 m.s.n.m - 3000 m.s.n.m','MEDIA','0.58',1,4),(15,'PARCELA','AGRÍCOLA','CULTIVO EN LIMPIO','2001 m.s.n.m - 3000 m.s.n.m','MEDIA','0.58',1,5);
 /*!40000 ALTER TABLE `rural` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -940,6 +942,131 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `INSERT_DATOS_RURAL_CONSTRUCCION` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `INSERT_DATOS_RURAL_CONSTRUCCION`(
+    IN p_anio VARCHAR(4),
+    IN p_select_ruralurbano TINYINT,
+    IN p_idpredio INT,
+    
+    IN p_tipo VARCHAR(45),
+    IN p_uso VARCHAR(45),
+    IN p_tierras_aptas VARCHAR(45),
+    IN p_altitud VARCHAR(50),
+    IN p_calidad_agrologica VARCHAR(10),
+    IN p_total_hectareas VARCHAR(45),
+    IN p_existe_construccion TINYINT,
+    
+    IN p_clasificacion VARCHAR(45),
+    IN p_material VARCHAR(45),
+    IN p_conservacion VARCHAR(45),
+    IN p_tipo_uso VARCHAR(45),
+
+    IN p_edificaciones JSON
+)
+BEGIN
+    DECLARE v_id_anio INT DEFAULT NULL;
+    DECLARE v_id_rural INT DEFAULT NULL;
+    DECLARE v_id_construccion INT DEFAULT NULL;
+    DECLARE v_estado INT DEFAULT 3;
+
+    -- 1. Buscar si ya existe el año registrado para ese predio
+    SELECT idanio_registro INTO v_id_anio
+    FROM anio_registro
+    WHERE anio = p_anio AND select_ruralurbano = p_select_ruralurbano AND predios_idpredios = p_idpredio
+    LIMIT 1;
+
+    -- 2. Insertar si no existe
+    IF v_id_anio IS NULL THEN
+        INSERT INTO anio_registro (anio, select_ruralurbano, predios_idpredios)
+        VALUES (p_anio, p_select_ruralurbano, p_idpredio);
+        SET v_id_anio = LAST_INSERT_ID();
+        SET v_estado = 1;
+    ELSE
+        SET v_estado = 2;
+    END IF;
+
+    -- 3. Insertar en rural
+    INSERT INTO rural (
+        tipo, uso, tierras_aptas, altitud, calidad_agrologica,
+        total_hectareas, existe_construccion, anio_registro_idanio_registro
+    ) VALUES (
+        p_tipo, p_uso, p_tierras_aptas, p_altitud, p_calidad_agrologica,
+        p_total_hectareas, p_existe_construccion, v_id_anio
+    );
+
+    SET v_id_rural = LAST_INSERT_ID();
+
+    -- Verificar inserción en rural
+    IF v_id_rural IS NULL THEN
+        SET v_estado = 3;
+    END IF;
+
+    -- 4. Si existe construcción, insertar en construcción y edificaciones
+    IF p_existe_construccion = 1 THEN
+
+        -- Insertar construcción
+        INSERT INTO construccion (
+            clasificacion, material, conservacion, tipo_uso, rural_idrural
+        ) VALUES (
+            p_clasificacion, p_material, p_conservacion, p_tipo_uso, v_id_rural
+        );
+
+        SET v_id_construccion = LAST_INSERT_ID();
+
+        -- Si construcción no fue insertada, estado = 3
+        IF v_id_construccion IS NULL THEN
+            SET v_estado = 3;
+        END IF;
+
+        -- Bucle de edificación
+        BEGIN
+            DECLARE i INT DEFAULT 0;
+            DECLARE total_edificaciones INT;
+
+            SET total_edificaciones = JSON_LENGTH(p_edificaciones);
+
+            WHILE i < total_edificaciones DO
+                INSERT INTO edificacion (
+                    bloque, piso, antiguedad, Muro_columna, techo,
+                    pisos, puerta_ventana, revistimiento, banio,
+                    instalaciones_electricas, areaconstruida, construccion_idconstruccion
+                )
+                VALUES (
+                    JSON_UNQUOTE(JSON_EXTRACT(p_edificaciones, CONCAT('$[', i, '].bloque'))),
+                    JSON_UNQUOTE(JSON_EXTRACT(p_edificaciones, CONCAT('$[', i, '].piso'))),
+                    JSON_UNQUOTE(JSON_EXTRACT(p_edificaciones, CONCAT('$[', i, '].anioConstruccion'))),
+                    JSON_UNQUOTE(JSON_EXTRACT(p_edificaciones, CONCAT('$[', i, '].muro'))),
+                    JSON_UNQUOTE(JSON_EXTRACT(p_edificaciones, CONCAT('$[', i, '].techo'))),
+                    JSON_UNQUOTE(JSON_EXTRACT(p_edificaciones, CONCAT('$[', i, '].pisos'))),
+                    JSON_UNQUOTE(JSON_EXTRACT(p_edificaciones, CONCAT('$[', i, '].puertaVentana'))),
+                    JSON_UNQUOTE(JSON_EXTRACT(p_edificaciones, CONCAT('$[', i, '].revestimiento'))),
+                    JSON_UNQUOTE(JSON_EXTRACT(p_edificaciones, CONCAT('$[', i, '].bano'))),
+                    JSON_UNQUOTE(JSON_EXTRACT(p_edificaciones, CONCAT('$[', i, '].instalacionesElectricas'))),
+                    JSON_UNQUOTE(JSON_EXTRACT(p_edificaciones, CONCAT('$[', i, '].areaConstruida'))),
+                    v_id_construccion
+                );
+                SET i = i + 1;
+            END WHILE;
+        END;
+    END IF;
+
+    -- Retornar estado final
+    SELECT v_estado AS estado_final;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `ObtenerArancelarioPorAnio` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -1013,6 +1140,40 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `obtener_edificacionporidConstruccion` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `obtener_edificacionporidConstruccion`(IN idConstruccion INT)
+BEGIN
+    SELECT 
+        e.idedificacion,
+        e.bloque,
+        e.piso,
+        e.antiguedad,
+        e.Muro_columna,
+        e.techo,
+        e.pisos,
+        e.puerta_ventana,
+        e.revistimiento,
+        e.banio,
+        e.instalaciones_electricas,
+        e.areaconstruida,
+        e.construccion_idconstruccion
+    FROM edificacion e
+    WHERE e.construccion_idconstruccion = idConstruccion;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `obtener_predios_por_codigo` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -1040,6 +1201,77 @@ BEGIN
     FROM indentificador i
     INNER JOIN predios p ON i.id = p.indentificador_id
     WHERE i.codigo LIKE p_codigo;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `obtener_RuralUrbano_por_anio` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `obtener_RuralUrbano_por_anio`(IN idAnio INT)
+BEGIN
+    DECLARE tipoRegistro TINYINT;
+    DECLARE existeConstruccion TINYINT;
+
+    -- Obtener tipo de registro (1 = rural)
+    SELECT select_ruralurbano INTO tipoRegistro
+    FROM anio_registro
+    WHERE idanio_registro = idAnio;
+
+    IF tipoRegistro = 1 THEN
+        -- Verificar si hay construcción en el registro rural
+        SELECT existe_construccion INTO existeConstruccion
+        FROM rural
+        WHERE anio_registro_idanio_registro = idAnio
+        LIMIT 1;
+
+        IF existeConstruccion = 1 THEN
+            -- Retornar datos de rural y construccion en un solo SELECT con JOIN
+            SELECT
+                r.idrural,
+                r.tipo,
+                r.uso,
+                r.tierras_aptas,
+                r.altitud,
+                r.calidad_agrologica,
+                r.total_hectareas,
+                r.existe_construccion,
+                r.anio_registro_idanio_registro,
+                c.idconstruccion,
+                c.clasificacion,
+                c.material,
+                c.conservacion,
+                c.tipo_uso,
+                c.rural_idrural,
+                c.urbano_idurbano
+            FROM rural r
+            LEFT JOIN construccion c ON c.rural_idrural = r.idrural
+            WHERE r.anio_registro_idanio_registro = idAnio;
+        ELSE
+            -- Solo retornar datos de rural
+            SELECT
+                r.idrural,
+                r.tipo,
+                r.uso,
+                r.tierras_aptas,
+                r.altitud,
+                r.calidad_agrologica,
+                r.total_hectareas,
+                r.existe_construccion,
+                r.anio_registro_idanio_registro
+            FROM rural r
+            WHERE r.anio_registro_idanio_registro = idAnio;
+        END IF;
+    END IF;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -1166,4 +1398,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-05-03 22:58:39
+-- Dump completed on 2025-05-05  0:10:27
