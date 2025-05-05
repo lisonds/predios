@@ -19,7 +19,7 @@
     $predio = null;
     
     if (!empty($codigo)) {
-        $stmt = $conexion->prepare("SELECT * FROM dbpredios.predios WHERE idpredios=?");
+        $stmt = $conexion->prepare("SELECT * FROM predios WHERE idpredios=?");
         $stmt->bind_param("s", $codigo);
         $stmt->execute();
         $resultado = $stmt->get_result();
@@ -29,6 +29,18 @@
         }
     
         $stmt->close();
+
+
+        $stmt = $conexion->prepare("SELECT * FROM anio_registro WHERE predios_idpredios = ?");
+        $stmt->bind_param("s", $codigo);
+        $stmt->execute();
+        $resultado2 = $stmt->get_result();
+        
+        $listaAnios = [];
+        while ($fila = $resultado2->fetch_assoc()) {
+            $listaAnios[] = $fila;
+        }
+
     }
     
     $conexion->close();
@@ -88,13 +100,14 @@
                 <div class="info-row">
                     <!-- Selector de año -->
                     <div class="year-select">
-                        <label for="yearSelect" class="year-label">Selecciona Año:</label>
+                        <label for="yearSelect" class="year-label">Selecciona Año <br> que se registro:</label>
                         <select id="yearSelect" name="yearSelect" class="form-select form-select-sm">
-                            <?php for ($year = $currentYear; $year >= $startYear; $year--): ?>
-                                <option value="<?php echo $year; ?>" <?php echo ($year == $currentYear) ? 'selected' : ''; ?>>
-                                    <?php echo $year; ?>
+                            <option value="0" selected disabled>-- Buscar año --</option>
+                            <?php foreach ($listaAnios as $anio): ?>
+                                <option value="<?php echo $anio['idanio_registro']; ?>">
+                                    <?php echo htmlspecialchars($anio['anio']); ?>
                                 </option>
-                            <?php endfor; ?>
+                            <?php endforeach; ?>
                         </select>
                     </div>
 
@@ -141,10 +154,124 @@
                 </div>
             </div>
 
-                <div class="container">
-                    <div class="info-row">
+            <div class="container my-4">
+                <div class="card shadow border-0">
+                    <div class="card-body">
+
+                        <!-- Título -->
+                        <h4 class="card-title text-primary mb-4">Información del Terreno</h4>
+                        <div class="row mb-4">
+                            <div class="col-sm-4"><strong>Tipo de Terreno:</strong> Lote</div>
+                            <div class="col-sm-4"><strong>Uso de Terreno:</strong> Agrícola</div>
+                            <div class="col-sm-4"><strong>Tierras Aptas:</strong> —</div>
+                            <div class="col-sm-4"><strong>Altitud de Terreno:</strong> —</div>
+                            <div class="col-sm-4"><strong>Calidad Agrológica:</strong> —</div>
+                            <div class="col-sm-4"><strong>Total de Hectáreas:</strong> —</div>
+                        </div>
+
+                      
+
+                        <div class="row mb-8 justify-content-center">
+                            <div class="col-auto">
+                                <table class="tabla-valores">
+                                    <tr>
+                                        <th>GRUPO DE TIERRAS</th>
+                                        <th>VALOR POR HECTAREA</th>
+                                        <th>CANT HECT</th>
+                                        <th>AUTOVALUO DEL TERRENO</th>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-descripcion">
+                                            TIERRAS APTAS PARA CULTIVO EN LIMPIO
+                                            CON UN ALTITUD 2001 m.s.n.m - 3000<br>
+                                            m.s.n.m CALIDAD AGROLOGICA Alta
+                                        </td>
+                                        <td>20456.36</td>
+                                        <td>5.3</td>
+                                        <td class="col-valores">s/ 100 569.37</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+
+                        <!-- Información de Construcción -->
+                        <h5 class="text-success mb-3">Construcción</h5>
+                        <div class="row mb-3">
+                            <div class="col-sm-4"><strong>Clasificación:</strong> Casa Habitación</div>
+                            <div class="col-sm-4"><strong>Material:</strong> Adobe</div>
+                            <div class="col-sm-4"><strong>Estado:</strong> Bueno</div>
+                            <div class="col-sm-6"><strong>Tipo de Uso:</strong> Multifamiliar</div>
+                        </div>
+
+                        <!-- Tabla de Detalles -->
+                       
+
+                        <div class="container my-4">
+                            <div class="table-responsive">
+                                <table class="table tabla-autovaluo">
+                                    <thead>
+                                        <tr>
+                                            <th rowspan="2">Bloque</th>
+                                            <th rowspan="2">Piso</th>
+                                            <th rowspan="2"><div class="vertical-text">Antigüedad</div></th>
+                                            <th colspan="1">Estructura</th>
+                                            <th rowspan="2"><div class="vertical-text">Valor Unitario por m²</div></th>
+                                            <th rowspan="2"><div class="vertical-text">Incremento</div></th>
+                                            <th colspan="3">Depreciación</th>
+                                            <th colspan="2">Área Construida</th>
+                                            <th rowspan="2">Valor de la <br> Construcción</th>
+                                        </tr>
+                                        <tr>
+                                            <th><div class="vertical-text">Muros y columnas <br> Techos <br> Pisos <br> Puertas/Ventanas <br> Revestimiento <br> Baño <br> Inst. Eléctricas</div></th>
+                                            <th>%</th>
+                                            <th>S/</th>
+                                            <th><div class="vertical-text">Valor Unitario  Depreciado</div></th>
+                                            <th>M²</th>
+                                            <th>S/</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>1</td>
+                                            <td>50</td>
+                                            <td>C F D C F E</td>
+                                            <td>748.04</td>
+                                            <td>0</td>
+                                            <td>35</td>
+                                            <td>261.81</td>
+                                            <td>486.23</td>
+                                            <td>120</td>
+                                            <td>486.23</td>
+                                            <td>58347.60</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>2</td>
+                                            <td>45</td>
+                                            <td>D G H H G E </td>
+                                            <td>395.86</td>
+                                            <td>0</td>
+                                            <td>32</td>
+                                            <td>126.68</td>
+                                            <td>269.18</td>
+                                            <td>100</td>
+                                            <td>269.18</td>
+                                            <td>26918.00</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="valor-total">VALOR DE LA CONSTRUCCIÓN: <strong>85265.60</strong></div>
+
+                            <div class="seccion-titulo">DETERMINACIÓN DE AUTOVALUO DEL TERRENO</div>
+                        </div>
+                            <!--final de tabla -->
+
                     </div>
                 </div>
+            </div>
                 
 
 

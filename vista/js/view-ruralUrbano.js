@@ -1,4 +1,48 @@
 
+if (document.querySelector("#yearSelect")) {
+    const selectAnio = document.getElementById('yearSelect');
+
+    selectAnio.addEventListener('change', function () {
+        const idanio = this.value;
+        if (idanio !== "0") {
+            mapearbd(idanio);
+        }
+    });
+
+    async function mapearbd(id) {
+        const dataanio = new FormData();
+        dataanio.append('acceso', id);
+
+        try {
+            const resp = await fetch(base_url + "/controlador/RuralUrbano_control.php?datos=verDataRuralConSinPredio", {
+                method: 'POST',
+                mode: 'cors',
+                cache: 'no-cache',
+                body: dataanio
+            });
+
+            if (!resp.ok) throw new Error("Error en la respuesta del servidor");
+
+            const resultado = await resp.json();
+            Swal.fire({//mostrar mensaje
+                icon: "success",
+                title: "Perfecto",//aqui vamos mostrar mensaje
+                showConfirmButton: false,
+                timer: 1900
+              });
+            // Aquí puedes hacer lo que quieras con el resultado
+
+        } catch (error) {
+            Swal.fire({
+                icon: "error",
+                title: "Try cach...",
+                text: "Ocurrio un Error: "+error,
+                footer: '<a href="#">Why do I have this issue?</a>'
+              });
+        }
+    }
+}
+
 /*ESTE VA SER EL QUE CAPTURA FORMULARIO */
 if (document.querySelector("#formPredioRuralCal")) {//AQUI se valida si existe el id formulario en html
     let frmPredio=document.querySelector("#formPredioRuralCal");//

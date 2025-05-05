@@ -7,6 +7,54 @@ require_once "../libreria/conexion.php";
             $this->conexion=$this->conexion->conect();
 
         }//este constructor esta que trae la conexion del base de datos
+
+        public function obtener_RuralUrbano_por_anio(String $idAnio)
+        {
+            $query = "CALL obtener_RuralUrbano_por_anio('{$idAnio}')";
+            $result = $this->conexion->query($query);
+
+            if ($result) {
+                $row = $result->fetch_assoc();
+
+                if ($row) {
+                    $arrayPredios[] = $row;
+                    $arrayEdificacion = []; // ← Evita el warning si no hay construcción
+
+                    $cons = $row['existe_construccion'] ?? 0;
+
+                    if ($cons == 1) {
+                        $idconstruccion = $row['idconstruccion'] ?? null;
+
+                        if ($idconstruccion !== null) {
+                            $this->conexion->next_result();
+                            $rs2 = $this->conexion->query("CALL obtener_edificacionporidConstruccion({$idconstruccion})");
+
+                            if ($rs2) {
+                                while ($fila = $rs2->fetch_assoc()) {
+                                    $arrayEdificacion[] = $fila;
+                                }
+                            }
+                        }
+                    }
+
+                    return [
+                        'predio' => $arrayPredios,
+                        'edificacion' => $arrayEdificacion
+                    ];
+                } else {
+                    return [
+                        'predio' => [],
+                        'edificacion' => []
+                    ];
+                }
+            } else {
+                return [
+                    'predio' => [],
+                    'edificacion' => []
+                ];
+            }
+        }
+
         public function getCodPredios(string $codigo){
             $arrayUsuarios=array();//crear array para extraer todo los registros
             $rs=$this->conexion->query("CALL obtener_predios_por_codigo('{$codigo}')");
