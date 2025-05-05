@@ -217,6 +217,82 @@
 
 
 
+<!-- Modal para agregar nueva fila -->
+<div class="modal fade" id="addYearModal" tabindex="-1" aria-labelledby="addYearModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header bg-success text-white">
+        <h5 class="modal-title" id="addYearModalLabel">Agregar Valor Arancelario</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+        <form id="formAgregarFila">
+
+        <div class="row mb-3">
+            <div class="col-md-2">
+              <label for="anioArancelario" class="form-label">Año</label>
+              <select class="form-select" id="anioArancelario" required>
+                <?php
+                  $currentYear = date("Y");
+                  $startYear = 2010;
+                  for ($y = $currentYear; $y >= $startYear; $y--) {
+                    echo "<option value='$y'>$y</option>";
+                  }
+                ?>
+              </select>
+            </div>
+          </div>
+
+          <div class="row mb-3">
+
+            <div class="col-md-6">
+                <label for="altitud" class="form-label">Altitud</label>
+                <select name="altitud" class="form-select" required>
+                    <option value="">Seleccione un rango</option>
+                    <option value="500 m.s.n.m - 2000 m.s.n.m">500 m.s.n.m - 2000 m.s.n.m</option>
+                    <option value="2001 m.s.n.m - 3000 m.s.n.m">2001 m.s.n.m - 3000 m.s.n.m</option>
+                    <option value="3001 m.s.n.m - 4000 m.s.n.m">3001 m.s.n.m - 4000 m.s.n.m</option>
+                    <option value="4001 m.s.n.m a más">4001 m.s.n.m a más</option>
+                </select>
+            </div>
+
+
+            <div class="col-md-2">
+              <label for="valorAlta" class="form-label">Alta</label>
+              <input type="text" class="form-control" id="valorAlta" required>
+            </div>
+            <div class="col-md-2">
+              <label for="valorMedia" class="form-label">Media</label>
+              <input type="text" class="form-control" id="valorMedia" required>
+            </div>
+            <div class="col-md-2">
+              <label for="valorBaja" class="form-label">Baja</label>
+              <input type="text" class="form-control" id="valorBaja" required>
+            </div>
+            <div class="col-md-3">
+              <label for="tipoTierra" class="form-label">Tipo</label>
+              <select class="form-select" id="tipoTierra" required>
+                <option value="limpio">Cultivo Limpio</option>
+                <option value="permanente">Cultivo Permanente</option>
+                <option value="pastos">Pastos</option>
+              </select>
+            </div>
+          </div>
+
+          
+
+          <div class="text-end">
+            <button type="submit" class="btn btn-primary">Agregar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
 <?php
     require 'template/header.php';  // Incluye el header
 

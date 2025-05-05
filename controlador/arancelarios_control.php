@@ -6,22 +6,24 @@
     $op = $_REQUEST['data'];
     $objArancelario = new ArancelariosModel();
 
-    if ($op == "obtener_datos_por_anio") {
-            if ($_POST) {
-                $year = $_POST["anioSelect"];
-                $arrayLista = $objArancelario->getDataByYear($year);
-        
-                if (empty($arrayLista)) {
-                    $arrayResponse = array(
-                        'status' => false,
-                        'data' => '',
-                        'msg' => 'No hay Registros para año seleccionado'
-                    );
-                } 
-                echo json_encode($arrayResponse);
+    if ($option === "obtener_datos_por_anio") {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $anio = $_POST['anio'] ?? '';
+        if (empty($anio)) {
+            echo json_encode(["status" => false, "msg" => "El año es obligatorio"]);
+            exit;
+        }
+
+        $objArancelario = new ArancelariosModel();
+        $data = $objArancelario->getDataByYear($anio);
+
+        if (!empty($data)) {
+            echo json_encode(["status" => true, "data" => $data]);
+        } else {
+            echo json_encode(["status" => false, "msg" => "No hay datos disponibles para este año"]);
         }
     }
-        
+}
 
     if ($op =="agregar_datos_construccion") {
                 

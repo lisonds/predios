@@ -7,19 +7,19 @@ require_once "../libreria/conexion.php";
             $this->conexion=new Conexion();
             $this->conexion=$this->conexion->conect();
 
-        }
+        } // constructor para la conexion de base de datos 
 
         // Obtener datos por año usando el procedimiento almacenado
-        public function getDataByYear($year) {
-            $arrayLista = array();
-            $rs = $this->conexion->query("CALL ObtenerArancelarioPorAnio('$year')");
-            
-            while ($obj = $rs->fetch_object()) {
-                array_push($arrayLista,$obj);
-            }
+    public function getDataByYear($year) {
+        $arrayLista = array();
+        $rs = $this->conexion->query("CALL ObtenerArancelarioPorAnio('{$year}')");
 
-            return $arrayLista;
+        while ($obj = $rs->fetch_object()) {
+            array_push($arrayLista, $obj);
         }
+
+        return $arrayLista;
+    }
 
         // Insertar un nuevo arancelario
         public function insertArancelario(

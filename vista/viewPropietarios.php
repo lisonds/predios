@@ -84,7 +84,7 @@
                 <div class="modal fade" id="modalRegistroPropietario" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-xl">
                         <div class="modal-content">
-                            <div class="modal-header">
+                            <div class="modal-header bg-success text-white">
                                 <h5 class="modal-title" id="modalLabel">REGISTRAR PROPIETARIO <span id="codigoPropietario" class="text-primary fw-bold"></span> </h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
@@ -222,7 +222,7 @@
             <div class="modal fade" id="modalEditarPropietario" tabindex="-1" aria-labelledby="modalEditarPropietarioLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
-                        <div class="modal-header">
+                        <div class="modal-header bg-success text-white">
                             <h5 class="modal-title" id="modalEditarPropietarioLabel">Editar Contribuyente</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
                         </div>

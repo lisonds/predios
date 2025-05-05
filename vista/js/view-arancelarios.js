@@ -1,24 +1,16 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const inputElement = document.getElementById("selectAnio");
+    const inputElement = document.getElementById("yearSelect");
 
     if (inputElement) {
-        // Variable para almacenar el número ingresado como cadena
-        let anioIngresado = "";
+        inputElement.addEventListener("change", function () {
+            const anioSeleccionado = this.value;
 
-        // Evento al quitar el foco (cuando el cursor deja de parpadear)
-        inputElement.addEventListener("blur", function () {
-            // Permitir solo números y rellenar con ceros a la izquierda
-            this.value = this.value.replace(/\D/g, '').padStart(6, '0');
-
-            // Actualizar la variable como una cadena
-            numeroIngresado = String(this.value); // Aseguramos que sea una cadena
-            
-
-            // Llamar a la función buscarCodigo con la cadena
-            SeleccionarAnio(anioIngresado);
+            // Llama a tu función que carga las tablas con los datos del año seleccionado
+            SeleccionarAnio(anioSeleccionado);
         });
     }
 });
+
 
 async function SeleccionarAnio(item) {
     // Limpiar la tabla antes de cargar nuevos datos
