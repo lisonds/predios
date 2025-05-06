@@ -110,6 +110,8 @@
                     $htmlEdificaciones .= '</tbody></table>';
                 }
 
+             }else{
+                $htmlEdificaciones = '<div></div>';
              }
              $arrayResponse = [
                 'status' => true,
