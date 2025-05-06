@@ -160,13 +160,8 @@
 
                         <!-- Título -->
                         <h4 class="card-title text-primary mb-4">Información del Terreno</h4>
-                        <div class="row mb-4">
-                            <div class="col-sm-4"><strong>Tipo de Terreno:</strong> Lote</div>
-                            <div class="col-sm-4"><strong>Uso de Terreno:</strong> Agrícola</div>
-                            <div class="col-sm-4"><strong>Tierras Aptas:</strong> —</div>
-                            <div class="col-sm-4"><strong>Altitud de Terreno:</strong> —</div>
-                            <div class="col-sm-4"><strong>Calidad Agrológica:</strong> —</div>
-                            <div class="col-sm-4"><strong>Total de Hectáreas:</strong> —</div>
+                        <div class="row mb-4" id="contenedorPredio">
+                            
                         </div>
 
                       
@@ -208,60 +203,8 @@
                        
 
                         <div class="container my-4">
-                            <div class="table-responsive">
-                                <table class="table tabla-autovaluo">
-                                    <thead>
-                                        <tr>
-                                            <th rowspan="2">Bloque</th>
-                                            <th rowspan="2">Piso</th>
-                                            <th rowspan="2"><div class="vertical-text">Antigüedad</div></th>
-                                            <th colspan="1">Estructura</th>
-                                            <th rowspan="2"><div class="vertical-text">Valor Unitario por m²</div></th>
-                                            <th rowspan="2"><div class="vertical-text">Incremento</div></th>
-                                            <th colspan="3">Depreciación</th>
-                                            <th colspan="2">Área Construida</th>
-                                            <th rowspan="2">Valor de la <br> Construcción</th>
-                                        </tr>
-                                        <tr>
-                                            <th><div class="vertical-text">Muros y columnas <br> Techos <br> Pisos <br> Puertas/Ventanas <br> Revestimiento <br> Baño <br> Inst. Eléctricas</div></th>
-                                            <th>%</th>
-                                            <th>S/</th>
-                                            <th><div class="vertical-text">Valor Unitario  Depreciado</div></th>
-                                            <th>M²</th>
-                                            <th>S/</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>1</td>
-                                            <td>50</td>
-                                            <td>C F D C F E</td>
-                                            <td>748.04</td>
-                                            <td>0</td>
-                                            <td>35</td>
-                                            <td>261.81</td>
-                                            <td>486.23</td>
-                                            <td>120</td>
-                                            <td>486.23</td>
-                                            <td>58347.60</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>2</td>
-                                            <td>45</td>
-                                            <td>D G H H G E </td>
-                                            <td>395.86</td>
-                                            <td>0</td>
-                                            <td>32</td>
-                                            <td>126.68</td>
-                                            <td>269.18</td>
-                                            <td>100</td>
-                                            <td>269.18</td>
-                                            <td>26918.00</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                            <div class="table-responsive" id="contenedorEdificaciones">
+                                
                             </div>
                             <div class="valor-total">VALOR DE LA CONSTRUCCIÓN: <strong>85265.60</strong></div>
 

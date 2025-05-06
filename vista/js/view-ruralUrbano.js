@@ -1,4 +1,4 @@
-
+/*MAPEAR POR ANIO*/
 if (document.querySelector("#yearSelect")) {
     const selectAnio = document.getElementById('yearSelect');
 
@@ -21,16 +21,22 @@ if (document.querySelector("#yearSelect")) {
                 body: dataanio
             });
 
-            if (!resp.ok) throw new Error("Error en la respuesta del servidor");
+            const data = await resp.json(); // Obtén la respuesta como JSON
 
-            const resultado = await resp.json();
-            Swal.fire({//mostrar mensaje
-                icon: "success",
-                title: "Perfecto",//aqui vamos mostrar mensaje
-                showConfirmButton: false,
-                timer: 1900
-              });
-            // Aquí puedes hacer lo que quieras con el resultado
+            if (data.status) {
+                // Si la respuesta es exitosa, inyecta los HTML en los divs correspondientes
+                document.getElementById("contenedorPredio").innerHTML = data.htmlPredio;
+                document.getElementById("contenedorEdificaciones").innerHTML = data.htmlEdificaciones;
+            } else {
+                // Si no se encontraron datos, muestra un mensaje
+                Swal.fire({//mostrar mensaje
+                    icon: "Error ",
+                    title: data.msg,//aqui vamos mostrar mensaje
+                    text: "Ocurrio un Error: "+error,
+                    footer: '<a href="#">Why do I have this issue?</a>'
+                  });
+                
+            }
 
         } catch (error) {
             Swal.fire({

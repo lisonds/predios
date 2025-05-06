@@ -4,6 +4,11 @@
     //creando la instancia para acceder a modelo
     $objRuralUrbano=new RuralUrbano();
 
+
+
+
+
+
     //verDataRuralSinPredio
     if ($option == "verDataRuralConSinPredio") {
         if($_POST){
@@ -11,18 +16,133 @@
             // Llamas a tu método y capturas el resultado
             $arrayPrediosRural = $objRuralUrbano->obtener_RuralUrbano_por_anio($idAnio);
 
-            // Devuelves la respuesta al frontend como JSON
+            $predio = $arrayPrediosRural['predio'][0]; // Asumes un solo predio
+            $edificaciones = $arrayPrediosRural['edificacion']; //aqui capturamos
+            
+             // --- HTML para panel de predio ---
+             if($predio['existe_construccion']==0){
+                $htmlPredio = '
+                    <div class="row mb-4">
+                        <div class="col-sm-4"><strong>Tipo de Terreno:</strong> '.$predio['tipo'].'</div>
+                        <div class="col-sm-4"><strong>Uso de Terreno:</strong>'.$predio['uso'].'</div>
+                        <div class="col-sm-4"><strong>Tierras Aptas:</strong> '.$predio['tierras_aptas'].'</div>
+                        <div class="col-sm-4"><strong>Altitud de Terreno:</strong>'.$predio['altitud'].'</div>
+                        <div class="col-sm-4"><strong>Calidad Agrológica:</strong>'.$predio['calidad_agrologica'].'</div>
+                        <div class="col-sm-4"><strong>Total de Hectáreas:</strong>'.$predio['total_hectareas'].'</div>
+                    </div>
+
+                ';
+             }else{
+                $htmlPredio = '
+                    <div class="row mb-4">
+                        <div class="col-sm-4"><strong>Tipo de Terreno:</strong> '.$predio['tipo'].'</div>
+                        <div class="col-sm-4"><strong>Uso de Terreno:</strong>'.$predio['uso'].'</div>
+                        <div class="col-sm-4"><strong>Tierras Aptas:</strong> '.$predio['tierras_aptas'].'</div>
+                        <div class="col-sm-4"><strong>Altitud de Terreno:</strong>'.$predio['altitud'].'</div>
+                        <div class="col-sm-4"><strong>Calidad Agrológica:</strong>'.$predio['calidad_agrologica'].'</div>
+                        <div class="col-sm-4"><strong>Total de Hectáreas:</strong>'.$predio['total_hectareas'].'</div>
+
+                        
+                    </div>
+
+                      <!-- Información de Construcción -->
+                        <h5 class="text-success mb-3">Construcción</h5>
+                        <div class="row mb-3">
+                            <div class="col-sm-4"><strong>Clasificación:</strong> '.$predio['clasificacion'].'</div>
+                            <div class="col-sm-4"><strong>Material:</strong> '.$predio['material'].'</div>
+                            <div class="col-sm-4"><strong>Estado:</strong> '.$predio['conservacion'].'/div>
+                            <div class="col-sm-6"><strong>Tipo de Uso:</strong> '.$predio['tipo_uso'].'</div>
+                        </div>
+
+                ';
+
+                
+                
+             }
+
+             if($predio['existe_construccion']==1){
+                // --- HTML para tabla de edificaciones ---
+                $htmlEdificaciones = '';
+                if ($predio['existe_construccion'] == "1" && !empty($edificaciones)) {
+                    $htmlEdificaciones = '
+                        <table class="table tabla-autovaluo">
+                            <thead>
+                                <tr>
+                                    <th rowspan="2">Bloque</th>
+                                    <th rowspan="2">Piso</th>
+                                    <th rowspan="2"><div class="vertical-text">Antigüedad</div></th>
+                                    <th colspan="1">Estructura</th>
+                                    <th rowspan="2"><div class="vertical-text">Valor Unitario por m²</div></th>
+                                    <th rowspan="2"><div class="vertical-text">Incremento</div></th>
+                                    <th colspan="3">Depreciación</th>
+                                    <th colspan="2">Área Construida</th>
+                                    <th rowspan="2">Valor de la <br> Construcción</th>
+                                </tr>
+                                <tr>
+                                    <th><div class="vertical-text">Muros y columnas <br> Techos <br> Pisos <br> Puertas/Ventanas <br> Revestimiento <br> Baño <br> Inst. Eléctricas</div></th>
+                                    <th>%</th>
+                                    <th>S/</th>
+                                    <th><div class="vertical-text">Valor Unitario  Depreciado</div></th>
+                                    <th>M²</th>
+                                    <th>S/</th>
+                                </tr>
+                            </thead>
+                            <tbody>';
+                    foreach ($edificaciones as $edif) {
+                        $htmlEdificaciones .= '
+                             <tr>
+                                <td>'.$edif['bloque'].'</td>
+                                <td>'.$edif['piso'].'</td>
+                                <td>'.$edif['antiguedad'].'</td>
+                                <td>'.$edif['Muro_columna'] ." ". $edif['techo']." ". $edif['pisos']." ". 
+                                $edif['puerta_ventana']." ". $edif['revistimiento']." ". $edif['banio']." ". 
+                                $edif['instalaciones_electricas'].'</td>
+                                <td>748.04</td>
+                                <td>0</td>
+                                <td>35</td>
+                                <td>261.81</td>
+                                <td>486.23</td>
+                                <td>120</td>
+                                <td>486.23</td>
+                                <td>58347.60</td>
+                            </tr>';
+                    }
+                    $htmlEdificaciones .= '</tbody></table>';
+                }
+
+             }
+             $arrayResponse = [
+                'status' => true,
+                'htmlPredio' => $htmlPredio,
+                'htmlEdificaciones' => $htmlEdificaciones,
+                'msg' => 'Datos encontrados correctamente'
+            ];
+    
             header('Content-Type: application/json');
-            echo json_encode($arrayPrediosRural);
+            echo json_encode($arrayResponse);
             exit;
+            
+           
         }
         die();
     }
+
+
+
+
+
+
+
+
+
+
+
 
     if ($option == "busca_codigo") {
         if($_POST){
             $codIdentificador=$_POST["codigo"];
             $arrayPredios = $objRuralUrbano->getCodPredios($codIdentificador);
+            
                      
             if(empty($arrayPredios)){
                 $arrayResponse = array('status' => false,'data'=>'', 'msg' => 'No hay Registros de Predios Con Este Codigo');
