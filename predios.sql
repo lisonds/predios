@@ -56,7 +56,7 @@ CREATE TABLE `anio_registro` (
   PRIMARY KEY (`idanio_registro`),
   KEY `fk_anio_registro_predios1_idx` (`predios_idpredios`),
   CONSTRAINT `fk_anio_registro_predios1` FOREIGN KEY (`predios_idpredios`) REFERENCES `predios` (`idpredios`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -65,7 +65,7 @@ CREATE TABLE `anio_registro` (
 
 LOCK TABLES `anio_registro` WRITE;
 /*!40000 ALTER TABLE `anio_registro` DISABLE KEYS */;
-INSERT INTO `anio_registro` VALUES (1,'2025',1,16),(2,'2023',1,16),(3,'2023',1,17),(4,'2024',1,17),(5,'2025',1,17);
+INSERT INTO `anio_registro` VALUES (1,'2025',1,16),(2,'2023',1,16),(3,'2023',1,17),(4,'2024',1,17),(5,'2025',1,17),(6,'2022',1,17);
 /*!40000 ALTER TABLE `anio_registro` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -164,7 +164,7 @@ CREATE TABLE `construccion` (
   KEY `fk_construccion_urbano1_idx` (`urbano_idurbano`),
   CONSTRAINT `fk_construccion_rural` FOREIGN KEY (`rural_idrural`) REFERENCES `rural` (`idrural`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_construccion_urbano1` FOREIGN KEY (`urbano_idurbano`) REFERENCES `urbano` (`idurbano`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -173,7 +173,7 @@ CREATE TABLE `construccion` (
 
 LOCK TABLES `construccion` WRITE;
 /*!40000 ALTER TABLE `construccion` DISABLE KEYS */;
-INSERT INTO `construccion` VALUES (7,'Casa Habitacion','Ladrillo','Regular','Unifamiliar',10,NULL),(10,'Casa Habitacion','Ladrillo','Bueno','Unifamiliar',13,NULL),(11,'Casa Habitacion','Ladrillo','Bueno','Unifamiliar',14,NULL),(12,'Casa Habitacion','Ladrillo','Bueno','Unifamiliar',15,NULL);
+INSERT INTO `construccion` VALUES (7,'Casa Habitacion','Ladrillo','Regular','Unifamiliar',10,NULL),(10,'Casa Habitacion','Ladrillo','Bueno','Unifamiliar',13,NULL),(11,'Casa Habitacion','Ladrillo','Bueno','Unifamiliar',14,NULL),(12,'Casa Habitacion','Ladrillo','Bueno','Unifamiliar',15,NULL),(13,'Casa Habitacion','Adobe (Quincha, Madera)','Muy Bueno','Unifamiliar',16,NULL);
 /*!40000 ALTER TABLE `construccion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -255,7 +255,7 @@ CREATE TABLE `edificacion` (
   PRIMARY KEY (`idedificacion`),
   KEY `fk_edificacion_construccion_idx` (`construccion_idconstruccion`),
   CONSTRAINT `fk_edificacion_construccion` FOREIGN KEY (`construccion_idconstruccion`) REFERENCES `construccion` (`idconstruccion`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -264,7 +264,7 @@ CREATE TABLE `edificacion` (
 
 LOCK TABLES `edificacion` WRITE;
 /*!40000 ALTER TABLE `edificacion` DISABLE KEYS */;
-INSERT INTO `edificacion` VALUES (14,'1','1','2020','D','H','F','E','D','E','D','50',10),(15,'1','2','2024','D','D','E','E','F','C','D','50',10),(16,'1','1','2020','D','H','F','E','D','E','D','50',11),(17,'1','2','2024','D','D','E','E','F','C','D','50',11),(18,'1','1','2020','D','H','F','E','D','E','D','50',12),(19,'1','2','2024','D','D','E','E','F','C','D','50',12);
+INSERT INTO `edificacion` VALUES (14,'1','1','2020','D','H','F','E','D','E','D','50',10),(15,'1','2','2024','D','D','E','E','F','C','D','50',10),(16,'1','1','2020','D','H','F','E','D','E','D','50',11),(17,'1','2','2024','D','D','E','E','F','C','D','50',11),(18,'1','1','2020','D','H','F','E','D','E','D','50',12),(19,'1','2','2024','D','D','E','E','F','C','D','50',12),(20,'1','1','2025','A','A','A','A','A','A','A','',13),(21,'1','1','2025','A','A','A','A','A','A','A','',13);
 /*!40000 ALTER TABLE `edificacion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -431,7 +431,7 @@ CREATE TABLE `rural` (
   PRIMARY KEY (`idrural`),
   KEY `fk_rural_anio_registro1_idx` (`anio_registro_idanio_registro`),
   CONSTRAINT `fk_rural_anio_registro1` FOREIGN KEY (`anio_registro_idanio_registro`) REFERENCES `anio_registro` (`idanio_registro`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -440,7 +440,7 @@ CREATE TABLE `rural` (
 
 LOCK TABLES `rural` WRITE;
 /*!40000 ALTER TABLE `rural` DISABLE KEYS */;
-INSERT INTO `rural` VALUES (8,'LOTE','AGRÍCOLA','CULTIVO EN LIMPIO','2001 m.s.n.m - 3000 m.s.n.m','MEDIA','10.2',0,1),(10,'LOTE','AGRÍCOLA','CULTIVO EN LIMPIO','2001 m.s.n.m - 3000 m.s.n.m','ALTA','10.5',1,2),(13,'PARCELA','AGRÍCOLA','CULTIVO EN LIMPIO','2001 m.s.n.m - 3000 m.s.n.m','MEDIA','0.58',1,3),(14,'PARCELA','AGRÍCOLA','CULTIVO EN LIMPIO','2001 m.s.n.m - 3000 m.s.n.m','MEDIA','0.58',1,4),(15,'PARCELA','AGRÍCOLA','CULTIVO EN LIMPIO','2001 m.s.n.m - 3000 m.s.n.m','MEDIA','0.58',1,5);
+INSERT INTO `rural` VALUES (8,'LOTE','AGRÍCOLA','CULTIVO EN LIMPIO','2001 m.s.n.m - 3000 m.s.n.m','MEDIA','10.2',0,1),(10,'LOTE','AGRÍCOLA','CULTIVO EN LIMPIO','2001 m.s.n.m - 3000 m.s.n.m','ALTA','10.5',0,2),(13,'PARCELA','AGRÍCOLA','CULTIVO EN LIMPIO','2001 m.s.n.m - 3000 m.s.n.m','MEDIA','0.58',1,3),(14,'PARCELA','AGRÍCOLA','CULTIVO EN LIMPIO','2001 m.s.n.m - 3000 m.s.n.m','MEDIA','0.58',1,4),(15,'PARCELA','AGRÍCOLA','CULTIVO EN LIMPIO','2001 m.s.n.m - 3000 m.s.n.m','MEDIA','0.58',1,5),(16,'LOTE','GANADERÍA','CULTIVO PERMANENTE','2001 m.s.n.m - 3000 m.s.n.m','MEDIA','10.2',1,6);
 /*!40000 ALTER TABLE `rural` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -550,7 +550,7 @@ CREATE TABLE `valores_edificacion` (
   PRIMARY KEY (`idvalores_edificacion`),
   KEY `fk_valores_edificacion_anual_construccion_idx` (`anual_construccion_idanual_construccion`),
   CONSTRAINT `fk_valores_edificacion_anual_construccion` FOREIGN KEY (`anual_construccion_idanual_construccion`) REFERENCES `anual_construccion` (`idanual_construccion`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -559,7 +559,7 @@ CREATE TABLE `valores_edificacion` (
 
 LOCK TABLES `valores_edificacion` WRITE;
 /*!40000 ALTER TABLE `valores_edificacion` DISABLE KEYS */;
-INSERT INTO `valores_edificacion` VALUES (19,'B','12','8','6','5','4','3','2',3),(20,'B','1','2','3','4','5','6','7',3),(21,'A','123','4','8','35','38','43','54',4),(22,'B','1','2','3','4','5','8','7',4);
+INSERT INTO `valores_edificacion` VALUES (19,'B','12','8','6','5','4','3','2',3),(21,'A','123','4','8','35','38','43','54',4),(22,'B','1','2','3','4','5','8','7',4),(23,'A','45','89','43','12','23','78','58',3);
 /*!40000 ALTER TABLE `valores_edificacion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1077,33 +1077,25 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ObtenerArancelarioPorAnio`(IN p_anio VARCHAR(4))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ObtenerArancelarioPorAnio`(IN anio_input INT)
 BEGIN
-    -- Validar si existen registros para el año seleccionado
-    SELECT COUNT(*) INTO @count
-    FROM valores_edificacion ve
-    INNER JOIN anual_construccion ac ON ve.anual_construccion_idanual_construccion = ac.idanual_construccion
-    WHERE ac.anio_construccion = p_anio;
-
-    IF @count > 0 THEN
-        -- Devolver los datos correspondientes al año
-        SELECT 
-            ve.categoria,
-            ve.muro_columna AS "Muros y Columnas",
-            ve.techos AS Techos,
-            ve.pisos AS Pisos,
-            ve.puertas_ventanas AS "Puertas y Ventanas",
-            ve.revistimientos AS Revestimientos, -- Corregido aquí
-            ve.banios AS Baños,
-            ve.instalaciones AS Instalaciones
-        FROM valores_edificacion ve
-        INNER JOIN anual_construccion ac ON ve.anual_construccion_idanual_construccion = ac.idanual_construccion
-        WHERE ac.anio_construccion = p_anio;
-    ELSE
-        -- Si no hay datos, devolver un mensaje de error
-        SIGNAL SQLSTATE '45000'
-            SET MESSAGE_TEXT = 'No hay datos disponibles para este año.';
-    END IF;
+    SELECT 
+        ve.categoria,
+        ve.muro_columna,
+        ve.techos,
+        ve.pisos,
+        ve.puertas_ventanas,
+        ve.revistimiento,
+        ve.banios,
+        ve.instalaciones
+    FROM 
+        valores_edificacion ve
+    INNER JOIN 
+        anual_construccion ac ON ve.anual_construccion_idanual_construccion = ac.idanual_construccion
+    WHERE 
+        ac.anio_construccion = anio_input
+    ORDER BY 
+        ve.categoria ASC;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -1398,4 +1390,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-05-05  0:10:27
+-- Dump completed on 2025-05-06 16:41:33

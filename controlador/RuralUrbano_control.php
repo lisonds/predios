@@ -23,24 +23,24 @@
              if($predio['existe_construccion']==0){
                 $htmlPredio = '
                     <div class="row mb-4">
-                        <div class="col-sm-4"><strong>Tipo de Terreno:</strong> '.$predio['tipo'].'</div>
-                        <div class="col-sm-4"><strong>Uso de Terreno:</strong>'.$predio['uso'].'</div>
-                        <div class="col-sm-4"><strong>Tierras Aptas:</strong> '.$predio['tierras_aptas'].'</div>
-                        <div class="col-sm-4"><strong>Altitud de Terreno:</strong>'.$predio['altitud'].'</div>
-                        <div class="col-sm-4"><strong>Calidad Agrológica:</strong>'.$predio['calidad_agrologica'].'</div>
-                        <div class="col-sm-4"><strong>Total de Hectáreas:</strong>'.$predio['total_hectareas'].'</div>
+                        <div class="col-sm-4"><strong>Tipo de Terreno: </strong> ' .$predio['tipo'].'</div>
+                        <div class="col-sm-4"><strong>Uso de Terreno: </strong>' .$predio['uso'].'</div>
+                        <div class="col-sm-4"><strong>Tierras Aptas: </strong> ' .$predio['tierras_aptas'].'</div>
+                        <div class="col-sm-6"><strong>Altitud de Terreno: </strong>' .$predio['altitud'].'</div>
+                        <div class="col-sm-6"><strong>Calidad Agrológica: </strong>' .$predio['calidad_agrologica'].'</div>
+                        <div class="col-sm-6"><strong>Total de Hectáreas: </strong>' .$predio['total_hectareas'].'</div>
                     </div>
 
                 ';
              }else{
                 $htmlPredio = '
                     <div class="row mb-4">
-                        <div class="col-sm-4"><strong>Tipo de Terreno:</strong> '.$predio['tipo'].'</div>
-                        <div class="col-sm-4"><strong>Uso de Terreno:</strong>'.$predio['uso'].'</div>
-                        <div class="col-sm-4"><strong>Tierras Aptas:</strong> '.$predio['tierras_aptas'].'</div>
-                        <div class="col-sm-4"><strong>Altitud de Terreno:</strong>'.$predio['altitud'].'</div>
-                        <div class="col-sm-4"><strong>Calidad Agrológica:</strong>'.$predio['calidad_agrologica'].'</div>
-                        <div class="col-sm-4"><strong>Total de Hectáreas:</strong>'.$predio['total_hectareas'].'</div>
+                        <div class="col-sm-4"><strong>Tipo de Terreno: </strong> ' .$predio['tipo'].'</div>
+                        <div class="col-sm-4"><strong>Uso de Terreno: </strong>' .$predio['uso'].'</div>
+                        <div class="col-sm-4"><strong>Tierras Aptas: </strong> ' .$predio['tierras_aptas'].'</div>
+                        <div class="col-sm-4"><strong>Altitud de Terreno: </strong>' .$predio['altitud'].'</div>
+                        <div class="col-sm-4"><strong>Calidad Agrológica: </strong>' .$predio['calidad_agrologica'].'</div>
+                        <div class="col-sm-4"><strong>Total de Hectáreas: </strong>' .$predio['total_hectareas'].'</div>
 
                         
                     </div>
@@ -48,10 +48,10 @@
                       <!-- Información de Construcción -->
                         <h5 class="text-success mb-3">Construcción</h5>
                         <div class="row mb-3">
-                            <div class="col-sm-4"><strong>Clasificación:</strong> '.$predio['clasificacion'].'</div>
-                            <div class="col-sm-4"><strong>Material:</strong> '.$predio['material'].'</div>
-                            <div class="col-sm-4"><strong>Estado:</strong> '.$predio['conservacion'].'/div>
-                            <div class="col-sm-6"><strong>Tipo de Uso:</strong> '.$predio['tipo_uso'].'</div>
+                            <div class="col-sm-4"><strong>Clasificación:</strong> ' .$predio['clasificacion'].'</div>
+                            <div class="col-sm-4"><strong>Material:</strong> ' .$predio['material'].'</div>
+                            <div class="col-sm-4"><strong>Estado:</strong> ' .$predio['conservacion'].'</div>
+                            <div class="col-sm-6"><strong>Tipo de Uso:</strong> ' .$predio['tipo_uso'].'</div>
                         </div>
 
                 ';

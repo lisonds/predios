@@ -6,24 +6,26 @@
     $op = $_REQUEST['data'];
     $objArancelario = new ArancelariosModel();
 
-    if ($option === "obtener_datos_por_anio") {
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $anio = $_POST['anio'] ?? '';
-        if (empty($anio)) {
-            echo json_encode(["status" => false, "msg" => "El año es obligatorio"]);
-            exit;
+   
+      
+    if ($op === "obtener_datos_por_anio") {
+        if($_POST){
+            $anio=$_POST["anio"];
+            $arrayDataConstruccion = $objArancelario->getDataByYear($anio);
+                     
+            if(empty($arrayDataConstruccion)){
+                $arrayResponse = array('status' => false,'data'=>'', 'msg' => 'No hay Registros de Predios Con Este Codigo');
+            }else{
+                                //btn fin
+                $arrayResponse['status']=true;
+                $arrayResponse['data']=$arrayDataConstruccion;//aqui se le asigna a la data los datos de base de datos
+                $arrayResponse['msg']='Datos Encontrados';
+                
+            }
+            echo json_encode($arrayResponse);
         }
-
-        $objArancelario = new ArancelariosModel();
-        $data = $objArancelario->getDataByYear($anio);
-
-        if (!empty($data)) {
-            echo json_encode(["status" => true, "data" => $data]);
-        } else {
-            echo json_encode(["status" => false, "msg" => "No hay datos disponibles para este año"]);
-        }
+        die();
     }
-}
 
     if ($op =="agregar_datos_construccion") {
                 

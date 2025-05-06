@@ -84,22 +84,21 @@
         
             <!-- Tabla -->
 <div class="table-responsive">
-    <table class="table table-bordered custom-table small text center">
+    <table class="table table-bordered custom-table  text center">
         <thead>
-            
             <tr>
-                <th rowspan="2" class="text-center align-middle">CATEGORÍA</th>
+                <th rowspan="2" class="vertical-tbl">CATEGORÍA</th>
                 <th colspan="2" class="text-center">ESTRUCTURAS</th>
                 <th colspan="3" class="text-center">ACABADOS</th>
-                <th rowspan="2" class="text-center align-middle">INSTALACIONES </th>
+                <th rowspan="2" class="vertical-tbl">BAÑOS</th>
+                <th rowspan="2" class="vertical-tbl">INSTALACIONES</th>
             </tr>
             <tr>
-                <th>MUROS Y COLUMNAS </th>
-                <th>TECHOS </th>
-                <th>PISOS </th>
-                <th>PUERTAS Y VENTANAS </th>
-                <th>REVESTIMIENTOS </th>
-                
+                <th class="vertical-tbl">MUROS Y COLUMNAS</th>
+                <th class="vertical-tbl">TECHOS</th>
+                <th class="vertical-tbl">PISOS</th>
+                <th class="vertical-tbl">PUERTAS Y VENTANAS</th>
+                <th class="vertical-tbl">REVESTIMIENTOS</th>
             </tr>
         </thead>
         <tbody id="tablaArancelarios">

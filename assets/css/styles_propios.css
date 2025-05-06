@@ -329,3 +329,12 @@
   justify-content: center; /* Centra el texto horizontalmente dentro del contenedor */
   align-items: center;     /* Asegura que el texto esté centrado verticalmente */
 }
+
+th.vertical-tbl {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+  padding: 10px;
+}

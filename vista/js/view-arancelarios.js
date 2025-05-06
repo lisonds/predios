@@ -37,13 +37,13 @@ async function SeleccionarAnio(item) {
                     let newRow = document.createElement("tr");
                     newRow.innerHTML = `
                         <td>${item.categoria}</td>
-                        <td>${item["Muros y Columnas"]}</td>
-                        <td>${item.Techos}</td>
-                        <td>${item.Pisos}</td>
-                        <td>${item["Puertas y Ventanas"]}</td>
-                        <td>${item.Revestimientos}</td>
-                        <td>${item.Baños}</td>
-                        <td>${item.Instalaciones}</td>
+                        <td>${item.muro_columna}</td>
+                        <td>${item.techos}</td>
+                        <td>${item.pisos}</td>
+                        <td>${item.puertas_ventanas}</td>
+                        <td>${item.revistimiento}</td>
+                        <td>${item.banios}</td>
+                        <td>${item.instalaciones}</td>
                     `;
                     document.getElementById("tablaArancelarios").appendChild(newRow);
                 });
