@@ -1079,31 +1079,23 @@ DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ObtenerArancelarioPorAnio`(IN anio_input INT)
 BEGIN
-    -- Validar si existen registros para el año seleccionado
-    SELECT COUNT(*) INTO @count
-    FROM valores_edificacion ve
-    INNER JOIN anual_construccion ac ON ve.anual_construccion_idanual_construccion = ac.idanual_construccion
-    WHERE ac.anio_construccion = p_anio;
-
-    IF @count > 0 THEN
-        -- Devolver los datos correspondientes al año
-        SELECT 
-            ve.categoria,
-            ve.muro_columna AS "Muros y Columnas",
-            ve.techos AS Techos,
-            ve.pisos AS Pisos,
-            ve.puertas_ventanas AS "Puertas y Ventanas",
-            ve.revistimientos AS Revestimientos, -- Corregido aquí
-            ve.banios AS Baños,
-            ve.instalaciones AS Instalaciones
-        FROM valores_edificacion ve
-        INNER JOIN anual_construccion ac ON ve.anual_construccion_idanual_construccion = ac.idanual_construccion
-        WHERE ac.anio_construccion = p_anio;
-    ELSE
-        -- Si no hay datos, devolver un mensaje de error
-        SIGNAL SQLSTATE '45000'
-            SET MESSAGE_TEXT = 'No hay datos disponibles para este año.';
-    END IF;
+    SELECT 
+        ve.categoria,
+        ve.muro_columna,
+        ve.techos,
+        ve.pisos,
+        ve.puertas_ventanas,
+        ve.revistimiento,
+        ve.banios,
+        ve.instalaciones
+    FROM 
+        valores_edificacion ve
+    INNER JOIN 
+        anual_construccion ac ON ve.anual_construccion_idanual_construccion = ac.idanual_construccion
+    WHERE 
+        ac.anio_construccion = anio_input
+    ORDER BY 
+        ve.categoria ASC;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
