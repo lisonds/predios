@@ -6,6 +6,7 @@
     $op = $_REQUEST['data'];
     $objArancelario = new ArancelariosModel();
 
+
    
       
     if ($op === "obtener_datos_por_anio") {
@@ -26,6 +27,7 @@
         }
         die();
     }
+   
 
     if ($op =="agregar_datos_construccion") {
                 

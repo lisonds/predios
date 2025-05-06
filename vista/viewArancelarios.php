@@ -84,7 +84,7 @@
         
             <!-- Tabla -->
 <div class="table-responsive">
-    <table class="table table-bordered custom-table  text center">
+    <table id="tablaArancelarios" class="table table-bordered custom-table small text center">
         <thead>
             <tr>
                 <th rowspan="2" class="vertical-tbl">CATEGORÍA</th>
@@ -101,7 +101,7 @@
                 <th class="vertical-tbl">REVESTIMIENTOS</th>
             </tr>
         </thead>
-        <tbody id="tablaArancelarios">
+        <tbody id="tbodyArancelarios">
             <!-- Filas generadas dinámicamente -->
         </tbody>
     </table>
