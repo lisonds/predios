@@ -1093,7 +1093,7 @@ BEGIN
             ve.techos AS Techos,
             ve.pisos AS Pisos,
             ve.puertas_ventanas AS "Puertas y Ventanas",
-            ve.revistimientos AS Revestimientos, -- Corregido aquí
+            ve.revistimiento AS Revestimientos, -- Corregido aquí
             ve.banios AS Baños,
             ve.instalaciones AS Instalaciones
         FROM valores_edificacion ve

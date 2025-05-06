@@ -10,9 +10,9 @@ require_once "../libreria/conexion.php";
         } // constructor para la conexion de base de datos 
 
         // Obtener datos por año usando el procedimiento almacenado
-    public function getDataByYear($year) {
+    public function getDataByYear(string $anioSelect) {
         $arrayLista = array();
-        $rs = $this->conexion->query("CALL ObtenerArancelarioPorAnio('{$year}')");
+        $rs = $this->conexion->query("CALL ObtenerArancelarioPorAnio('{$anioSelect}')");
 
         while ($obj = $rs->fetch_object()) {
             array_push($arrayLista, $obj);
@@ -76,5 +76,11 @@ require_once "../libreria/conexion.php";
                     ];
                 } 
         }
+
+        
+
     }
+
+
+    
 ?>

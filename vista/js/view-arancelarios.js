@@ -1,3 +1,6 @@
+
+
+
 document.addEventListener("DOMContentLoaded", () => {
     const inputElement = document.getElementById("yearSelect");
 
@@ -12,63 +15,58 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-async function SeleccionarAnio(item) {
-    // Limpiar la tabla antes de cargar nuevos datos
-    document.getElementById("tablaArancelarios").innerHTML = '';
+async function SeleccionarAnio(anio) {
+    const tbody = document.getElementById("tbodyArancelarios");
+    tbody.innerHTML = ''; // Limpiar contenido anterior
 
     try {
-        let formData = new FormData();
-        formData.append('anio', item);
+        const formData = new FormData();
+        formData.append('anio', anio);
 
-        let resp = await fetch(`${base_url}/controlador/arancelarios_control.php?data=obtener_datos_por_anio`, {
+        const resp = await fetch(`${base_url}/controlador/arancelarios_control.php?data=obtener_datos_por_anio`, {
             method: 'POST',
             mode: 'cors',
             cache: 'no-cache',
             body: formData
         });
 
-        let json = await resp.json();
+        const json = await resp.json();
 
-        if (json.status) {
-            let data = json.data;
-
-            if (data.length > 0) {
-                data.forEach(item => {
-                    let newRow = document.createElement("tr");
-                    newRow.innerHTML = `
-                        <td>${item.categoria}</td>
-                        <td>${item["Muros y Columnas"]}</td>
-                        <td>${item.Techos}</td>
-                        <td>${item.Pisos}</td>
-                        <td>${item["Puertas y Ventanas"]}</td>
-                        <td>${item.Revestimientos}</td>
-                        <td>${item.Baños}</td>
-                        <td>${item.Instalaciones}</td>
-                    `;
-                    document.getElementById("tablaArancelarios").appendChild(newRow);
-                });
-            } else {
-                Swal.fire({
-                    icon: "info",
-                    title: "Sin datos",
-                    text: "No hay datos disponibles para este año"
-                });
-            }
+        if (json.status && Array.isArray(json.data) && json.data.length > 0) {
+            json.data.forEach(item => {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${item.categoria}</td>
+                    <td>${item["Muros y Columnas"]}</td>
+                    <td>${item.Techos}</td>
+                    <td>${item.Pisos}</td>
+                    <td>${item["Puertas y Ventanas"]}</td>
+                    <td>${item.Revestimientos}</td>
+                    <td>${item.Baños}</td>
+                    <td>${item.Instalaciones}</td>
+                `;
+                tbody.appendChild(row);
+            });
         } else {
+            const row = document.createElement("tr");
+            row.innerHTML = `<td colspan="8" style="text-align: center;">No hay datos registrados para el año ${anio}</td>`;
+            tbody.appendChild(row);
+
             Swal.fire({
-                icon: "error",
-                title: "Error",
-                text: json.msg
+                icon: "info",
+                title: "Sin datos",
+                text: `No se encontraron registros para el año ${anio}`
             });
         }
     } catch (error) {
         Swal.fire({
             icon: "error",
             title: "Error",
-            text: `Se produjo un error: ${error.message}`
+            text: `Se produjo un error al obtener los datos: ${error.message}`
         });
     }
 }
+
 
 
 /*DEL BUSCAR CODIGO SELECCIONADO VA AGREGAR AL MODAL PARA REGISTRAR LISTA DE VALORES ARANCELARIOS*/
