@@ -93,34 +93,7 @@
                             </tr>
                         </thead>
                         <tbody id="tablaCultivoLimpio">
-                            <!-- Filas generadas dinámicamente -->
-                            <tr>
-                                <td>500 m.s.n.m - 2000 m.s.n.m</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                                <td>@mdo</td>
-                            </tr>
-
-                            <tr>
-                                <td>2001 m.s.n.m - 3000 m.s.n.m</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                                <td>@mdo</td>
-                            </tr>
-
-                            <tr>
-                                <td>3001 m.s.n.m - 0000 m.s.n.m</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                                <td>@mdo</td>
-                            </tr>
-
-                            <tr>
-                                <td>4000 m.s.n.m a mas</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                                <td>@mdo</td>
-                            </tr>
+                            <!-- Filas generadas dinámicamente -->                          
                                 
                         </tbody>
                     </table>
@@ -140,35 +113,7 @@
                         </thead>
                         <tbody id="tablaCultivoPermanente">
                             <!-- Filas generadas dinámicamente -->
-                            <tr>
-                                <td>500 m.s.n.m - 2000 m.s.n.m</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                                <td>@mdo</td>
-                            </tr>
-
-                            <tr>
-                                <td>2001 m.s.n.m - 3000 m.s.n.m</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                                <td>@mdo</td>
-                            </tr>
-
-                            <tr>
-                                <td>3001 m.s.n.m - 0000 m.s.n.m</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                                <td>@mdo</td>
-                            </tr>
-
-                            <tr>
-                                <td>4000 m.s.n.m a mas</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                                <td>@mdo</td>
-                            </tr>
-
-
+                                
                         </tbody>
                     </table>
                 </div>
@@ -190,26 +135,26 @@
                         <tbody id="tablaPastos">
                             <!-- Filas generadas dinámicamente -->
 
-                            <tr>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                                <td>@mdo</td>
-                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>           
 
+            <div class="col-md-6">
+                <h6 class="text-center">TIERRAS ARIDAS</h6>
+                <div class="table-responsive table-container">
+                    <table class="table table-bordered custom-table small text center"">
+                        <thead>
                             <tr>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                                <td>@mdo</td>
+                                <th>ALTITUD</th>
+                                <th>ALTA</th>
+                                <th>MEDIA</th>
+                                <th>BAJA</th>
                             </tr>
+                        </thead>
+                        <tbody id="tablaTierrasAridas">
+                            <!-- Filas generadas dinámicamente -->
 
-                            <tr>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                                <td>@mdo</td>
-                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -222,16 +167,17 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header bg-success text-white">
-        <h5 class="modal-title" id="addYearModalLabel">Agregar Valor Arancelario</h5>
+        <h5 class="modal-title" id="addYearModalLabel">AGREGAR VALOR ARANCELARIO DE TERRENO RUSTICO</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
       </div>
       <div class="modal-body">
         <form id="formAgregarFila">
 
-        <div class="row mb-3">
-            <div class="col-md-2">
-              <label for="anioArancelario" class="form-label">Año</label>
-              <select class="form-select" id="anioArancelario" required>
+        <div class="row g-3">
+            <!-- selector de año -->
+            <div class="col-md-6">
+              <label for="anioArancelarioR" class="form-label fw-bold">Selecciona Año</label>
+              <select class="form-select" id="anioArancelarioR" name="anioArancelarioR" required>
                 <?php
                   $currentYear = date("Y");
                   $startYear = 2010;
@@ -241,13 +187,14 @@
                 ?>
               </select>
             </div>
-          </div>
+          
+            <!-- selector de altura -->
 
-          <div class="row mb-3">
+        
 
             <div class="col-md-6">
-                <label for="altitud" class="form-label">Altitud</label>
-                <select name="altitud" class="form-select" required>
+                <label for="altitud" class="form-label fw-bold">Altitud</label>
+                <select name="altitud" id="altitud" class="form-select" required>
                     <option value="">Seleccione un rango</option>
                     <option value="500 m.s.n.m - 2000 m.s.n.m">500 m.s.n.m - 2000 m.s.n.m</option>
                     <option value="2001 m.s.n.m - 3000 m.s.n.m">2001 m.s.n.m - 3000 m.s.n.m</option>
@@ -258,33 +205,32 @@
 
 
             <div class="col-md-2">
-              <label for="valorAlta" class="form-label">Alta</label>
-              <input type="text" class="form-control" id="valorAlta" required>
+              <label for="valorAlta" class="form-label fw-bold">Alta</label>
+              <input type="number" class="form-control" id="valorAlta" name="valorAlta" required>
             </div>
             <div class="col-md-2">
-              <label for="valorMedia" class="form-label">Media</label>
-              <input type="text" class="form-control" id="valorMedia" required>
+              <label for="valorMedia" class="form-label fw-bold">Media</label>
+              <input type="number" class="form-control" id="valorMedia" name="valorMedia" required>
             </div>
             <div class="col-md-2">
-              <label for="valorBaja" class="form-label">Baja</label>
-              <input type="text" class="form-control" id="valorBaja" required>
+              <label for="valorBaja" class="form-label fw-bold">Baja</label>
+              <input type="number" class="form-control" id="valorBaja" name="valorBaja" required>
             </div>
-            <div class="col-md-3">
-              <label for="tipoTierra" class="form-label">Tipo</label>
-              <select class="form-select" id="tipoTierra" required>
-                <option value="limpio">Cultivo Limpio</option>
-                <option value="permanente">Cultivo Permanente</option>
-                <option value="pastos">Pastos</option>
+            <div class="col-md-6">
+              <label for="grupoTierra" class="form-label fw-bold">Grupo de tierras</label>
+              <select class="form-select" id="grupoTierra" name="grupoTierra" required>
+                <option value="limpio">Tierras aptas para cultivo limpio</option>
+                <option value="permanente">Tierras aptas para cultivo permanente</option>
+                <option value="pastos">Tierras aptas para pastos</option>
+                <option value="eriazas">Tierras eriazas</option>
               </select>
             </div>
-          </div>
-
-          
-
+        
           <div class="text-end">
             <button type="submit" class="btn btn-primary">Agregar</button>
           </div>
         </form>
+        </div>
       </div>
     </div>
   </div>

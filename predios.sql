@@ -1376,6 +1376,88 @@ BEGIN
     END IF;
 END ;;
 DELIMITER ;
+
+
+DELIMITER $$
+
+CREATE PROCEDURE agregarArancelarioRustico (
+    IN p_anio INT,
+    IN p_altura_terreno VARCHAR(60),
+    IN p_grupo_tierras VARCHAR(60),
+    IN p_valor_alta VARCHAR(45),
+    IN p_valor_media VARCHAR(45),
+    IN p_valor_baja VARCHAR(45)
+)
+BEGIN
+    DECLARE v_iddato_anual INT;
+    DECLARE v_idgrupo_tierras INT;
+    DECLARE v_id_terreno INT;
+
+    -- Paso 1: Insertar o recuperar el dato anual
+    SELECT iddato_anual INTO v_iddato_anual
+    FROM dato_anual
+    WHERE año_registro = p_anio;
+
+    IF v_iddato_anual IS NULL THEN
+        INSERT INTO dato_anual (año_registro) VALUES (p_anio);
+        SET v_iddato_anual = LAST_INSERT_ID();
+    END IF;
+
+    -- Paso 2: Insertar o recuperar el grupo de tierras
+    SELECT idgrupo_tierras INTO v_idgrupo_tierras
+    FROM grupo_tierras
+    WHERE tierras = p_grupo_tierras AND dato_anual_iddato_anual = v_iddato_anual;
+
+    IF v_idgrupo_tierras IS NULL THEN
+        INSERT INTO grupo_tierras (tierras, dato_anual_iddato_anual)
+        VALUES (p_grupo_tierras, v_iddato_anual);
+        SET v_idgrupo_tierras = LAST_INSERT_ID();
+    END IF;
+
+    -- Paso 3: Insertar o recuperar la altura del terreno
+    SELECT id_terreno INTO v_id_terreno
+    FROM altura_terreno
+    WHERE altura_terreno = p_altura_terreno AND grupo_tierras_idgrupo_tierras = v_idgrupo_tierras;
+
+    IF v_id_terreno IS NULL THEN
+        INSERT INTO altura_terreno (altura_terreno, grupo_tierras_idgrupo_tierras)
+        VALUES (p_altura_terreno, v_idgrupo_tierras);
+        SET v_id_terreno = LAST_INSERT_ID();
+    END IF;
+
+    -- Paso 4: Insertar calidad agrológica
+    INSERT INTO calidad_agrologica (alta, media, baja, altura_terreno_id_terreno)
+    VALUES (p_valor_alta, p_valor_media, p_valor_baja, v_id_terreno);
+END $$
+
+DELIMITER ;
+
+
+
+DELIMITER $$
+
+CREATE PROCEDURE obtenerArancelarioRusticoPorAnio(
+    IN anio INT,
+    IN grupoTierra VARCHAR(100)
+)
+BEGIN
+  SELECT 
+    da.año_registro AS anio,
+    gt.tierras AS grupo_tierra,
+    at.altura_terreno AS altitud,
+    ca.alta,
+    ca.media,
+    ca.baja
+  FROM dato_anual da
+  INNER JOIN grupo_tierras gt ON gt.dato_anual_iddato_anual = da.iddato_anual
+  INNER JOIN altura_terreno at ON at.grupo_tierras_idgrupo_tierras = gt.idgrupo_tierras
+  INNER JOIN calidad_agrologica ca ON ca.altura_terreno_id_terreno = at.id_terreno
+  WHERE da.año_registro = anio
+    AND gt.tierras = grupoTierra;
+END $$
+
+DELIMITER ;
+
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
