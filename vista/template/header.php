@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- start: Icons https://remixicon.com/ --> <!-- CUANDO QUIERES USAR ICONS -->
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
     <!-- start: Icons -->
       <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -24,8 +25,13 @@
 
     <!-- start: Sidebar -->
     <div class="sidebar position-fixed top-0 bottom-0 bg-white border-end">
+        
+
         <div class="d-flex align-items-center p-3">
-            <a href="#" class="sidebar-logo text-uppercase fw-bold text-decoration-none text-indigo fs-4">FOXY</a>
+            <a href="#" class="sidebar-logo text-decoration-none d-flex align-items-center">
+                <img src="../assets/img/logo-quinua.png" alt="Logo Quinua" style="height: 200px; margin-right: 10px;">
+                <span class="fw-bold text-indigo fs-5"></span>
+            </a>
             <i class="sidebar-toggle ri-arrow-left-circle-line ms-auto fs-5 d-none d-md-block"></i>
         </div>
         <ul class="sidebar-menu p-3 m-0 mb-0">

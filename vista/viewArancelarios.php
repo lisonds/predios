@@ -1,8 +1,4 @@
-    <?php
-    require 'template/footer.php';  // Incluye el header
-
-    // Contenido principal de la página
-    ?>
+    
     <?php
     require '../configuracion/config.php';  // las configuraciones
 
@@ -143,7 +139,7 @@
                                         <option value="B">B</option>
                                         <option value="C">C</option>
                                         <option value="D">D</option>
-                                        <option value="E">F</option>
+                                        <option value="E">E</option>
                                         <option value="F">F</option>
                                         <option value="G">G</option>
                                         <option value="H">H</option>
@@ -211,6 +207,12 @@
    
 <?php
     require 'template/header.php';  // Incluye el header
+
+    // Contenido principal de la página
+    ?>
+
+<?php
+    require 'template/footer.php';  // Incluye el header
 
     // Contenido principal de la página
     ?>

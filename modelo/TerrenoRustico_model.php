@@ -21,7 +21,7 @@ require_once "../libreria/conexion.php";
         return $arrayLista;
     }
 
-        // Insertar un nuevo arancelario
+        // Insertar un nuevo dato para arancelario rustico
         public function insertRustico(
             string $anioArancelarioR,
             string $altitud,
@@ -30,7 +30,7 @@ require_once "../libreria/conexion.php";
             string $Valorbaja,
             string $GrupoTierra
         ) {
-                $query = "CALL agregarArancelarioEdificacion(
+                $query = "CALL agregarArancelarioRustico(
                     '{$anioArancelarioR}',
                     '{$altitud}',
                     '{$ValorAlta}',

@@ -1380,57 +1380,49 @@ DELIMITER ;
 
 DELIMITER $$
 
-CREATE PROCEDURE agregarArancelarioRustico (
+CREATE PROCEDURE agregarArancelarioRustico(
     IN p_anio INT,
-    IN p_altura_terreno VARCHAR(60),
-    IN p_grupo_tierras VARCHAR(60),
-    IN p_valor_alta VARCHAR(45),
-    IN p_valor_media VARCHAR(45),
-    IN p_valor_baja VARCHAR(45)
+    IN p_altitud VARCHAR(100),
+    IN p_valorAlta DECIMAL(10,2),
+    IN p_valorMedia DECIMAL(10,2),
+    IN p_valorBaja DECIMAL(10,2),
+    IN p_grupoTierra VARCHAR(100)
 )
 BEGIN
-    DECLARE v_iddato_anual INT;
-    DECLARE v_idgrupo_tierras INT;
-    DECLARE v_id_terreno INT;
+    DECLARE id_dato INT;
+    DECLARE id_grupo INT;
+    DECLARE id_terreno INT;
 
-    -- Paso 1: Insertar o recuperar el dato anual
-    SELECT iddato_anual INTO v_iddato_anual
+    -- Verifica si ya existe el año, si no, lo inserta
+    SELECT iddato_anual INTO id_dato
     FROM dato_anual
     WHERE año_registro = p_anio;
 
-    IF v_iddato_anual IS NULL THEN
-        INSERT INTO dato_anual (año_registro) VALUES (p_anio);
-        SET v_iddato_anual = LAST_INSERT_ID();
+    IF id_dato IS NULL THEN
+        INSERT INTO dato_anual(año_registro) VALUES (p_anio);
+        SET id_dato = LAST_INSERT_ID();
     END IF;
 
-    -- Paso 2: Insertar o recuperar el grupo de tierras
-    SELECT idgrupo_tierras INTO v_idgrupo_tierras
-    FROM grupo_tierras
-    WHERE tierras = p_grupo_tierras AND dato_anual_iddato_anual = v_iddato_anual;
+    -- Inserta grupo de tierras
+    INSERT INTO grupo_tierras(tierras, dato_anual_iddato_anual)
+    VALUES (p_grupoTierra, id_dato);
+    SET id_grupo = LAST_INSERT_ID();
 
-    IF v_idgrupo_tierras IS NULL THEN
-        INSERT INTO grupo_tierras (tierras, dato_anual_iddato_anual)
-        VALUES (p_grupo_tierras, v_iddato_anual);
-        SET v_idgrupo_tierras = LAST_INSERT_ID();
-    END IF;
+    -- Inserta altitud
+    INSERT INTO altura_terreno(altura_terreno, grupo_tierras_idgrupo_tierras)
+    VALUES (p_altitud, id_grupo);
+    SET id_terreno = LAST_INSERT_ID();
 
-    -- Paso 3: Insertar o recuperar la altura del terreno
-    SELECT id_terreno INTO v_id_terreno
-    FROM altura_terreno
-    WHERE altura_terreno = p_altura_terreno AND grupo_tierras_idgrupo_tierras = v_idgrupo_tierras;
+    -- Inserta los valores arancelarios
+    INSERT INTO calidad_agrologica(alta, media, baja, altura_terreno_id_terreno)
+    VALUES (p_valorAlta, p_valorMedia, p_valorBaja, id_terreno);
 
-    IF v_id_terreno IS NULL THEN
-        INSERT INTO altura_terreno (altura_terreno, grupo_tierras_idgrupo_tierras)
-        VALUES (p_altura_terreno, v_idgrupo_tierras);
-        SET v_id_terreno = LAST_INSERT_ID();
-    END IF;
-
-    -- Paso 4: Insertar calidad agrológica
-    INSERT INTO calidad_agrologica (alta, media, baja, altura_terreno_id_terreno)
-    VALUES (p_valor_alta, p_valor_media, p_valor_baja, v_id_terreno);
-END $$
+    -- Devuelve estado
+    SELECT 1 AS estado_operacion;
+END$$
 
 DELIMITER ;
+
 
 
 

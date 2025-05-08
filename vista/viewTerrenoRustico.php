@@ -1,9 +1,5 @@
     <!-- end: Sidebar -->
-    <?php
-    require 'template/footer.php';  // Incluye el header
-
-    // Contenido principal de la página
-    ?>
+   
     <?php
     require '../configuracion/config.php';  // las configuraciones
 
@@ -72,7 +68,7 @@
                     class="btn btn-success rounded-pill ms-2" 
                     data-bs-toggle="modal" 
                     data-bs-target="#addYearModal"
-                    id="addArancelarioButton">
+                    id="addRusticoButton">
                     Agregar nueva Lista 
                 </button>  
 
@@ -178,6 +174,7 @@
             <div class="col-md-6">
               <label for="anioArancelarioR" class="form-label fw-bold">Selecciona Año</label>
               <select class="form-select" id="anioArancelarioR" name="anioArancelarioR" required>
+              <option value="0" selected disabled>-- seleccionar año --</option>
                 <?php
                   $currentYear = date("Y");
                   $startYear = 2010;
@@ -195,12 +192,23 @@
             <div class="col-md-6">
                 <label for="altitud" class="form-label fw-bold">Altitud</label>
                 <select name="altitud" id="altitud" class="form-select" required>
-                    <option value="">Seleccione un rango</option>
+                    <option value="0">--Seleccione altitud--</option>
                     <option value="500 m.s.n.m - 2000 m.s.n.m">500 m.s.n.m - 2000 m.s.n.m</option>
                     <option value="2001 m.s.n.m - 3000 m.s.n.m">2001 m.s.n.m - 3000 m.s.n.m</option>
                     <option value="3001 m.s.n.m - 4000 m.s.n.m">3001 m.s.n.m - 4000 m.s.n.m</option>
                     <option value="4001 m.s.n.m a más">4001 m.s.n.m a más</option>
                 </select>
+            </div>
+
+             <div class="col-md-6">
+              <label for="grupoTierra" class="form-label fw-bold">Grupo de tierras</label>
+              <select class="form-select" id="grupoTierra" name="grupoTierra" required>
+                <option value="0" selected disabled>-- seleccionar grupo de Tierra --</option>
+                <option value="limpio">Tierras aptas para cultivo limpio</option>
+                <option value="permanente">Tierras aptas para cultivo permanente</option>
+                <option value="pastos">Tierras aptas para pastos</option>
+                <option value="eriazas">Tierras eriazas</option>
+              </select>
             </div>
 
 
@@ -216,15 +224,7 @@
               <label for="valorBaja" class="form-label fw-bold">Baja</label>
               <input type="number" class="form-control" id="valorBaja" name="valorBaja" required>
             </div>
-            <div class="col-md-6">
-              <label for="grupoTierra" class="form-label fw-bold">Grupo de tierras</label>
-              <select class="form-select" id="grupoTierra" name="grupoTierra" required>
-                <option value="limpio">Tierras aptas para cultivo limpio</option>
-                <option value="permanente">Tierras aptas para cultivo permanente</option>
-                <option value="pastos">Tierras aptas para pastos</option>
-                <option value="eriazas">Tierras eriazas</option>
-              </select>
-            </div>
+           
         
           <div class="text-end">
             <button type="submit" class="btn btn-primary">Agregar</button>
@@ -241,6 +241,12 @@
 
 <?php
     require 'template/header.php';  // Incluye el header
+
+    // Contenido principal de la página
+    ?>
+
+<?php
+    require 'template/footer.php';  // Incluye el header
 
     // Contenido principal de la página
     ?>

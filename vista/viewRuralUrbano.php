@@ -1,9 +1,5 @@
     <!-- end: Sidebar -->
-    <?php
-    require 'template/footer.php';  // Incluye el header
     
-    // Contenido principal de la página
-    ?>
     <?php
     require '../configuracion/config.php';  // Carga las constantes
 
@@ -554,5 +550,11 @@
  <?php
     require 'template/header.php';  // Incluye el header
                                 
+    // Contenido principal de la página
+    ?>
+
+<?php
+    require 'template/footer.php';  // Incluye el header
+    
     // Contenido principal de la página
     ?>
