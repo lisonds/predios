@@ -309,68 +309,48 @@ if (document.querySelector("#formRegistroPropietarios")) {//AQUI se valida si ex
     }
 }
 
-function DeletePropietario(item){
-    
+function DeletePropietario(id) {
     Swal.fire({
-      title: "Desea Eliminar un Propietario?",
-      text: "Esta Informacion Se Eliminara!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Si, Eliminar!"
+        title: "¿Desea eliminar Propietario?",
+        text: "Esta acción eliminará al propietario.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Si, Eliminar!"
     }).then((result) => {
-      if (result.isConfirmed) {
-        eliminarPropietario(item);
-      }
+        if (result.isConfirmed) {
+            const formData = new FormData();
+            formData.append("idPropietarios", id);
+            formData.append("propietario", "Delete");
+
+            fetch("../controlador/propietarios_control.php", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status) {
+                    Swal.fire({
+                        icon: "success",
+                        title: "Eliminado",
+                        text: "Se ha eliminado correctamente al propietario."
+                    }).then(() => {
+                        // Aquí puedes actualizar tu tabla si es necesario
+                        location.reload(); // o una función que recargue los datos
+                    });
+                } else {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Error",
+                        text: data.msg || "No se pudo eliminar al propietario."
+                    });
+                }
+            })
+            .catch(error => {
+                console.error("Error en la solicitud:", error);
+                Swal.fire("Error", "Ocurrió un error inesperado.", "error");
+            });
+        }
     });
-  }
-async function eliminarPropietario(id){
-    let formData = new FormData();
-    formData.append('idPropietarios', id);
-  
-    try {
-      let resp = await fetch(`${base_url}/controlador/propietarios_control.php?propietario=Delete`, {
-        method: 'POST', // Enviar con el método POST
-        mode: 'cors',
-        cache: 'no-cache', // No guardar en caché
-        body: formData
-      });
-  
-      // Verificar que la respuesta sea válida
-      if (!resp.ok) {
-        throw new Error(`Error en la solicitud: ${resp.status}`);
-      }
-  
-      let json = await resp.json(); // Convertir la respuesta a JSON
-  
-      if (json.status) {
-        Swal.fire({
-          title: "Propietario Eliminado",
-          text: json.msg,
-          icon: "success"
-        });
-  
-        // Actualizar la tabla de usuarios
-        document.querySelector("#tablaPropietarios").innerHTML = "";// Limpiar la tabla para mosttrar de manera dinamica
-        const valorInput = document.getElementById("searchInput").value;
-
-        // Guardar en una variable de tipo string
-        const textoIngresado = valorInput;
-        buscarCodigo(textoIngresado); //
-      } else {
-        Swal.fire({
-          title: "Error",
-          text: json.msg,
-          icon: "error"
-        });
-      }
-    } catch (error) {
-      Swal.fire({
-        title: "Error",
-        text: `Se produjo un error al eliminar un Propietario: ${error.message}`,
-        icon: "error"
-      });
-    }
 }
-

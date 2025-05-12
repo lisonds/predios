@@ -72,9 +72,9 @@
                     data-bs-toggle="modal"
                     data-bs-target="#modalRegistroPropietario"
                     id="addPropietarioButton">
-                    Agregar Propietario
+                    <i class="fa-solid fa-circle-plus" ></i> Agregar Propietario
                 </button>
-                <a id="linkAutovaluo" href="#" class="btn btn-info mb-3">Ver Sus Predios</a>
+                <a id="linkAutovaluo" href="#" class="btn btn-info mb-3"> <i class="fa-solid fa-eye"></i>Ver Sus Predios</a>
 
                 <!-- Modal -->
                 <div class="modal fade" id="modalRegistroPropietario" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">

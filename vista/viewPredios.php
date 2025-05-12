@@ -70,7 +70,7 @@
                     data-bs-toggle="modal" 
                     data-bs-target="#modalRegistroPredio" 
                     id="addPredioButton">
-                    <i class="fa-solid fa-plus">Agregar Predio</i>
+                    <i class="fa-solid fa-circle-plus" ></i> Agregar Predio
                     
                 </button>
                     <!-- Modal -->

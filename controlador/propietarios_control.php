@@ -109,26 +109,23 @@
 
 
 
-    if ($option == "Delete") { 
-        if($_POST){
-            if(empty($_POST['idPropietarios'])){
-                $arraResponse=array('status'=>false,'msg'=>'Error de datos');
-            }else{
-                $idUsuario=intval($_POST["idPropietarios"]);
-                $arrayInfo = $objPropietarios->EliminarPropietario($idUsuario);
-                
-                
-                if($arrayInfo ->id_eliminado){//lo que retorna en base de datos 
-                    $arrayResponse = array('status' =>true, 'msg' => 'Registro Eliminado');
-                }else{
-                    $arrayResponse = array('status' =>false, 'msg' => 'error al Eliminar');
-                }
-                echo json_encode($arrayResponse);
-            }          
-           
-        }
-        die();
+  if ($option == "Delete") { 
+    if ($_POST) {
+        if (empty($_POST['idPropietarios'])) {
+            $arrayResponse = array('status' => false, 'msg' => 'Error de datos');
+        } else {
+            $idUsuario = intval($_POST["idPropietarios"]);
+            $arrayInfo = $objPropietario->EliminarPropietario($idUsuario); // ✅ nombre corregido
 
+            if (isset($arrayInfo->id_eliminado) && $arrayInfo->id_eliminado) { // ✅ chequeo robusto
+                $arrayResponse = array('status' => true, 'msg' => 'Registro Eliminado');
+            } else {
+                $arrayResponse = array('status' => false, 'msg' => 'Error al eliminar');
+            }
+        }
+        echo json_encode($arrayResponse);
+        die();
     }
-   
+}
+
 ?>

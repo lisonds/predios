@@ -71,7 +71,7 @@
                     data-bs-toggle="modal" 
                     data-bs-target="#addYearModal"
                     id="addArancelarioButton">
-                    Agregar nueva Lista 
+                    <i class="fa-solid fa-circle-plus" ></i> Agregar Nueva lista
                 </button>            
 
             </div>
