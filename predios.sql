@@ -820,22 +820,27 @@ DELIMITER ;
 /*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `eliminarPropietario`(IN p_idpropietarios INT)
+DELIMITER $$
+
+CREATE PROCEDURE sp_eliminar_propietario(IN p_idPropietario INT)
 BEGIN
-    -- Verificar si el propietario existe
-    IF NOT EXISTS (SELECT 1 FROM propietarios WHERE idpropietarios = p_idpropietarios) THEN
-        SIGNAL SQLSTATE '45000'
-            SET MESSAGE_TEXT = 'Error: Propietario no encontrado.';
+    DECLARE exit handler for SQLEXCEPTION 
+    BEGIN
+        -- Si ocurre un error, se devuelve 0 como indicador de error
+        SELECT 0 AS id_eliminado;
+    END;
+
+    -- Eliminar el registro
+    DELETE FROM propietarios WHERE idPropietarios = p_idPropietario;
+
+    -- Verificar si se eliminó realmente algún registro
+    IF ROW_COUNT() > 0 THEN
+        SELECT 1 AS id_eliminado; -- Éxito
+    ELSE
+        SELECT 0 AS id_eliminado; -- No se encontró registro para eliminar
     END IF;
+END$$
 
-    -- Eliminar el propietario
-    DELETE FROM propietarios
-    WHERE idpropietarios = p_idpropietarios;
-
-    -- Confirmar éxito
-    SELECT 'Propietario eliminado correctamente' AS mensaje;
-END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
@@ -1378,77 +1383,81 @@ END ;;
 DELIMITER ;
 
 
-DELIMITER $$
 
-CREATE PROCEDURE agregarArancelarioRustico(
-    IN p_anio INT,
-    IN p_altitud VARCHAR(100),
-    IN p_valorAlta DECIMAL(10,2),
-    IN p_valorMedia DECIMAL(10,2),
-    IN p_valorBaja DECIMAL(10,2),
-    IN p_grupoTierra VARCHAR(100)
+
+
+
+DELIMITER //
+
+CREATE PROCEDURE agregarArancelarioRustico (
+    IN p_anio VARCHAR(45),
+    IN p_altitud VARCHAR(45),
+    IN p_valorAlta VARCHAR(45),
+    IN p_valorMedia VARCHAR(45),
+    IN p_valorBaja VARCHAR(45),
+    IN p_grupoTierra VARCHAR(60)
 )
 BEGIN
-    DECLARE id_dato INT;
-    DECLARE id_grupo INT;
-    DECLARE id_terreno INT;
+    DECLARE v_id_anio INT;
+    DECLARE v_id_grupo INT;
+    DECLARE v_id_terreno INT;
+    DECLARE v_existencia INT;
 
-    -- Verifica si ya existe el año, si no, lo inserta
-    SELECT iddato_anual INTO id_dato
+    -- Buscar o insertar el año
+    SELECT iddato_anual INTO v_id_anio
     FROM dato_anual
     WHERE año_registro = p_anio;
 
-    IF id_dato IS NULL THEN
-        INSERT INTO dato_anual(año_registro) VALUES (p_anio);
-        SET id_dato = LAST_INSERT_ID();
+    IF v_id_anio IS NULL THEN
+        INSERT INTO dato_anual (año_registro) VALUES (p_anio);
+        SET v_id_anio = LAST_INSERT_ID();
     END IF;
 
-    -- Inserta grupo de tierras
-    INSERT INTO grupo_tierras(tierras, dato_anual_iddato_anual)
-    VALUES (p_grupoTierra, id_dato);
-    SET id_grupo = LAST_INSERT_ID();
+    -- Buscar o insertar el grupo de tierra
+    SELECT idgrupo_tierras INTO v_id_grupo
+    FROM grupo_tierras
+    WHERE tierras = p_grupoTierra AND dato_anual_iddato_anual = v_id_anio;
 
-    -- Inserta altitud
-    INSERT INTO altura_terreno(altura_terreno, grupo_tierras_idgrupo_tierras)
-    VALUES (p_altitud, id_grupo);
-    SET id_terreno = LAST_INSERT_ID();
+    IF v_id_grupo IS NULL THEN
+        INSERT INTO grupo_tierras (tierras, dato_anual_iddato_anual)
+        VALUES (p_grupoTierra, v_id_anio);
+        SET v_id_grupo = LAST_INSERT_ID();
+    END IF;
 
-    -- Inserta los valores arancelarios
-    INSERT INTO calidad_agrologica(alta, media, baja, altura_terreno_id_terreno)
-    VALUES (p_valorAlta, p_valorMedia, p_valorBaja, id_terreno);
+    -- Buscar o insertar la altitud del terreno
+    SELECT id_terreno INTO v_id_terreno
+    FROM altura_terreno
+    WHERE altura_terreno = p_altitud AND grupo_tierras_idgrupo_tierras = v_id_grupo;
 
-    -- Devuelve estado
-    SELECT 1 AS estado_operacion;
-END$$
+    IF v_id_terreno IS NULL THEN
+        INSERT INTO altura_terreno (altura_terreno, grupo_tierras_idgrupo_tierras)
+        VALUES (p_altitud, v_id_grupo);
+        SET v_id_terreno = LAST_INSERT_ID();
+    END IF;
 
-DELIMITER ;
+    -- Verificamos si ya existe una entrada de calidad agrológica para esa combinación
+    SELECT COUNT(*) INTO v_existencia
+    FROM calidad_agrologica
+    WHERE altura_terreno_id_terreno = v_id_terreno;
 
+    IF v_existencia = 0 THEN
+        INSERT INTO calidad_agrologica (
+            alta, media, baja, altura_terreno_id_terreno
+        ) VALUES (
+            p_valorAlta, p_valorMedia, p_valorBaja, v_id_terreno
+        );
+        SELECT 1 AS estado_operacion; -- Inserción nueva
+    ELSE
+        UPDATE calidad_agrologica
+        SET alta = p_valorAlta, media = p_valorMedia, baja = p_valorBaja
+        WHERE altura_terreno_id_terreno = v_id_terreno;
+        SELECT 2 AS estado_operacion; -- Actualización
+    END IF;
 
-
-
-DELIMITER $$
-
-CREATE PROCEDURE obtenerArancelarioRusticoPorAnio(
-    IN anio INT,
-    IN grupoTierra VARCHAR(100)
-)
-BEGIN
-  SELECT 
-    da.año_registro AS anio,
-    gt.tierras AS grupo_tierra,
-    at.altura_terreno AS altitud,
-    ca.alta,
-    ca.media,
-    ca.baja
-  FROM dato_anual da
-  INNER JOIN grupo_tierras gt ON gt.dato_anual_iddato_anual = da.iddato_anual
-  INNER JOIN altura_terreno at ON at.grupo_tierras_idgrupo_tierras = gt.idgrupo_tierras
-  INNER JOIN calidad_agrologica ca ON ca.altura_terreno_id_terreno = at.id_terreno
-  WHERE da.año_registro = anio
-    AND gt.tierras = grupoTierra;
-END $$
+END //
 
 DELIMITER ;
+
 
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;

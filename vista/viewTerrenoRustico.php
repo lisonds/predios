@@ -6,8 +6,6 @@
     // Contenido principal de la página
     ?>
 
-    $conexion->close();
-    ?>
     <?php 
     $currentYear = date("Y"); // Año actual
     $startYear = 2010; // Año de inicio
@@ -69,7 +67,7 @@
                     data-bs-toggle="modal" 
                     data-bs-target="#addYearModal"
                     id="addRusticoButton">
-                    Agregar nueva Lista 
+                    <i class="fa-solid fa-circle-plus" ></i> Agregar Nueva lista
                 </button>  
 
         </div> 
@@ -150,6 +148,12 @@
                         </thead>
                         <tbody id="tablaTierrasAridas">
                             <!-- Filas generadas dinámicamente -->
+                            <tr>
+                                <td>terreno eriazo</td>
+                                <td>2100</td>
+                                <td>--</td>
+                                <td>--</td>
+                            </tr>
 
                         </tbody>
                     </table>
@@ -227,7 +231,8 @@
            
         
           <div class="text-end">
-            <button type="submit" class="btn btn-primary">Agregar</button>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
           </div>
         </form>
         </div>
@@ -235,7 +240,6 @@
     </div>
   </div>
 </div>
-
 
 
 
