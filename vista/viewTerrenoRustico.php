@@ -214,15 +214,15 @@
 
             <div class="col-md-2">
               <label for="valorAlta" class="form-label fw-bold">Alta</label>
-              <input type="number" class="form-control" id="valorAlta" name="valorAlta" required>
+              <input type="number" class="form-control" id="valorAlta" name="valorAlta" step="any" required>
             </div>
             <div class="col-md-2">
               <label for="valorMedia" class="form-label fw-bold">Media</label>
-              <input type="number" class="form-control" id="valorMedia" name="valorMedia" required>
+              <input type="number" class="form-control" id="valorMedia" name="valorMedia" step="any" required>
             </div>
             <div class="col-md-2">
               <label for="valorBaja" class="form-label fw-bold">Baja</label>
-              <input type="number" class="form-control" id="valorBaja" name="valorBaja" required>
+              <input type="number" class="form-control" id="valorBaja" name="valorBaja" step="any" required>
             </div>
            
         

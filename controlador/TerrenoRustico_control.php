@@ -1,5 +1,5 @@
 <?php
-    require_once "../modelo/arancelarios_model.php";
+    require_once "../modelo/TerrenoRustico_model.php";
 
     // Verifica si existe el parámetro 'data' en la petición
 
