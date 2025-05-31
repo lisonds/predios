@@ -174,8 +174,8 @@
                 </ul>
             </li>
             <li class="sidebar-menu-divider mt-3 mb-1 text-uppercase">DATOS ESTATICOS</li>
-            <li class="sidebar-menu-item has-dropdown">
-                <a href="#">
+            <li class="sidebar-menu-item">
+                <a href="view-normal.php">
                      <i class="ri-book-line sidebar-menu-item-icon"></i>
                     NORMAS LEGALES 
                     
