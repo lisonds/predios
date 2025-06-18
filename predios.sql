@@ -28,8 +28,8 @@ CREATE TABLE `altura_terreno` (
   `grupo_tierras_idgrupo_tierras` int NOT NULL,
   PRIMARY KEY (`id_terreno`),
   KEY `fk_altura_terreno_grupo_tierras_idx` (`grupo_tierras_idgrupo_tierras`),
-  CONSTRAINT `fk_altura_terreno_grupo_tierras` FOREIGN KEY (`grupo_tierras_idgrupo_tierras`) REFERENCES `grupo_tierras` (`idgrupo_tierras`)
-) ENGINE=InnoDB AUTO_INCREMENT=85 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `fk_altura_terreno_grupo_tierras` FOREIGN KEY (`grupo_tierras_idgrupo_tierras`) REFERENCES `grupo_tierras` (`idgrupo_tierras`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=116 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,6 +38,7 @@ CREATE TABLE `altura_terreno` (
 
 LOCK TABLES `altura_terreno` WRITE;
 /*!40000 ALTER TABLE `altura_terreno` DISABLE KEYS */;
+INSERT INTO `altura_terreno` VALUES (102,'2001 m.s.n.m - 3000 m.s.n.m',43),(103,'500 m.s.n.m - 2000 m.s.n.m',44),(104,'2001 m.s.n.m - 3000 m.s.n.m',44),(105,'3001 m.s.n.m - 4000 m.s.n.m',44),(106,'4001 m.s.n.m a más',44),(107,'500 m.s.n.m - 2000 m.s.n.m',45),(108,'2001 m.s.n.m - 3000 m.s.n.m',45),(109,'3001 m.s.n.m - 4000 m.s.n.m',45),(110,'4001 m.s.n.m a más',45),(111,'500 m.s.n.m - 2000 m.s.n.m',46),(112,'2001 m.s.n.m - 3000 m.s.n.m',46),(113,'3001 m.s.n.m - 4000 m.s.n.m',46),(114,'4001 m.s.n.m a más',46),(115,'500 m.s.n.m - 2000 m.s.n.m',47);
 /*!40000 ALTER TABLE `altura_terreno` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -108,8 +109,8 @@ CREATE TABLE `calidad_agrologica` (
   `altura_terreno_id_terreno` int NOT NULL,
   PRIMARY KEY (`idcalidad_agrologica`),
   KEY `fk_calidad_agrologica_altura_terreno_idx` (`altura_terreno_id_terreno`),
-  CONSTRAINT `fk_calidad_agrologica_altura_terreno` FOREIGN KEY (`altura_terreno_id_terreno`) REFERENCES `altura_terreno` (`id_terreno`)
-) ENGINE=InnoDB AUTO_INCREMENT=85 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `fk_calidad_agrologica_altura_terreno` FOREIGN KEY (`altura_terreno_id_terreno`) REFERENCES `altura_terreno` (`id_terreno`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=116 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -118,6 +119,7 @@ CREATE TABLE `calidad_agrologica` (
 
 LOCK TABLES `calidad_agrologica` WRITE;
 /*!40000 ALTER TABLE `calidad_agrologica` DISABLE KEYS */;
+INSERT INTO `calidad_agrologica` VALUES (102,'5489.36','5632.45','76895.25',102),(103,'1','2','3',103),(104,'4','5','6',104),(105,'7','8','9',105),(106,'10','11','12',106),(107,'13','14','15',107),(108,'16','17','18',108),(109,'19','20','21',109),(110,'22','23','24',110),(111,'25','26','27',111),(112,'28','29','30',112),(113,'31','32','33',113),(114,'35','36','38',114),(115,'39','25','87',115);
 /*!40000 ALTER TABLE `calidad_agrologica` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -188,7 +190,7 @@ CREATE TABLE `dato_anual` (
   `iddato_anual` int NOT NULL AUTO_INCREMENT,
   `año_registro` varchar(4) NOT NULL,
   PRIMARY KEY (`iddato_anual`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -197,6 +199,7 @@ CREATE TABLE `dato_anual` (
 
 LOCK TABLES `dato_anual` WRITE;
 /*!40000 ALTER TABLE `dato_anual` DISABLE KEYS */;
+INSERT INTO `dato_anual` VALUES (16,'2020'),(17,'2025');
 /*!40000 ALTER TABLE `dato_anual` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -281,8 +284,8 @@ CREATE TABLE `grupo_tierras` (
   `dato_anual_iddato_anual` int NOT NULL,
   PRIMARY KEY (`idgrupo_tierras`),
   KEY `fk_grupo_tierras_dato_anual_idx` (`dato_anual_iddato_anual`),
-  CONSTRAINT `fk_grupo_tierras_dato_anual` FOREIGN KEY (`dato_anual_iddato_anual`) REFERENCES `dato_anual` (`iddato_anual`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `fk_grupo_tierras_dato_anual` FOREIGN KEY (`dato_anual_iddato_anual`) REFERENCES `dato_anual` (`iddato_anual`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -291,6 +294,7 @@ CREATE TABLE `grupo_tierras` (
 
 LOCK TABLES `grupo_tierras` WRITE;
 /*!40000 ALTER TABLE `grupo_tierras` DISABLE KEYS */;
+INSERT INTO `grupo_tierras` VALUES (43,'permanente',16),(44,'Tierras aptas para cultivo limpio',17),(45,'Tierras aptas para cultivo permanente',17),(46,'Tierras aptas para pastos',17),(47,'Tierras eriazas',17);
 /*!40000 ALTER TABLE `grupo_tierras` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -308,7 +312,7 @@ CREATE TABLE `impusitiva_tributaria` (
   `base_legal` varchar(60) DEFAULT NULL,
   `Observaciones` double DEFAULT NULL,
   PRIMARY KEY (`idImpusitiva_Tributaria`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -317,6 +321,7 @@ CREATE TABLE `impusitiva_tributaria` (
 
 LOCK TABLES `impusitiva_tributaria` WRITE;
 /*!40000 ALTER TABLE `impusitiva_tributaria` DISABLE KEYS */;
+INSERT INTO `impusitiva_tributaria` VALUES (15,'2020','4950','l50',29.7),(16,'2025','5350','l50',32.1);
 /*!40000 ALTER TABLE `impusitiva_tributaria` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -398,7 +403,7 @@ CREATE TABLE `propietarios` (
   PRIMARY KEY (`idpropietarios`),
   KEY `fk_propietarios_indentificador_idx` (`indentificador_id`),
   CONSTRAINT `fk_propietarios_indentificador` FOREIGN KEY (`indentificador_id`) REFERENCES `indentificador` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -407,7 +412,7 @@ CREATE TABLE `propietarios` (
 
 LOCK TABLES `propietarios` WRITE;
 /*!40000 ALTER TABLE `propietarios` DISABLE KEYS */;
-INSERT INTO `propietarios` VALUES (12,'TULIO LISON ORE ICHACCAYA','70421319','Persona_natural','Propietario','Av. Los Angeles','Quinua','Huamanga','Ayacucho',22),(13,'NERY LUZ DE LA CRUZ AYME','71946323','Persona_natural','Conyugue','Av. Los Angeles','Quinua','Huamanga','Ayacucho',22),(14,'JHON QUISPE JERI','70421320','Persona_natural','Propietario','Av. Los Angeles','Huascahuara','Huamanga','Ayacucho',23),(15,'MARY MARIBI QUISPE AGUILAR','70421318','Persona_natural','Conyugue','Av. Los Angeles','Huascahuara','Huamanga','Ayacucho',23);
+INSERT INTO `propietarios` VALUES (12,'TULIO LISON ORE ICHACCAYA','70421319','Persona_natural','Propietario','Av. Los Angeles','Quinua','Huamanga','Ayacucho',22),(13,'NERY LUZ DE LA CRUZ AYME','71946323','Persona_natural','Conyugue','Av. Los Angeles','Quinua','Huamanga','Ayacucho',22),(14,'JHON QUISPE JERI','70421320','Persona_natural','Propietario','Av. Los Angeles','Huascahuara','Huamanga','Ayacucho',23),(15,'MARY MARIBI QUISPE AGUILAR','70421318','Persona_natural','Conyugue','Av. Los Angeles','Huascahuara','Huamanga','Ayacucho',23),(16,'LEADY MABEL JORGE GONZALES','70431319','Persona_natural','Copropietario','Jr. Condorcanqui N° 356 ','San Juan','Huamanga','Ayacucho',22);
 /*!40000 ALTER TABLE `propietarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -660,6 +665,94 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `agregarArancelarioRustico` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `agregarArancelarioRustico`(
+    IN anioArancelarioR VARCHAR(10),
+    IN altitud VARCHAR(60),
+    IN GrupoTierra VARCHAR(60),
+    IN ValorAlta VARCHAR(45),
+    IN ValorMedia VARCHAR(45),
+    IN ValorBaja VARCHAR(45)
+)
+BEGIN
+    DECLARE id_anio INT DEFAULT NULL;
+    DECLARE id_grupo INT DEFAULT NULL;
+    DECLARE id_altura INT DEFAULT NULL;
+    DECLARE id_calidad INT DEFAULT NULL;
+
+    -- 1. Verificar si existe el año
+    SELECT iddato_anual INTO id_anio
+    FROM dato_anual
+    WHERE año_registro = anioArancelarioR
+    LIMIT 1;
+
+    IF id_anio IS NULL THEN
+        INSERT INTO dato_anual (año_registro) VALUES (anioArancelarioR);
+        SET id_anio = LAST_INSERT_ID();
+    END IF;
+
+    -- 2. Verificar si existe el grupo de tierras
+    SELECT idgrupo_tierras INTO id_grupo
+    FROM grupo_tierras
+    WHERE tierras = GrupoTierra AND dato_anual_iddato_anual = id_anio
+    LIMIT 1;
+
+    IF id_grupo IS NULL THEN
+        INSERT INTO grupo_tierras (tierras, dato_anual_iddato_anual)
+        VALUES (GrupoTierra, id_anio);
+        SET id_grupo = LAST_INSERT_ID();
+    END IF;
+
+    -- 3. Verificar si existe la altitud
+    SELECT id_terreno INTO id_altura
+    FROM altura_terreno
+    WHERE altura_terreno = altitud AND grupo_tierras_idgrupo_tierras = id_grupo
+    LIMIT 1;
+
+    IF id_altura IS NULL THEN
+        INSERT INTO altura_terreno (altura_terreno, grupo_tierras_idgrupo_tierras)
+        VALUES (altitud, id_grupo);
+        SET id_altura = LAST_INSERT_ID();
+
+        -- Insertar calidad agrológica
+        INSERT INTO calidad_agrologica (alta, media, baja, altura_terreno_id_terreno)
+        VALUES (ValorAlta, ValorMedia, ValorBaja, id_altura);
+
+        SELECT 1 AS resultado; -- nuevo ingreso
+    ELSE
+        -- 4. Verificar si ya existe la calidad agrológica para esa altitud
+        SELECT idcalidad_agrologica INTO id_calidad
+        FROM calidad_agrologica
+        WHERE altura_terreno_id_terreno = id_altura
+        LIMIT 1;
+
+        IF id_calidad IS NULL THEN
+            INSERT INTO calidad_agrologica (alta, media, baja, altura_terreno_id_terreno)
+            VALUES (ValorAlta, ValorMedia, ValorBaja, id_altura);
+            SELECT 1 AS resultado; -- nuevo ingreso
+        ELSE
+            UPDATE calidad_agrologica
+            SET alta = ValorAlta, media = ValorMedia, baja = ValorBaja
+            WHERE idcalidad_agrologica = id_calidad;
+            SELECT 0 AS resultado; -- actualización
+        END IF;
+    END IF;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `agregarPredio` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -811,6 +904,109 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `Dato_suma_categoria_edificacion` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Dato_suma_categoria_edificacion`(
+    IN p_anio VARCHAR(10),
+    IN p_muro_columna CHAR(1),
+    IN p_techo CHAR(1),
+    IN p_pisos CHAR(1),
+    IN p_puerta_ventana CHAR(1),
+    IN p_revistimiento CHAR(1),
+    IN p_banio CHAR(1),
+    IN p_instalaciones_electricas CHAR(1)
+)
+BEGIN
+    DECLARE v_idanual_construccion INT;
+    DECLARE v_total DECIMAL(10,2) DEFAULT 0;
+    DECLARE v_temp DECIMAL(10,2);
+
+    -- Obtener el ID del año de construcción
+    SELECT idanual_construccion 
+    INTO v_idanual_construccion
+    FROM anual_construccion
+    WHERE anio_construccion = p_anio
+    LIMIT 1;
+
+    -- Sumar muro_columna
+    SELECT CAST(muro_columna AS DECIMAL(10,2)) 
+    INTO v_temp
+    FROM valores_edificacion
+    WHERE anual_construccion_idanual_construccion = v_idanual_construccion
+      AND categoria = p_muro_columna
+    LIMIT 1;
+    SET v_total = v_total + IFNULL(v_temp, 0);
+
+    -- Sumar techos
+    SELECT CAST(techos AS DECIMAL(10,2)) 
+    INTO v_temp
+    FROM valores_edificacion
+    WHERE anual_construccion_idanual_construccion = v_idanual_construccion
+      AND categoria = p_techo
+    LIMIT 1;
+    SET v_total = v_total + IFNULL(v_temp, 0);
+
+    -- Sumar pisos
+    SELECT CAST(pisos AS DECIMAL(10,2)) 
+    INTO v_temp
+    FROM valores_edificacion
+    WHERE anual_construccion_idanual_construccion = v_idanual_construccion
+      AND categoria = p_pisos
+    LIMIT 1;
+    SET v_total = v_total + IFNULL(v_temp, 0);
+
+    -- Sumar puertas_ventanas
+    SELECT CAST(puertas_ventanas AS DECIMAL(10,2)) 
+    INTO v_temp
+    FROM valores_edificacion
+    WHERE anual_construccion_idanual_construccion = v_idanual_construccion
+      AND categoria = p_puerta_ventana
+    LIMIT 1;
+    SET v_total = v_total + IFNULL(v_temp, 0);
+
+    -- Sumar revistimiento
+    SELECT CAST(revistimiento AS DECIMAL(10,2)) 
+    INTO v_temp
+    FROM valores_edificacion
+    WHERE anual_construccion_idanual_construccion = v_idanual_construccion
+      AND categoria = p_revistimiento
+    LIMIT 1;
+    SET v_total = v_total + IFNULL(v_temp, 0);
+
+    -- Sumar banios
+    SELECT CAST(banios AS DECIMAL(10,2)) 
+    INTO v_temp
+    FROM valores_edificacion
+    WHERE anual_construccion_idanual_construccion = v_idanual_construccion
+      AND categoria = p_banio
+    LIMIT 1;
+    SET v_total = v_total + IFNULL(v_temp, 0);
+
+    -- Sumar instalaciones
+    SELECT CAST(instalaciones AS DECIMAL(10,2)) 
+    INTO v_temp
+    FROM valores_edificacion
+    WHERE anual_construccion_idanual_construccion = v_idanual_construccion
+      AND categoria = p_instalaciones_electricas
+    LIMIT 1;
+    SET v_total = v_total + IFNULL(v_temp, 0);
+
+    -- Retornar resultado
+    SELECT v_total AS suma_total;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `eliminarPropietario` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -820,27 +1016,22 @@ DELIMITER ;
 /*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER $$
-
-CREATE PROCEDURE sp_eliminar_propietario(IN p_idPropietario INT)
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `eliminarPropietario`(IN p_idpropietarios INT)
 BEGIN
-    DECLARE exit handler for SQLEXCEPTION 
-    BEGIN
-        -- Si ocurre un error, se devuelve 0 como indicador de error
-        SELECT 0 AS id_eliminado;
-    END;
-
-    -- Eliminar el registro
-    DELETE FROM propietarios WHERE idPropietarios = p_idPropietario;
-
-    -- Verificar si se eliminó realmente algún registro
-    IF ROW_COUNT() > 0 THEN
-        SELECT 1 AS id_eliminado; -- Éxito
-    ELSE
-        SELECT 0 AS id_eliminado; -- No se encontró registro para eliminar
+    -- Verificar si el propietario existe
+    IF NOT EXISTS (SELECT 1 FROM propietarios WHERE idpropietarios = p_idpropietarios) THEN
+        SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'Error: Propietario no encontrado.';
     END IF;
-END$$
 
+    -- Eliminar el propietario
+    DELETE FROM propietarios
+    WHERE idpropietarios = p_idpropietarios;
+
+    -- Confirmar éxito
+    SELECT 'Propietario eliminado correctamente' AS mensaje;
+END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
@@ -1107,6 +1298,40 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `obtenerArancelarioRusticoPorAnio` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_AUTO_VALUE_ON_ZERO' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerArancelarioRusticoPorAnio`(
+    IN anio INT,
+    IN grupoTierra VARCHAR(100)
+)
+BEGIN
+  SELECT 
+    da.año_registro AS anio,
+    gt.tierras AS grupo_tierra,
+    at.altura_terreno AS altitud,
+    ca.alta,
+    ca.media,
+    ca.baja
+  FROM dato_anual da
+  INNER JOIN grupo_tierras gt ON gt.dato_anual_iddato_anual = da.iddato_anual
+  INNER JOIN altura_terreno at ON at.grupo_tierras_idgrupo_tierras = gt.idgrupo_tierras
+  INNER JOIN calidad_agrologica ca ON ca.altura_terreno_id_terreno = at.id_terreno
+  WHERE da.año_registro = anio
+    AND gt.tierras = grupoTierra;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `ObtenerPropietariosPorCodigo` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -1131,6 +1356,36 @@ BEGIN
     SELECT * 
     FROM propietarios 
     WHERE indentificador_id = identificador_id;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `obtener_data_Por_anios` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `obtener_data_Por_anios`(IN anioBuscar VARCHAR(4))
+BEGIN
+    SELECT 
+        gt.tierras,
+        at.altura_terreno,
+        ca.alta,
+        ca.media,
+        ca.baja
+    FROM dato_anual            AS da
+    JOIN grupo_tierras         AS gt ON gt.dato_anual_iddato_anual     = da.iddato_anual
+    JOIN altura_terreno        AS at ON at.grupo_tierras_idgrupo_tierras = gt.idgrupo_tierras
+    JOIN calidad_agrologica    AS ca ON ca.altura_terreno_id_terreno  = at.id_terreno
+    WHERE CAST(da.año_registro AS CHAR) = anioBuscar
+    ORDER BY gt.tierras , at.altura_terreno;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -1165,6 +1420,27 @@ BEGIN
         e.construccion_idconstruccion
     FROM edificacion e
     WHERE e.construccion_idconstruccion = idConstruccion;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `obtener_lista_anios` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `obtener_lista_anios`()
+BEGIN
+    SELECT año_registro 
+    FROM dato_anual
+    ORDER BY año_registro DESC;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -1381,84 +1657,6 @@ BEGIN
     END IF;
 END ;;
 DELIMITER ;
-
-
-
-
-
-
-DELIMITER //
-
-CREATE PROCEDURE agregarArancelarioRustico (
-    IN p_anio VARCHAR(45),
-    IN p_altitud VARCHAR(45),
-    IN p_valorAlta VARCHAR(45),
-    IN p_valorMedia VARCHAR(45),
-    IN p_valorBaja VARCHAR(45),
-    IN p_grupoTierra VARCHAR(60)
-)
-BEGIN
-    DECLARE v_id_anio INT;
-    DECLARE v_id_grupo INT;
-    DECLARE v_id_terreno INT;
-    DECLARE v_existencia INT;
-
-    -- Buscar o insertar el año
-    SELECT iddato_anual INTO v_id_anio
-    FROM dato_anual
-    WHERE año_registro = p_anio;
-
-    IF v_id_anio IS NULL THEN
-        INSERT INTO dato_anual (año_registro) VALUES (p_anio);
-        SET v_id_anio = LAST_INSERT_ID();
-    END IF;
-
-    -- Buscar o insertar el grupo de tierra
-    SELECT idgrupo_tierras INTO v_id_grupo
-    FROM grupo_tierras
-    WHERE tierras = p_grupoTierra AND dato_anual_iddato_anual = v_id_anio;
-
-    IF v_id_grupo IS NULL THEN
-        INSERT INTO grupo_tierras (tierras, dato_anual_iddato_anual)
-        VALUES (p_grupoTierra, v_id_anio);
-        SET v_id_grupo = LAST_INSERT_ID();
-    END IF;
-
-    -- Buscar o insertar la altitud del terreno
-    SELECT id_terreno INTO v_id_terreno
-    FROM altura_terreno
-    WHERE altura_terreno = p_altitud AND grupo_tierras_idgrupo_tierras = v_id_grupo;
-
-    IF v_id_terreno IS NULL THEN
-        INSERT INTO altura_terreno (altura_terreno, grupo_tierras_idgrupo_tierras)
-        VALUES (p_altitud, v_id_grupo);
-        SET v_id_terreno = LAST_INSERT_ID();
-    END IF;
-
-    -- Verificamos si ya existe una entrada de calidad agrológica para esa combinación
-    SELECT COUNT(*) INTO v_existencia
-    FROM calidad_agrologica
-    WHERE altura_terreno_id_terreno = v_id_terreno;
-
-    IF v_existencia = 0 THEN
-        INSERT INTO calidad_agrologica (
-            alta, media, baja, altura_terreno_id_terreno
-        ) VALUES (
-            p_valorAlta, p_valorMedia, p_valorBaja, v_id_terreno
-        );
-        SELECT 1 AS estado_operacion; -- Inserción nueva
-    ELSE
-        UPDATE calidad_agrologica
-        SET alta = p_valorAlta, media = p_valorMedia, baja = p_valorBaja
-        WHERE altura_terreno_id_terreno = v_id_terreno;
-        SELECT 2 AS estado_operacion; -- Actualización
-    END IF;
-
-END //
-
-DELIMITER ;
-
-
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
@@ -1473,4 +1671,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-05-06 16:41:33
+-- Dump completed on 2025-06-17 23:09:46

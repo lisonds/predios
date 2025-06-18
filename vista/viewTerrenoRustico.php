@@ -6,11 +6,7 @@
     // Contenido principal de la página
     ?>
 
-    <?php 
-    $currentYear = date("Y"); // Año actual
-    $startYear = 2010; // Año de inicio
-    ?>
-
+   
     <!-- start: Main -->
     <main class="bg-light">
     <div class="p-2">
@@ -53,12 +49,9 @@
         <!-- Selector de año -->
         <div class="year-select">
             <label for="yearSelect" class="year-label">Selecciona Año:</label>
-                <select id="yearSelect" name="yearSelect" class="form-select form-select-sm">
-                    <?php for ($year = $currentYear; $year >= $startYear; $year--): ?>
-                        <option value="<?php echo $year; ?>" <?php echo ($year == $currentYear) ? 'selected' : ''; ?>>
-                            <?php echo $year; ?>
-                        </option>
-                    <?php endfor; ?>
+               <select id="yearSelect" name="yearSelect" class="form-select form-select-sm">
+                    
+                    
                 </select>
             </div>
 
