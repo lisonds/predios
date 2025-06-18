@@ -127,7 +127,7 @@ if (document.querySelector("#formAgregarTerrenosRusticos")) {//AQUI se valida si
        
         
             const formData=new FormData(frmTerrenosRusticos);//a qui le mandamos todo el objeto del formulario por que tienen todo los elementos del frm
-            
+            const añoSeleccionado= formData.get("anioArancelarioR");
             try {
                 let resp = await fetch(`${base_url}/controlador/TerrenoRustico_control.php?data=agregar_datos_rustico`, {
                     method: 'POST',
@@ -140,6 +140,7 @@ if (document.querySelector("#formAgregarTerrenosRusticos")) {//AQUI se valida si
                 const json = JSON.parse(responseText);
 
                 if (json.status) {
+                    dataPorAnioSelect(añoSeleccionado);
                     Swal.fire({
                         icon: "success",
                         title: json.msg,
