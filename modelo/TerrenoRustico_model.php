@@ -25,32 +25,34 @@ require_once "../libreria/conexion.php";
         public function insertRustico(
             string $anioArancelarioR,
             string $altitud,
+            string $GrupoTierra,
             string $ValorAlta,
             string $ValorMedia,
-            string $Valorbaja,
-            string $GrupoTierra
+            string $Valorbaja
+            
         ) {
                 $query = "CALL agregarArancelarioRustico(
                     '{$anioArancelarioR}',
                     '{$altitud}',
+                    '{$GrupoTierra}',
                     '{$ValorAlta}',
                     '{$ValorMedia}',
-                    '{$Valorbaja}',
-                    '{$GrupoTierra}'
+                    '{$Valorbaja}'
+                    
                 )";
 
                 $result = $this->conexion->query($query);
 
                 if ($result) {
                     $row = $result->fetch_assoc();
-                    $cod = $row['estado_operacion'];
+                    $cod = $row['resultado'];
                     
                     if ($cod == 1) {
                         return (object)[
                             "status" => true,
                             "msg" => "Se registraron correctamente los datos de edificación."
                         ];
-                    } elseif ($cod == 2) {
+                    } elseif ($cod == 0) {
                         return (object)[
                             "status" => true,
                             "msg" => "Los datos de edificación se actualizaron correctamente."

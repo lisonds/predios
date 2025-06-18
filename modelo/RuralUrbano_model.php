@@ -178,34 +178,35 @@ require_once "../libreria/conexion.php";
             $sql=$sql->fetch_object();
             return $sql;
         }
-        public function updatePredio(int $strIdpredio, string $strDenominado,
-        string $strSector,string $strDistrito,string $strProvincia,string $strDepartamento,
-        string $strCodPredial,string $strCodCatastral){
-        $query = "UPDATE `predios` SET `denominado` = '{$strDenominado}', `sector` = '{$strSector}',
-         `distrito` = '{$strDistrito}', `provincia` = '{$strProvincia}', `departamento` = '{$strDepartamento}', 
-         `cod_predial` = '{$strCodPredial}', `cod_catastral` = '{$strCodCatastral}' WHERE (`idpredios` = '{$strIdpredio}')";
-            $result = $this->conexion->query($query);
-            if ($result) {
-                // Retornar un objeto con el ID del usuario insertado y el mensaje de éxito
-                return (object) [
-                    "status" => true,
-                    "idtb_usuario" => $this->conexion->insert_id,
-                    "msg" => "Usuario editado correctamente"
-                ];
-            } else {
-                // Retornar un objeto con el error
-                return (object) [
-                    "status" => false,
-                    "msg" => "Error al Editar usuario: " . $this->conexion->error
-                ];
-            }
-        }
-        public function  EliminarPredio(int $id){
-            $sql=$this->conexion->query("CALL sp_eliminar_predio({$id})");
-            $sql=$sql->fetch_object();
-            return $sql;
-        }
+
+        public function obtener_result_categorias($anio, $muro, $techo, $pisos, $puertas, $revestimiento, $banio, $instalaciones) {
+            $suma = 0;
         
+            // Limpia antes por si la conexión está sucia
+            while ($this->conexion->more_results() && $this->conexion->next_result()) {
+                $limpia = $this->conexion->store_result();
+                if ($limpia) $limpia->free();
+            }
+        
+            $sql = "CALL Dato_suma_categoria_edificacion('$anio', '$muro', '$techo', '$pisos', '$puertas', '$revestimiento', '$banio', '$instalaciones')";
+        
+            if ($resultado = $this->conexion->query($sql)) {
+                if ($fila = $resultado->fetch_assoc()) {
+                    $suma = $fila['suma_total'];
+                }
+                $resultado->free();
+        
+                while ($this->conexion->more_results() && $this->conexion->next_result()) {
+                    if ($extra = $this->conexion->store_result()) {
+                        $extra->free();
+                    }
+                }
+            } else {
+                error_log("Error MySQLi: " . $this->conexion->error);
+            }
+        
+            return ['suma_total' => $suma];
+        }
     }
 
 

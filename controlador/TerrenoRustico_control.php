@@ -32,20 +32,21 @@
     if ($op =="agregar_datos_rustico") {
                 
         if ($_POST) { // Validar si es un POST
-            if (empty($_POST['anioArancelarioR']) || empty($_POST['Altitud']) || empty($_POST['valorAlta']) || empty($_POST['valorMedia'])
+            if (empty($_POST['anioArancelarioR']) || empty($_POST['altitud']) || empty($_POST['valorAlta']) || empty($_POST['valorMedia'])
             || empty($_POST['valorBaja'])|| empty($_POST['grupoTierra'])) {
                 $arrayResponse = array('status' => false, 'msg' => 'Error de datos');
             } else {
                 $strAnioArancelarioR = trim($_POST['anioArancelarioR']); 
                 $strAltitud = trim($_POST['altitud']); 
+                $strGrupoTierra = trim($_POST['grupoTierra']);
                 $strValorAlta = trim($_POST['valorAlta']);
                 $strValorMedia = trim($_POST['valorMedia']);
                 $strValorBaja = trim($_POST['valorBaja']);
-                $strGrupoTierra = trim($_POST['grupoTierra']);
                 
+             
                 
-                $arrayRustico = $objRustico ->insertRustico($strAnioArancelarioR, $strAltitud, $strValorAlta, $strValorMedia,
-                $strValorBaja,$strGrupoTierra);
+                $arrayRustico = $objRustico ->insertRustico($strAnioArancelarioR, $strAltitud,$strGrupoTierra, $strValorAlta, $strValorMedia,
+                $strValorBaja);
                
                 if ($arrayRustico->status) {
                     

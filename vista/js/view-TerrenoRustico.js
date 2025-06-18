@@ -3,28 +3,20 @@ document.getElementById('addRusticoButton').addEventListener('click', function (
     document.getElementById('anioArancelarioR').value = anio;
 });
 
-document.addEventListener("DOMContentLoaded", () => {
-    const inputElement = document.getElementById("yearSelect");
 
-    if (inputElement) {
-        inputElement.addEventListener("change", function () {
-            const anioSeleccionado = this.value;
-            SeleccionarAnio(anioSeleccionado);
-        });
+/*SE VA GUARDAR EL FORMULARIO QUE CAPTURA EN EL BASE DE DATOS*/
+if (document.querySelector("#formAgregarTerrenosRusticos")) {//AQUI se valida si existe el id formulario en html
+    let frmTerrenosRusticos=document.querySelector("#formAgregarTerrenosRusticos");//
+    frmTerrenosRusticos.onsubmit=function(e){//ejecutar al dar btn guardar
+        e.preventDefault();//evitar que se recargue cuando damos el btn guardar
+        btnGuardarTerrenoRustico();//lamar funcion guardar
     }
-
-    // Botón guardar del formulario
-    if (document.querySelector("#formAgregarFila")) {
-        let frmArancelarios = document.querySelector("#formAgregarFila");
-
-        frmArancelarios.onsubmit = function (e) {
-            e.preventDefault();
-            btnGuardarRustico();
-        };
-
-        async function btnGuardarRustico() {
-            let formData = new FormData(frmArancelarios);
-
+    async function btnGuardarTerrenoRustico() {
+        //extraer datos de cada input
+       
+        
+            const formData=new FormData(frmTerrenosRusticos);//a qui le mandamos todo el objeto del formulario por que tienen todo los elementos del frm
+            
             try {
                 let resp = await fetch(`${base_url}/controlador/TerrenoRustico_control.php?data=agregar_datos_rustico`, {
                     method: 'POST',
@@ -45,11 +37,11 @@ document.addEventListener("DOMContentLoaded", () => {
                     });
 
                     // Limpiar el formulario
-                    frmArancelarios.reset();
+                   
 
                     // Recargar las tablas con el año actual
-                    const anio = document.getElementById("anioArancelarioR").value;
-                    SeleccionarAnio(anio);
+                    //const anio = document.getElementById("anioArancelarioR").value;
+                    //SeleccionarAnio(anio);
                 } else {
                     Swal.fire({
                         icon: "error",
@@ -64,9 +56,16 @@ document.addEventListener("DOMContentLoaded", () => {
                     text: `Ocurrió un error: ${error.message}`
                 });
             }
-        }
     }
-});
+}
+
+/*FIN DEL FORMULARIO QUE SE VA GUARDAR */
+
+
+
+
+
+
 
 
 async function SeleccionarAnio(anio) {
@@ -131,5 +130,7 @@ async function SeleccionarAnio(anio) {
         });
     }
 }
+
+
 
 

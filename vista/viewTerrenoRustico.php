@@ -170,8 +170,9 @@
         <h5 class="modal-title" id="addYearModalLabel">AGREGAR VALOR ARANCELARIO DE TERRENO RUSTICO</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
       </div>
+      
       <div class="modal-body">
-        <form id="formAgregarFila">
+        <form id="formAgregarTerrenosRusticos">
 
         <div class="row g-3">
             <!-- selector de año -->
@@ -207,11 +208,11 @@
              <div class="col-md-6">
               <label for="grupoTierra" class="form-label fw-bold">Grupo de tierras</label>
               <select class="form-select" id="grupoTierra" name="grupoTierra" required>
-                <option value="0" selected disabled>-- seleccionar grupo de Tierra --</option>
-                <option value="limpio">Tierras aptas para cultivo limpio</option>
-                <option value="permanente">Tierras aptas para cultivo permanente</option>
-                <option value="pastos">Tierras aptas para pastos</option>
-                <option value="eriazas">Tierras eriazas</option>
+                <option value="" selected disabled>-- seleccionar grupo de Tierra --</option>
+                <option value="Tierras aptas para cultivo limpio">Tierras aptas para cultivo limpio</option>
+                <option value="Tierras aptas para cultivo permanente">Tierras aptas para cultivo permanente</option>
+                <option value="Tierras aptas para pastos">Tierras aptas para pastos</option>
+                <option value="Tierras eriazas">Tierras eriazas</option>
               </select>
             </div>
 
@@ -240,7 +241,16 @@
     </div>
   </div>
 </div>
+ <script>
+     const base_url="<?=BASE_URL?>";//AQUI ENVIAMOS LAS DIRECCIONES A JS
+</script>
+<!-- Script personalizado-->
+ <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="../assets/js/jquery.min.js"></script>
+<script src="../assets/js/script-msm.js"></script>
 
+
+<script src="js/view-TerrenoRustico.js"></script>
 
 
 <?php
