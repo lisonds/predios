@@ -150,7 +150,7 @@
                         <div class="slider-pill"></div>
                     </div>
                     <div>
-                        <a href="fpdf/PruebaH.php" target="_blank" class="btn btn-success mb-3"> <i class="far fa-file-pdf"></i></i>Generar Reporte</a>
+                        <a href="fpdf/PruebaH.php" target="_blank" class="btn btn-success mb-3"> <i class="far fa-file-pdf"></i> Exportar autovaluo</i> </a>
                     </div>
                 </div>
             </div>
