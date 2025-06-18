@@ -74,7 +74,13 @@
                     id="addPropietarioButton">
                     <i class="fa-solid fa-circle-plus" ></i> Agregar Propietario
                 </button>
+                
                 <a id="linkAutovaluo" href="#" class="btn btn-info mb-3"> <i class="fa-solid fa-eye"></i>Ver Sus Predios</a>
+
+                
+                <div>
+                    <a href="fpdf/PruebaV.php" target="_blank" class="btn btn-success mb-3"> <i class="far fa-file-pdf"></i></i>Generar Reporte</a>
+                </div>
 
                 <!-- Modal -->
                 <div class="modal fade" id="modalRegistroPropietario" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">

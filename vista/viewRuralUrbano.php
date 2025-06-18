@@ -134,6 +134,8 @@
                     <button id="btnIngresar" class="btn btn-success shadow-sm" disabled>
                     <i class="ri-survey-fill me-1"></i> INGRESAR DATOS
                     </button>
+                    
+
 
                     <div class="toggle-container">
                         <input type="radio" name="tipoPredio" id="rural" class="btn-check" autocomplete="off">
@@ -147,8 +149,13 @@
 
                         <div class="slider-pill"></div>
                     </div>
+                    <div>
+                        <a href="fpdf/PruebaH.php" target="_blank" class="btn btn-success mb-3"> <i class="far fa-file-pdf"></i></i>Generar Reporte</a>
+                    </div>
                 </div>
             </div>
+
+            
 
             <div class="container my-4">
                 <div class="card shadow border-0">
