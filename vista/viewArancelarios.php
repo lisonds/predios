@@ -72,7 +72,11 @@
                     data-bs-target="#addYearModal"
                     id="addArancelarioButton">
                     <i class="fa-solid fa-circle-plus" ></i> Agregar Nueva lista
-                </button>            
+                </button>   
+
+                <button id="btnExportarPDF" class="btn btn-danger rounded-pill ms-2">
+                    <i class="fa fa-file-pdf"></i> Exportar a PDF
+                </button>         
 
             </div>
               
