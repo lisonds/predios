@@ -76,7 +76,7 @@ async function buscarCodigo(item) {
                                  <!-- Diseño Vertical para Ubicación -->
                                  <div class="d-flex flex-wrap gap-4 align-items-center">
                                      <div>
-                                         <strong><i class="bi bi-geo-alt-fill"></i> Nombres:</strong> 
+                                         <strong><i class="bi bi-geo-alt-fill"></i> Direccion:</strong> 
                                          <span class="text-primary">${item.direccion}</span>
                                      </div>
                                      

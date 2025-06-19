@@ -139,7 +139,7 @@
                                         <!-- nombre contribuyente -->
                                         <div class="col-md-4">
                                             <label for="nombres" class="form-label fw-bold">Nombres</label>
-                                            <input type="text" class="form-control" id="nombres" name="nombres" placeholder="Ingrese su nombre completo">
+                                            <input type="text" class="form-control" id="nombres" name="nombres" placeholder="Ingrese sus nombres">
                                         </div>
 
                                         <!-- apellido paterno del contribuyente -->

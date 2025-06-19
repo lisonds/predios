@@ -161,4 +161,44 @@ if (document.querySelector("#formAgregarAnio")) {//AQUI se valida si existe el i
     }
 }
 
+document.getElementById("btnExportarPDF").addEventListener("click", async () => {
+    const anioSeleccionado = document.getElementById("yearSelect").value;
+
+    // Obtener datos actuales de la tabla
+    const tbody = document.getElementById("tbodyArancelarios");
+    const filas = tbody.querySelectorAll("tr");
+
+    let datosTabla = [];
+
+    filas.forEach(fila => {
+        const celdas = fila.querySelectorAll("td");
+        if (celdas.length > 0) {
+            datosTabla.push({
+                categoria: celdas[0].innerText.trim(),
+                muro_columna: celdas[1].innerText.trim(),
+                techos: celdas[2].innerText.trim(),
+                pisos: celdas[3].innerText.trim(),
+                puertas_ventanas: celdas[4].innerText.trim(),
+                revistimiento: celdas[5].innerText.trim(),
+                banios: celdas[6].innerText.trim(),
+                instalaciones: celdas[7].innerText.trim()
+            });
+        }
+    });
+
+    try {
+        const formData = new FormData();
+        formData.append("anio", anioSeleccionado);
+        formData.append("valores", JSON.stringify(datosTabla));
+
+        const response = await fetch(`${base_url}../../fpdf/reporte_edificacion.php`, {
+            method: "POST",
+            body: formData
+        });
+
+        // El PDF se abrirá automáticamente gracias al header de salida
+    } catch (error) {
+        Swal.fire("Error", "No se pudo generar el PDF.", "error");
+    }
+});
 
