@@ -2,12 +2,48 @@
 document.addEventListener("DOMContentLoaded", function() {
             // Este código se ejecuta cuando el DOM ya ha sido cargado
             getExtraeranio();
+            getMostrarDator();
             // Aquí va cualquier otra función o código que desees ejecutar
 });
-
+/*se extrae toda la tabla  los datos ingresador  */
+async function getMostrarDator(){
+    try {
+    const resp = await fetch(`${base_url}/controlador/ValorImpusitiva_control.php?data=extraer_data`);
+     json= await resp.json(); //le conveertimos a json.
+            if(json.status){ //el estatus cuando tienen datos biene verdadero
+                let data=json.data;//a data asignamos los datos
+                // Limpiar el contenido de la tabla antes de llenarla
+                document.querySelector("#tablaValorMinimo").innerHTML = "";
+                data.forEach(item => { //iteramos por cantidad de datos
+                    let newtr=document.createElement("tr");
+                    newtr.id="row_"+item.idImpusitiva_Tributaria;
+                    newtr.innerHTML=`<tr>
+                                        
+                                        <td>${item.anio}</td>
+                                        <td>${item.UIT}</td>
+                                        <td>${item.base_Legal}</td>
+                                        <td>${item.Observaciones}</td>
+                                        <td>${item.options}</td>
+                                        
+                                        
+                                    </tr>`;
+                    document.querySelector("#tablaValorMinimo").appendChild(newtr);//asigna el segmento de html dentro de id
+                });
+                
+            }
+            
+        } catch (error) {
+            Swal.fire({
+            title: "Error",
+            text: `Se produjo un error : ${error.message}`,
+            icon: "error"
+        });
+        }
+}
+/*se extrae datos  lara la lista desplegable */
 async function getExtraeranio() {
      try {
-        const resp = await fetch(`${base_url}/controlador/TerrenoRustico_control.php?data=extraer_anio`);
+        const resp = await fetch(`${base_url}/controlador/ValorImpusitiva_control.php?data=extraer_anio`);
         const data = await resp.json();
 
         const select = document.getElementById("yearSelect");
@@ -23,7 +59,7 @@ async function getExtraeranio() {
         if (data.status) {
             data.data.forEach(item => {
                 // Si el backend devuelve objetos con clave 'año_registro'
-                const year = item.año_registro ?? item; // usa solo 'item' si solo vienen años como números
+                const year = item.anio ?? item; // usa solo 'item' si solo vienen años como números
                 const option = document.createElement("option");
                 option.value = year;
                 option.textContent = year;
@@ -34,7 +70,11 @@ async function getExtraeranio() {
             console.warn(data.msg);
         }
     } catch (error) {
-        console.error('Error al obtener los años:', error);
+        Swal.fire({
+            title: "Error",
+            text: `Se produjo un error : ${error.message}`,
+            icon: "error"
+        });
     }
 }
 
@@ -147,6 +187,7 @@ if (document.querySelector("#formAgregarValorImpusitiva")) {//AQUI se valida si 
                         showConfirmButton: false,
                         timer: 1500
                     });
+                    getMostrarDator();
 
                     // Limpiar el formulario
                    

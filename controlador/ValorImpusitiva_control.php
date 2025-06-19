@@ -1,10 +1,10 @@
 <?php
-    require_once "../modelo/TerrenoRustico_model.php";
+    require_once "../modelo/ValorImpusitiva_model.php";
 
     // Verifica si existe el parámetro 'data' en la petición
 
     $op = $_REQUEST['data'];
-    $objRustico = new RusticoModel();
+    $objImpusitiva = new ValorImpusitivaModel();
 
 
    
@@ -12,7 +12,7 @@
     if ($op === "obtener_datos_por_anio") {
         if($_POST){
             $anio=$_POST["anio"];
-            $arrayDataRustico = $objRustico->getDataByYear($anio);
+            $arrayDataRustico = $objImpusitiva->getDataByYear($anio);
                      
             if(empty($arrayDataRustico)){
                 $arrayResponse = array('status' => false,'data'=>'', 'msg' => 'No hay datos para este año');
@@ -49,13 +49,13 @@
 
                 // (Opcional) Formatear a 2 decimales, si se desea:
                 $valorMinimoFormateado = number_format($valorMinimo, 2); 
-                $arrayRustico = $objRustico ->insertRustico($stranioImpusitivaR, $strUit, $strBaseLegal,$valorMinimoFormateado);
+                $arrayValorImpusitiva = $objImpusitiva ->insertImpusitiva($stranioImpusitivaR, $strUit, $strBaseLegal,$valorMinimoFormateado);
                
-                if ($arrayRustico->status) {
+                if ($arrayValorImpusitiva->status) {
                     
-                    $arrayResponse = array('status' => true, 'msg' => $arrayRustico->msg);
+                    $arrayResponse = array('status' => true, 'msg' => $arrayValorImpusitiva->msg);
                 } else {
-                    $arrayResponse = array('status' => false, 'msg' => $arrayRustico->msg);
+                    $arrayResponse = array('status' => false, 'msg' => $arrayValorImpusitiva->msg);
                 }
             }
             
@@ -65,16 +65,49 @@
         die();  
     }
 
+    if ($op =="extraer_data") {
+        
+            
+            $arrayDataImpusitiva = $objImpusitiva->GetData();
 
-      if ($op =="extraer_anio") {
-             $arrayDataRusticoAnio = $objRustico->getYears();
+            if(empty($arrayDataImpusitiva )){
+                $arrayResponse = array('status' => false,'data'=>'', 'msg' => 'No hay Registros de Predios Con Este Codigo');
+            }else{
+                for ($i=0; $i <count($arrayDataImpusitiva ) ; $i++) { 
+                    $idUIT=$arrayDataImpusitiva [$i]->idImpusitiva_Tributaria;//estamos sacando el id del tabla
+                    $options = '<a href="#" class="btn btn-primary btn-sm" 
+                                    data-bs-toggle="modal" 
+                                    data-bs-target="#modalEditarImpusitario" 
+                                    data-idpredio="'.$idUIT.'"><i class="ri-file-edit-line"></i></a>
+                                <a class="btn btn-danger btn-sm" onclick="DeleteImpusitario('.$idUIT.')"><i class="ri-delete-bin-6-line"></i></a>
+                                ';
+                    $arrayDataImpusitiva [$i]->options=$options;
+    
+                }
+                //btn fin
+                $arrayResponse['status']=true;
+                $arrayResponse['data']=$arrayDataImpusitiva ;//aqui se le asigna a la data los datos de base de datos
+                $arrayResponse['msg']='Datos Encontrados';
+                
+            }
+            
+        
+
+        echo json_encode($arrayResponse);
+        die();
+
+    }
+
+
+    if ($op =="extraer_anio") {
+             $arrayValorImpusitiva = $objImpusitiva->getYears();
                      
-            if(empty($arrayDataRusticoAnio)){
+            if(empty($arrayValorImpusitiva)){
                 $arrayResponse = array('status' => false,'data'=>'', 'msg' => 'no hay registro de años');
             }else{
                                 //btn fin
                 $arrayResponse['status']=true;
-                $arrayResponse['data']=$arrayDataRusticoAnio;//aqui se le asigna a la data los datos de base de datos
+                $arrayResponse['data']=$arrayValorImpusitiva;//aqui se le asigna a la data los datos de base de datos
                 $arrayResponse['msg']='Datos Encontrados';
                 
             }
@@ -94,9 +127,9 @@
             );
         } else {
             $anio = intval(trim($_POST['anio']));
-            $arrayRustico = $objRustico->GetDataPorAnio($anio);
+            $arrayValorImpusitiva = $objImpusitiva->GetDataPorAnio($anio);
 
-            if (empty($arrayRustico)) {
+            if (empty($arrayValorImpusitiva)) {
                 $arrayResponse = array(
                     'status' => false,
                     'msg' => 'No se encontraron datos para el año ingresado.',
@@ -106,7 +139,7 @@
                 $arrayResponse = array(
                     'status' => true,
                     'msg' => 'Datos encontrados.',
-                    'data' => $arrayRustico
+                    'data' => $arrayValorImpusitiva
                 );
             }
         }

@@ -29,7 +29,7 @@ CREATE TABLE `altura_terreno` (
   PRIMARY KEY (`id_terreno`),
   KEY `fk_altura_terreno_grupo_tierras_idx` (`grupo_tierras_idgrupo_tierras`),
   CONSTRAINT `fk_altura_terreno_grupo_tierras` FOREIGN KEY (`grupo_tierras_idgrupo_tierras`) REFERENCES `grupo_tierras` (`idgrupo_tierras`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=116 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=118 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,7 +38,7 @@ CREATE TABLE `altura_terreno` (
 
 LOCK TABLES `altura_terreno` WRITE;
 /*!40000 ALTER TABLE `altura_terreno` DISABLE KEYS */;
-INSERT INTO `altura_terreno` VALUES (102,'2001 m.s.n.m - 3000 m.s.n.m',43),(103,'500 m.s.n.m - 2000 m.s.n.m',44),(104,'2001 m.s.n.m - 3000 m.s.n.m',44),(105,'3001 m.s.n.m - 4000 m.s.n.m',44),(106,'4001 m.s.n.m a más',44),(107,'500 m.s.n.m - 2000 m.s.n.m',45),(108,'2001 m.s.n.m - 3000 m.s.n.m',45),(109,'3001 m.s.n.m - 4000 m.s.n.m',45),(110,'4001 m.s.n.m a más',45),(111,'500 m.s.n.m - 2000 m.s.n.m',46),(112,'2001 m.s.n.m - 3000 m.s.n.m',46),(113,'3001 m.s.n.m - 4000 m.s.n.m',46),(114,'4001 m.s.n.m a más',46),(115,'500 m.s.n.m - 2000 m.s.n.m',47);
+INSERT INTO `altura_terreno` VALUES (102,'2001 m.s.n.m - 3000 m.s.n.m',43),(103,'500 m.s.n.m - 2000 m.s.n.m',44),(104,'2001 m.s.n.m - 3000 m.s.n.m',44),(105,'3001 m.s.n.m - 4000 m.s.n.m',44),(106,'4001 m.s.n.m a más',44),(107,'500 m.s.n.m - 2000 m.s.n.m',45),(108,'2001 m.s.n.m - 3000 m.s.n.m',45),(109,'3001 m.s.n.m - 4000 m.s.n.m',45),(110,'4001 m.s.n.m a más',45),(111,'500 m.s.n.m - 2000 m.s.n.m',46),(112,'2001 m.s.n.m - 3000 m.s.n.m',46),(113,'3001 m.s.n.m - 4000 m.s.n.m',46),(114,'4001 m.s.n.m a más',46),(115,'500 m.s.n.m - 2000 m.s.n.m',47),(116,'2001 m.s.n.m - 3000 m.s.n.m',47),(117,'3001 m.s.n.m - 4000 m.s.n.m',47);
 /*!40000 ALTER TABLE `altura_terreno` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -57,7 +57,7 @@ CREATE TABLE `anio_registro` (
   PRIMARY KEY (`idanio_registro`),
   KEY `fk_anio_registro_predios1_idx` (`predios_idpredios`),
   CONSTRAINT `fk_anio_registro_predios1` FOREIGN KEY (`predios_idpredios`) REFERENCES `predios` (`idpredios`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -66,7 +66,7 @@ CREATE TABLE `anio_registro` (
 
 LOCK TABLES `anio_registro` WRITE;
 /*!40000 ALTER TABLE `anio_registro` DISABLE KEYS */;
-INSERT INTO `anio_registro` VALUES (1,'2025',1,16),(2,'2023',1,16),(3,'2023',1,17),(4,'2024',1,17),(5,'2025',1,17),(6,'2022',1,17);
+INSERT INTO `anio_registro` VALUES (1,'2025',1,16),(2,'2023',1,16),(3,'2023',1,17),(4,'2024',1,17),(5,'2025',1,17),(6,'2022',1,17),(7,'2025',1,18);
 /*!40000 ALTER TABLE `anio_registro` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -110,7 +110,7 @@ CREATE TABLE `calidad_agrologica` (
   PRIMARY KEY (`idcalidad_agrologica`),
   KEY `fk_calidad_agrologica_altura_terreno_idx` (`altura_terreno_id_terreno`),
   CONSTRAINT `fk_calidad_agrologica_altura_terreno` FOREIGN KEY (`altura_terreno_id_terreno`) REFERENCES `altura_terreno` (`id_terreno`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=116 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=118 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -119,7 +119,7 @@ CREATE TABLE `calidad_agrologica` (
 
 LOCK TABLES `calidad_agrologica` WRITE;
 /*!40000 ALTER TABLE `calidad_agrologica` DISABLE KEYS */;
-INSERT INTO `calidad_agrologica` VALUES (102,'5489.36','5632.45','76895.25',102),(103,'1','2','3',103),(104,'4','5','6',104),(105,'7','8','9',105),(106,'10','11','12',106),(107,'13','14','15',107),(108,'16','17','18',108),(109,'19','20','21',109),(110,'22','23','24',110),(111,'25','26','27',111),(112,'28','29','30',112),(113,'31','32','33',113),(114,'35','36','38',114),(115,'39','25','87',115);
+INSERT INTO `calidad_agrologica` VALUES (102,'5489.36','5632.45','76895.25',102),(103,'1','2','3',103),(104,'4','5','6',104),(105,'7','8','9',105),(106,'10','11','12',106),(107,'13','14','15',107),(108,'16','17','18',108),(109,'19','20','21',109),(110,'22','23','24',110),(111,'25','26','27',111),(112,'28','29','30',112),(113,'31','32','33',113),(114,'35','36','38',114),(115,'39','25','87',115),(116,'58','36','58',116),(117,'50','50','50',117);
 /*!40000 ALTER TABLE `calidad_agrologica` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -166,7 +166,7 @@ CREATE TABLE `construccion` (
   KEY `fk_construccion_urbano1_idx` (`urbano_idurbano`),
   CONSTRAINT `fk_construccion_rural` FOREIGN KEY (`rural_idrural`) REFERENCES `rural` (`idrural`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_construccion_urbano1` FOREIGN KEY (`urbano_idurbano`) REFERENCES `urbano` (`idurbano`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -175,7 +175,7 @@ CREATE TABLE `construccion` (
 
 LOCK TABLES `construccion` WRITE;
 /*!40000 ALTER TABLE `construccion` DISABLE KEYS */;
-INSERT INTO `construccion` VALUES (7,'Casa Habitacion','Ladrillo','Regular','Unifamiliar',10,NULL),(10,'Casa Habitacion','Ladrillo','Bueno','Unifamiliar',13,NULL),(11,'Casa Habitacion','Ladrillo','Bueno','Unifamiliar',14,NULL),(12,'Casa Habitacion','Ladrillo','Bueno','Unifamiliar',15,NULL),(13,'Casa Habitacion','Adobe (Quincha, Madera)','Muy Bueno','Unifamiliar',16,NULL);
+INSERT INTO `construccion` VALUES (7,'Casa Habitacion','Ladrillo','Regular','Unifamiliar',10,NULL),(10,'Casa Habitacion','Ladrillo','Bueno','Unifamiliar',13,NULL),(11,'Casa Habitacion','Ladrillo','Bueno','Unifamiliar',14,NULL),(12,'Casa Habitacion','Ladrillo','Bueno','Unifamiliar',15,NULL),(13,'Casa Habitacion','Adobe (Quincha, Madera)','Muy Bueno','Unifamiliar',16,NULL),(14,'Casa Habitacion','Adobe (Quincha, Madera)','Regular','Unifamiliar',17,NULL);
 /*!40000 ALTER TABLE `construccion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -258,7 +258,7 @@ CREATE TABLE `edificacion` (
   PRIMARY KEY (`idedificacion`),
   KEY `fk_edificacion_construccion_idx` (`construccion_idconstruccion`),
   CONSTRAINT `fk_edificacion_construccion` FOREIGN KEY (`construccion_idconstruccion`) REFERENCES `construccion` (`idconstruccion`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -267,7 +267,7 @@ CREATE TABLE `edificacion` (
 
 LOCK TABLES `edificacion` WRITE;
 /*!40000 ALTER TABLE `edificacion` DISABLE KEYS */;
-INSERT INTO `edificacion` VALUES (14,'1','1','2020','D','H','F','E','D','E','D','50',10),(15,'1','2','2024','D','D','E','E','F','C','D','50',10),(16,'1','1','2020','D','H','F','E','D','E','D','50',11),(17,'1','2','2024','D','D','E','E','F','C','D','50',11),(18,'1','1','2020','D','H','F','E','D','E','D','50',12),(19,'1','2','2024','D','D','E','E','F','C','D','50',12),(20,'1','1','2025','A','A','A','A','A','A','A','',13),(21,'1','1','2025','A','A','A','A','A','A','A','',13);
+INSERT INTO `edificacion` VALUES (14,'1','1','2020','D','H','F','E','D','E','D','50',10),(15,'1','2','2024','D','D','E','E','F','C','D','50',10),(16,'1','1','2020','D','H','F','E','D','E','D','50',11),(17,'1','2','2024','D','D','E','E','F','C','D','50',11),(18,'1','1','2020','D','H','F','E','D','E','D','50',12),(19,'1','2','2024','D','D','E','E','F','C','D','50',12),(20,'1','1','2025','A','A','A','A','A','A','A','',13),(21,'1','1','2025','A','A','A','A','A','A','A','',13),(22,'1','1','2000','E','D','G','F','E','E','E','50',14);
 /*!40000 ALTER TABLE `edificacion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -312,7 +312,7 @@ CREATE TABLE `impusitiva_tributaria` (
   `base_legal` varchar(60) DEFAULT NULL,
   `Observaciones` double DEFAULT NULL,
   PRIMARY KEY (`idImpusitiva_Tributaria`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -321,7 +321,7 @@ CREATE TABLE `impusitiva_tributaria` (
 
 LOCK TABLES `impusitiva_tributaria` WRITE;
 /*!40000 ALTER TABLE `impusitiva_tributaria` DISABLE KEYS */;
-INSERT INTO `impusitiva_tributaria` VALUES (15,'2020','4950','l50',29.7),(16,'2025','5350','l50',32.1);
+INSERT INTO `impusitiva_tributaria` VALUES (15,'2020','4950','l50',29.7),(16,'2025','5350','l50',32.1),(17,'2021','4400','D.S N° 392-2020-EF',26.4),(18,'2022','4600','D.S. N° 398-2021-EF',27.6),(19,'2023','4950','D.S. N° 309-2022-EF',29.7);
 /*!40000 ALTER TABLE `impusitiva_tributaria` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -336,7 +336,7 @@ CREATE TABLE `indentificador` (
   `id` int NOT NULL AUTO_INCREMENT,
   `codigo` varchar(6) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -345,7 +345,7 @@ CREATE TABLE `indentificador` (
 
 LOCK TABLES `indentificador` WRITE;
 /*!40000 ALTER TABLE `indentificador` DISABLE KEYS */;
-INSERT INTO `indentificador` VALUES (22,'000001'),(23,'000002');
+INSERT INTO `indentificador` VALUES (22,'000001'),(23,'000002'),(24,'000003');
 /*!40000 ALTER TABLE `indentificador` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -369,7 +369,7 @@ CREATE TABLE `predios` (
   PRIMARY KEY (`idpredios`),
   KEY `fk_predios_indentificador_idx` (`indentificador_id`),
   CONSTRAINT `fk_predios_indentificador` FOREIGN KEY (`indentificador_id`) REFERENCES `indentificador` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -378,7 +378,7 @@ CREATE TABLE `predios` (
 
 LOCK TABLES `predios` WRITE;
 /*!40000 ALTER TABLE `predios` DISABLE KEYS */;
-INSERT INTO `predios` VALUES (16,'Av. Los Angeles N° 125','Anansayocc','Quinua','Huamanga','Ayacucho','5698652','54_56645642_25',22),(17,'Chuchiqa','Ccalla','Huascahuara','Huamanga','Ayacucho','5698652','54_56645642_25',23);
+INSERT INTO `predios` VALUES (16,'Av. Los Angeles N° 125','Anansayocc','Quinua','Huamanga','Ayacucho','5698652','54_56645642_25',22),(17,'Chuchiqa','Ccalla','Huascahuara','Huamanga','Ayacucho','5698652','54_56645642_25',23),(18,'CheqoPunku','Lorensayocc','San Juan','Huamanga','Ayacucho','5689463','54_56645642_25',24);
 /*!40000 ALTER TABLE `predios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -403,7 +403,7 @@ CREATE TABLE `propietarios` (
   PRIMARY KEY (`idpropietarios`),
   KEY `fk_propietarios_indentificador_idx` (`indentificador_id`),
   CONSTRAINT `fk_propietarios_indentificador` FOREIGN KEY (`indentificador_id`) REFERENCES `indentificador` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -412,7 +412,7 @@ CREATE TABLE `propietarios` (
 
 LOCK TABLES `propietarios` WRITE;
 /*!40000 ALTER TABLE `propietarios` DISABLE KEYS */;
-INSERT INTO `propietarios` VALUES (12,'TULIO LISON ORE ICHACCAYA','70421319','Persona_natural','Propietario','Av. Los Angeles','Quinua','Huamanga','Ayacucho',22),(13,'NERY LUZ DE LA CRUZ AYME','71946323','Persona_natural','Conyugue','Av. Los Angeles','Quinua','Huamanga','Ayacucho',22),(14,'JHON QUISPE JERI','70421320','Persona_natural','Propietario','Av. Los Angeles','Huascahuara','Huamanga','Ayacucho',23),(15,'MARY MARIBI QUISPE AGUILAR','70421318','Persona_natural','Conyugue','Av. Los Angeles','Huascahuara','Huamanga','Ayacucho',23),(16,'LEADY MABEL JORGE GONZALES','70431319','Persona_natural','Copropietario','Jr. Condorcanqui N° 356 ','San Juan','Huamanga','Ayacucho',22);
+INSERT INTO `propietarios` VALUES (12,'TULIO LISON ORE ICHACCAYA','70421319','Persona_natural','Propietario','Av. Los Angeles','Quinua','Huamanga','Ayacucho',22),(13,'NERY LUZ DE LA CRUZ AYME','71946323','Persona_natural','Conyugue','Av. Los Angeles','Quinua','Huamanga','Ayacucho',22),(14,'JHON QUISPE JERI','70421320','Persona_natural','Propietario','Av. Los Angeles','Huascahuara','Huamanga','Ayacucho',23),(15,'MARY MARIBI QUISPE AGUILAR','70421318','Persona_natural','Conyugue','Av. Los Angeles','Huascahuara','Huamanga','Ayacucho',23),(16,'LEADY MABEL JORGE GONZALES','70431319','Persona_natural','Copropietario','Jr. Condorcanqui N° 356 ','San Juan','Huamanga','Ayacucho',22),(17,'EDITH YESELIN PARIONA GARCIA','70421330','Persona_natural','Propietario','Jr. Sallally','Quinua','Huamanga','Ayacucho',24);
 /*!40000 ALTER TABLE `propietarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -436,7 +436,7 @@ CREATE TABLE `rural` (
   PRIMARY KEY (`idrural`),
   KEY `fk_rural_anio_registro1_idx` (`anio_registro_idanio_registro`),
   CONSTRAINT `fk_rural_anio_registro1` FOREIGN KEY (`anio_registro_idanio_registro`) REFERENCES `anio_registro` (`idanio_registro`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -445,7 +445,7 @@ CREATE TABLE `rural` (
 
 LOCK TABLES `rural` WRITE;
 /*!40000 ALTER TABLE `rural` DISABLE KEYS */;
-INSERT INTO `rural` VALUES (8,'LOTE','AGRÍCOLA','CULTIVO EN LIMPIO','2001 m.s.n.m - 3000 m.s.n.m','MEDIA','10.2',0,1),(10,'LOTE','AGRÍCOLA','CULTIVO EN LIMPIO','2001 m.s.n.m - 3000 m.s.n.m','ALTA','10.5',0,2),(13,'PARCELA','AGRÍCOLA','CULTIVO EN LIMPIO','2001 m.s.n.m - 3000 m.s.n.m','MEDIA','0.58',1,3),(14,'PARCELA','AGRÍCOLA','CULTIVO EN LIMPIO','2001 m.s.n.m - 3000 m.s.n.m','MEDIA','0.58',1,4),(15,'PARCELA','AGRÍCOLA','CULTIVO EN LIMPIO','2001 m.s.n.m - 3000 m.s.n.m','MEDIA','0.58',1,5),(16,'LOTE','GANADERÍA','CULTIVO PERMANENTE','2001 m.s.n.m - 3000 m.s.n.m','MEDIA','10.2',1,6);
+INSERT INTO `rural` VALUES (8,'LOTE','AGRÍCOLA','CULTIVO EN LIMPIO','2001 m.s.n.m - 3000 m.s.n.m','MEDIA','10.2',0,1),(10,'LOTE','AGRÍCOLA','CULTIVO EN LIMPIO','2001 m.s.n.m - 3000 m.s.n.m','ALTA','10.5',0,2),(13,'PARCELA','AGRÍCOLA','CULTIVO EN LIMPIO','2001 m.s.n.m - 3000 m.s.n.m','MEDIA','0.58',1,3),(14,'PARCELA','AGRÍCOLA','CULTIVO EN LIMPIO','2001 m.s.n.m - 3000 m.s.n.m','MEDIA','0.58',1,4),(15,'PARCELA','AGRÍCOLA','CULTIVO EN LIMPIO','2001 m.s.n.m - 3000 m.s.n.m','MEDIA','0.58',1,5),(16,'LOTE','GANADERÍA','CULTIVO PERMANENTE','2001 m.s.n.m - 3000 m.s.n.m','MEDIA','10.2',1,6),(17,'LOTE','AGRÍCOLA','CULTIVO PERMANENTE','2001 m.s.n.m - 3000 m.s.n.m','MEDIA','0.20',1,7);
 /*!40000 ALTER TABLE `rural` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -747,6 +747,57 @@ BEGIN
         END IF;
     END IF;
 
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `agregarBaseImpusitiva` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `agregarBaseImpusitiva`(
+    IN p_anio VARCHAR(4),
+    IN p_UIT VARCHAR(6),
+    IN p_baseLegal VARCHAR(60),
+    IN p_observaciones DOUBLE
+)
+BEGIN
+    DECLARE v_existente INT;
+
+    -- Buscar si ya existe un registro con ese año
+    SELECT COUNT(*) INTO v_existente
+    FROM impusitiva_tributaria
+    WHERE anio = p_anio;
+
+    IF v_existente > 0 THEN
+        -- Ya existe el año, no insertar
+        SELECT 0 AS resultado;
+    ELSE
+        -- No existe el año, insertar
+        BEGIN
+            DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+            BEGIN
+                SELECT 0 AS resultado;
+            END;
+
+            INSERT INTO impusitiva_tributaria (
+                anio, UIT, base_Legal, Observaciones
+            )
+            VALUES (
+                p_anio, p_UIT, p_baseLegal, p_observaciones
+            );
+
+            SELECT 1 AS resultado;
+        END;
+    END IF;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -1362,6 +1413,34 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `obtener_data_Impusitiva` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `obtener_data_Impusitiva`()
+BEGIN
+    SELECT 
+        idImpusitiva_Tributaria,
+        anio,
+        UIT,
+        base_Legal,
+        Observaciones
+    FROM 
+        impusitiva_tributaria
+    ORDER BY 
+        anio DESC;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `obtener_data_Por_anios` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -1441,6 +1520,27 @@ BEGIN
     SELECT año_registro 
     FROM dato_anual
     ORDER BY año_registro DESC;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `obtener_lista_anios_impusitiva` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `obtener_lista_anios_impusitiva`()
+BEGIN
+    SELECT anio
+    FROM impusitiva_tributaria
+    ORDER BY anio DESC;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -1671,4 +1771,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-06-17 23:09:46
+-- Dump completed on 2025-06-18 21:31:43
