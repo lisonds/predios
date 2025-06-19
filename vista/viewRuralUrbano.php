@@ -214,6 +214,26 @@
                             <div class="seccion-titulo">DETERMINACIÓN DE AUTOVALUO DEL TERRENO</div>
                         </div>
                             <!--final de tabla -->
+                             <table class="table table-bordered table-hover modern-table">
+                                    <thead>
+                                        <tr>
+                                            <th class="wide-column">Bloque</th>
+                                            <th class="wide-column">Piso</th>
+                                            <th class="wide-column">Año de Construcción</th>
+                                            <th class="vertical-header">Muro</th>
+                                            <th class="vertical-header">Techo</th>
+                                            <th class="vertical-header">Pisos</th>
+                                            <th class="vertical-header">Puerta-Ventana</th>
+                                            <th class="vertical-header">Revestimiento</th>
+                                            <th class="vertical-header">Baño</th>
+                                            <th class="vertical-header">Instalaciones Eléctricas</th>
+                                            <th class="wide-column">Área Construida (m²)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tablaCuerpo">
+                                        <!-- Aquí se agregarán las filas dinámicamente -->
+                                    </tbody>
+                                </table>
 
                     </div>
                 </div>
@@ -223,6 +243,10 @@
 
     </main>
     <!-- end: Main -->
+
+
+     <!-- FULLLL MODALLLLLLLLLLLLLLLLLLLLLLLLLLLLL-->
+
     <!-- Modal Predio Rural -->
     <div class="modal fade" id="modalRural" tabindex="-1" aria-labelledby="modalPredioLabel" aria-modal="true" style="display: none;" inert>
             
