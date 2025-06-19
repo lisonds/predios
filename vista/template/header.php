@@ -200,6 +200,12 @@
                     UIT POR AÑO
                 </a>
             </li>
+            <li class="sidebar-menu-item">
+                <a href="viewDepreciacion.php">
+                    <i class="ri-table-line sidebar-menu-item-icon"></i>
+                    DEPRECIACION
+                </a>
+            </li>
         </ul>
     </div>
     <div class="sidebar-overlay"></div>
