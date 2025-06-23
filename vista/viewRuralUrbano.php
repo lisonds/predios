@@ -367,7 +367,7 @@
                                                             <option>Casa Habitacion</option>
                                                             <option>Tienda, Depositos</option>
                                                             <option>Centros de Recreacion o Esparcimiento</option>
-                                                            <option>Clinica, Hospital,Cine, Colegio, Taller.</option>                        
+                                                            <option>Clinica, Hospital,Cine, Colegio, Taller</option>                        
                                                         </select>
                                                     </div>
                                                    

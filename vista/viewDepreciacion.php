@@ -48,7 +48,15 @@
         <div class="info-row">
         <!-- Selector de año -->
         
-
+             <div class="col-md-3">
+                <select class="form-select" id="materialPredominante" name="materialPredominante" required>
+                    <option value="" selected disabled>-- Clasificacion --</option>
+                    <option value="Casa Habitacion">Casa Habitacion</option>
+                    <option value="Tienda, Depositos">Tienda, Deposito</option>
+                    <option value="Centros de Recreacion o Esparcimiento">Edificios </option>
+                    <option value="Clinica, Hospital,Cine, Colegio, Taller">Colegios</option>
+                </select>
+                </div>
              <button 
                     class="btn btn-success rounded-pill ms-2" 
                     data-bs-toggle="modal" 
@@ -63,19 +71,20 @@
         <div class="row">
             <div class="col-md-1"></div>
             <div class="col-md-10">
-                <h6 class="text-center">UNIDAD IMPUSITIVA TRIBUTARIA - UIT</h6>
+                <h6 class="text-center">TABLA DE DEPRECIACION POR ANTIGUEDAD Y ESTADO DE CONSERVACION SEGUN MATERIAL ESTRUCTURAL PREDOMINANTE</h6>
                 <div class="table-responsive table-container">
                     <table class="table table-bordered custom-table small text center">
                         <thead>
                             <tr>
-                                <th>AÑO</th>
-                                <th>UIT</th>
-                                <th>BASE LEGAL</th>
-                                <th>VALOR MINIO DE PAGO</th>
-                                <th> </th>
+                                <th>ANTIGUEDAD HASTA</th>
+                                <th>MATERIAL</th>
+                                <th>MUY BUENO</th>
+                                <th>BUENO</th>
+                                <th>REGULAR </th>
+                                <th>MALO</th>
                             </tr>
                         </thead>
-                        <tbody id="tablaValorMinimo">
+                        <tbody id="tablaDepreciacion">
                             <!-- Filas generadas dinámicamente -->                          
                                 
                         </tbody>
@@ -93,23 +102,21 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header bg-success text-white">
-        <h5 class="modal-title" id="addYearModalLabel">AGREGAR VALOR IMPUSITIVA TRIBUTARIA - UIT</h5>
+        <h5 class="modal-title" id="addYearModalLabel">AGREGAR VALOR DE LA DEPRECIACION</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
       </div>
       
       <div class="modal-body">
-        <form id="formAgregarValorImpusitiva">
+        <form id="formAgregarDepreciacion">
 
-        <div class="row g-4">
-          
-            
-           <div class="col-md-3">
-                <label for="anioImpositivaR" class="form-label fw-bold">
-                    Selecciona el año para ingresar el UIT
-                </label>
-            </div>
-            <div class="col-md-2">
-                <select class="form-select" id="anioImpositivaR" name="anioImpositivaR" required>
+            <div class="row g-4">
+
+                <!-- Año para ingresar UIT -->
+                <div class="col-md-3">
+                <label for="anioDepreciacion" class="form-label fw-bold">Selecciona el año para ingresar el UIT</label>
+                </div>
+                <div class="col-md-3">
+                <select class="form-select" id="anioDepreciacion" name="anioDepreciacion" required>
                     <option value="" selected disabled>-- Seleccionar año --</option>
                     <option value="5">Hasta 05 años</option>
                     <option value="10">Hasta 10 años</option>
@@ -122,51 +129,51 @@
                     <option value="45">Hasta 45 años</option>
                     <option value="50">Hasta 50 años</option>
                 </select>
-            </div>
-            <div class="col-md-4">
-                <label for="anioImpositivaR" class="form-label fw-bold">
-                    Material Estructural Predominante
-                </label>
-            </div>
-            <div class="col-md-3">
-                <select class="form-select" id="anioImpositivaR" name="anioImpositivaR" required>
-                    <option value="" selected disabled>-- Seleccionar año --</option>
-                    <option value="Concreto<">Concreto</option>
+                </div>
+
+                <!-- Material estructural predominante -->
+                <div class="col-md-3">
+                <label for="materialPredominante" class="form-label fw-bold">Material Estructural Predominante</label>
+                </div>
+                <div class="col-md-3">
+                <select class="form-select" id="materialPredominante" name="materialPredominante" required>
+                    <option value="" selected disabled>-- Material Construcción --</option>
+                    <option value="Concreto">Concreto</option>
                     <option value="Ladrillo">Ladrillo</option>
-                    <option value="Adobe (Quincha, Madera)">Adobe (Quincha, Madera)</option>
-                  
+                    <option value="Adobe">Adobe (Quincha, Madera)</option>
                 </select>
-            </div>
-          
-            <!-- selector de altura -->
-            <div class="col-md-2"></div>
-        
-            <div class="col-md-2"></div>
-            <div class="col-md-3">
-              <label for="uit" class="form-label fw-bold">UIT - año</label>
-              <input type="number" class="form-control" id="uit" name="uit" step="any" required>
-            </div>
-            <div class="col-md-5">
-              <label for="BaseLegal" class="form-label fw-bold">Base Legal</label>
-              <input type="text" class="form-control" id="BaseLegal" name="BaseLegal" step="any" required>
-            </div>
-            <div class="col-md-2"></div>
-            <div class="col-md-2"></div>
-            <div class="col-md-2">
-                <label for="valorstatic" class="form-label fw-bold">Valor Por Defecto 0.6 %</label>
-            </div>
-            <div class="col-md-2">
-                <input type="text" class="form-control" id="valorstatic" name="valorstatic" step="any" required value="0.006">
+                </div>
+
+                <!-- Valores por estado de conservación -->
+                <div class="col-md-2">
+                <label for="muyBueno" class="form-label fw-bold">Muy Bueno</label>
+                <input type="number" class="form-control" id="muyBueno" name="muyBueno" step="any" required>
+                </div>
+                <div class="col-md-1"></div>
+                <div class="col-md-2">
+                <label for="bueno" class="form-label fw-bold">Bueno</label>
+                <input type="number" class="form-control" id="bueno" name="bueno" step="any" required>
+                </div>
+                <div class="col-md-1"></div>
+                <div class="col-md-2">
+                <label for="regular" class="form-label fw-bold">Regular</label>
+                <input type="number" class="form-control" id="regular" name="regular" step="any" required>
+                </div>
+                <div class="col-md-1"></div>
+                <div class="col-md-2">
+                <label for="malo" class="form-label fw-bold">Malo</label>
+                <input type="number" class="form-control" id="malo" name="malo" step="any" required>
+                </div>
+
+                <!-- Botones -->
+                <div class="col-12 text-end">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                </div>
+
             </div>
 
-            
-           
-        
-          <div class="text-end">
-            <button type="submit" class="btn btn-primary">Guardar</button>
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-          </div>
-        </form>
+            </form>
         </div>
       </div>
     </div>
@@ -181,7 +188,7 @@
 <script src="../assets/js/script-msm.js"></script>
 
 
-<script src="js/viewValorImpusitiva.js"></script>
+<script src="js/viewDepreciacion.js"></script>
 
 
 <?php
