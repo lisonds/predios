@@ -74,9 +74,12 @@
                     <i class="fa-solid fa-circle-plus" ></i> Agregar Nueva lista
                 </button>   
 
-                <button id="btnExportarPDF" class="btn btn-danger rounded-pill ms-2">
-                    <i class="fa fa-file-pdf"></i> Exportar a PDF
-                </button>         
+                <button 
+                    class="btn btn-dark rounded-pill ms-2"
+                    data-bs-toggle="modal"
+                    data-bs-target="#modalBaseLegalEdificacion">
+                    <i class="fa fa-file-pdf"></i> Base Legal
+                </button>    
 
             </div>
               
@@ -197,6 +200,21 @@
         </div>
     </main>
     <!-- end: Main -->
+<!-- Modal para mostrar PDF -->
+<div class="modal fade" id="modalBaseLegalEdificacion" tabindex="-1" aria-labelledby="modalBaseLegalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-dark text-white">
+        <h5 class="modal-title" id="modalBaseLegalLabel">Base Legal - Tabla de Depreciación</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body" style="height: 80vh;">
+        <iframe src="../assets/docs/EDIFICACIONES.pdf" width="100%" height="100%" frameborder="0"></iframe>
+      </div>
+    </div>
+  </div>
+</div>
+
 
     <script>
      const base_url="<?=BASE_URL?>";//AQUI ENVIAMOS LAS DIRECCIONES A JS

@@ -58,13 +58,22 @@
                 </select>
                 </div>
              <button 
-                    class="btn btn-success rounded-pill ms-2" 
-                    data-bs-toggle="modal" 
-                    data-bs-target="#addYearModal"
-                    id="addRusticoButton">
-                    <i class="fa-solid fa-circle-plus" ></i> Agregar Nueva lista
-                </button>  
+                class="btn btn-success rounded-pill ms-2" 
+                data-bs-toggle="modal" 
+                data-bs-target="#addYearModal"
+                id="addRusticoButton">
+                <i class="fa-solid fa-circle-plus" ></i> Agregar Nueva lista
+            </button> 
 
+            <button 
+                class="btn btn-dark rounded-pill ms-2"
+                data-bs-toggle="modal"
+                data-bs-target="#modalBaseLegal">
+                <i class="fa fa-file-pdf"></i> Base Legal
+            </button>
+ 
+
+           
         </div> 
         <br>
             
@@ -179,6 +188,22 @@
     </div>
   </div>
 </div>
+
+<!-- Modal para mostrar PDF -->
+<div class="modal fade" id="modalBaseLegal" tabindex="-1" aria-labelledby="modalBaseLegalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-dark text-white">
+        <h5 class="modal-title" id="modalBaseLegalLabel">Base Legal - Tabla de Depreciación</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body" style="height: 80vh;">
+        <iframe src="../assets/docs/depreciacion.pdf" width="100%" height="100%" frameborder="0"></iframe>
+      </div>
+    </div>
+  </div>
+</div>
+
  <script>
      const base_url="<?=BASE_URL?>";//AQUI ENVIAMOS LAS DIRECCIONES A JS
 </script>
