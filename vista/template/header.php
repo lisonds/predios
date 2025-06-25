@@ -108,14 +108,7 @@
                 </ul>
             </li>
             <li class="sidebar-menu-divider mt-3 mb-1 text-uppercase">DATOS ESTATICOS</li>
-            <li class="sidebar-menu-item">
-                <a href="view-normal.php">
-                     <i class="ri-book-line sidebar-menu-item-icon"></i>
-                    NORMAS LEGALES 
-                    
-                </a>
-                
-            </li>
+            
             <li class="sidebar-menu-item">
                 <a href="viewArancelarios.php">
                     <i class="ri-table-fill sidebar-menu-item-icon"></i>
