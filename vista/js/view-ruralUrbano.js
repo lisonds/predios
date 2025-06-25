@@ -4,14 +4,16 @@ if (document.querySelector("#yearSelect")) {
 
     selectAnio.addEventListener('change', function () {
         const idanio = this.value;
+        const anio = this.options[this.selectedIndex].text;
         if (idanio !== "0") {
-            mapearbd(idanio);
+            mapearbd(idanio,anio);
         }
     });
 
-    async function mapearbd(id) {
+    async function mapearbd(idAnioREgistro,anio) {
         const dataanio = new FormData();
-        dataanio.append('acceso', id);
+        dataanio.append('acceso', idAnioREgistro);
+        dataanio.append('anio', anio);
 
         try {
             const resp = await fetch(base_url + "/controlador/RuralUrbano_control.php?datos=verDataRuralConSinPredio", {
@@ -49,7 +51,7 @@ if (document.querySelector("#yearSelect")) {
     }
 }
 
-/*ESTE VA SER EL QUE CAPTURA FORMULARIO */
+/*ESTE VA SER EL QUE CAPTURA FORMULARIO RURAL  */
 if (document.querySelector("#formPredioRuralCal")) {//AQUI se valida si existe el id formulario en html
     let frmPredio=document.querySelector("#formPredioRuralCal");//
     frmPredio.onsubmit=function(e){//ejecutar al dar btn guardar

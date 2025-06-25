@@ -8,51 +8,59 @@ require_once "../libreria/conexion.php";
 
         }//este constructor esta que trae la conexion del base de datos
 
-        public function obtener_RuralUrbano_por_anio(String $idAnio)
+        private function limpiarResultadosPendientes() {
+            while ($this->conexion->more_results() && $this->conexion->next_result()) {
+                if ($res = $this->conexion->store_result()) {
+                    $res->free();
+                }
+            }
+        }
+
+      public function obtener_RuralUrbano_por_anio(String $idAnio)
         {
+            $arrayPredios = [];
+            $arrayEdificacion = [];
+            $this->limpiarResultadosPendientes(); 
             $query = "CALL obtener_RuralUrbano_por_anio('{$idAnio}')";
             $result = $this->conexion->query($query);
 
             if ($result) {
                 $row = $result->fetch_assoc();
+                $result->free(); // ✅ Siempre liberar
+                $this->conexion->next_result(); // ✅ Siempre limpiar conexión
 
                 if ($row) {
                     $arrayPredios[] = $row;
-                    $arrayEdificacion = []; // ← Evita el warning si no hay construcción
-
                     $cons = $row['existe_construccion'] ?? 0;
 
-                    if ($cons == 1) {
-                        $idconstruccion = $row['idconstruccion'] ?? null;
+                    if ($cons == 1 && isset($row['idconstruccion'])) {
+                        $idconstruccion = $row['idconstruccion'];
 
-                        if ($idconstruccion !== null) {
-                            $this->conexion->next_result();
-                            $rs2 = $this->conexion->query("CALL obtener_edificacionporidConstruccion({$idconstruccion})");
+                        $rs2 = $this->conexion->query("CALL obtener_edificacionporidConstruccion({$idconstruccion})");
 
-                            if ($rs2) {
-                                while ($fila = $rs2->fetch_assoc()) {
-                                    $arrayEdificacion[] = $fila;
-                                }
+                        if ($rs2) {
+                            while ($fila = $rs2->fetch_assoc()) {
+                                $arrayEdificacion[] = $fila;
                             }
+
+                            $rs2->free(); // ✅ Liberar resultado del segundo CALL
+                            $this->conexion->next_result();
                         }
                     }
-
-                    return [
-                        'predio' => $arrayPredios,
-                        'edificacion' => $arrayEdificacion
-                    ];
-                } else {
-                    return [
-                        'predio' => [],
-                        'edificacion' => []
-                    ];
                 }
             } else {
-                return [
-                    'predio' => [],
-                    'edificacion' => []
-                ];
+                // Por seguridad, forzar limpieza de resultados colgados
+                while ($this->conexion->more_results() && $this->conexion->next_result()) {
+                    if ($res = $this->conexion->store_result()) {
+                        $res->free();
+                    }
+                }
             }
+
+            return [
+                'predio' => $arrayPredios,
+                'edificacion' => $arrayEdificacion
+            ];
         }
 
         public function getCodPredios(string $codigo){
@@ -94,8 +102,8 @@ require_once "../libreria/conexion.php";
                             ];
                         } elseif ($cod == 2) {
                             return (object)[
-                                "status" => true,
-                                "msg" => "Los datos ingresados se actualizaron correctamente."
+                                "status" => false,
+                                "msg" => "El Registro ".$strAnio." ya existe.. "
                             ];
                         } else {
                             return (object)[
@@ -149,14 +157,10 @@ require_once "../libreria/conexion.php";
                             ];
                         } elseif ($cod == 2) {
                             return (object)[
-                                "status" => true,
-                                "msg" => "Los datos ingresados se actualizaron correctamente."
+                                "status" => false,
+                                "msg" => "El Registro ".$strAnio." ya existe.."
                             ];
-                        }  elseif ($cod == 3) {
-                            return (object)[
-                                "status" => true,
-                                "msg" => "Los no se ingresaron todos los datos."
-                            ];
+                        
                         }  else {
                             return (object)[
                                 "status" => false,
@@ -207,7 +211,55 @@ require_once "../libreria/conexion.php";
         
             return ['suma_total' => $suma];
         }
+       public function obtener_Resultado_DAta_Terrenos_REsticos($anio, $tierras_aptas, $altitud, $calidad_agrologica) {
+        $this->limpiarResultadosPendientes(); 
+        $query = "CALL mapeo_resultado_terrenos_rustico(
+            '{$anio}',
+            '{$tierras_aptas}',
+            '{$altitud}',
+            '{$calidad_agrologica}'
+        )";
+
+        $result = $this->conexion->query($query);
+
+        if ($result) {
+            $row = $result->fetch_assoc();
+
+            // ✅ Aun si no hay fila, liberar y limpiar
+            $result->free();
+            $this->conexion->next_result();
+
+            if ($row && isset($row['resultado'])) {
+                $cod = $row['resultado'];
+
+                return (object)[
+                    "status" => $cod != 0,
+                    "resultado" => $cod
+                ];
+            } else {
+                // No se encontró ningún resultado válido
+                return (object)[
+                    "status" => false,
+                    "resultado" => 0
+                ];
+            }
+
+        } else {
+            // 🔁 Limpieza por seguridad si el CALL falló
+            while ($this->conexion->more_results() && $this->conexion->next_result()) {
+                if ($res = $this->conexion->store_result()) {
+                    $res->free();
+                }
+            }
+
+            return (object)[
+                "status" => false,
+                "msg" => "Error al ejecutar el procedimiento almacenado: " . $this->conexion->error
+            ];
+        }
     }
 
+    }
+    
 
 ?>

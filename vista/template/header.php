@@ -30,7 +30,7 @@
         
 
         <div class="d-flex align-items-center p-3">
-            <a href="#" class="sidebar-logo text-decoration-none d-flex align-items-center">
+            <a href="index.php" class="sidebar-logo text-decoration-none d-flex align-items-center">
                 <img src="../assets/img/logo-quinua.png" alt="Logo Quinua" style="height: 200px; margin-right: 10px;">
                 <span class="fw-bold text-indigo fs-5"></span>
             </a>
@@ -69,72 +69,6 @@
                     <li class="sidebar-dropdown-menu-item">
                         <a href="viewPredios.php">
                             Predios
-                        </a>
-                    </li>
-                    <li class="sidebar-dropdown-menu-item has-dropdown">
-                        <a href="#">
-                            Blog
-                            <i class="ri-arrow-down-s-line sidebar-menu-item-accordion ms-auto"></i>
-                        </a>
-                        <ul class="sidebar-dropdown-menu">
-                            <li class="sidebar-dropdown-menu-item">
-                                <a href="#">
-                                    Home
-                                </a>
-                            </li>
-                            <li class="sidebar-dropdown-menu-item">
-                                <a href="#">
-                                    Post
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="sidebar-dropdown-menu-item has-dropdown">
-                        <a href="#">
-                            Email Template
-                            <i class="ri-arrow-down-s-line sidebar-menu-item-accordion ms-auto"></i>
-                        </a>
-                        <ul class="sidebar-dropdown-menu">
-                            <li class="sidebar-dropdown-menu-item">
-                                <a href="#">
-                                    Reset Password
-                                </a>
-                            </li>
-                            <li class="sidebar-dropdown-menu-item">
-                                <a href="#">
-                                    Changed Password
-                                </a>
-                            </li>
-                            <li class="sidebar-dropdown-menu-item">
-                                <a href="#">
-                                    Verify Email
-                                </a>
-                            </li>
-                            <li class="sidebar-dropdown-menu-item">
-                                <a href="#">
-                                    Invitation
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="sidebar-dropdown-menu-item">
-                        <a href="#">
-                            Pricing
-                        </a>
-                    </li>
-                    <li class="sidebar-dropdown-menu-item">
-                        <a href="#">
-                            About Us
-                        </a>
-                    </li>
-                    <li class="sidebar-dropdown-menu-item">
-                        <a href="#">
-                            Contact Us
-                        </a>
-                    </li>
-                    <li class="sidebar-dropdown-menu-item">
-                        <a href="#">
-                            Our Team
                         </a>
                     </li>
                 </ul>

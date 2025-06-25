@@ -10,10 +10,13 @@
     if ($option == "verDataRuralConSinPredio") {
         if ($_POST) {
             $idAnio = $_POST["acceso"];
+            $anio = $_POST["anio"];
             $arrayPrediosRural = $objRuralUrbano->obtener_RuralUrbano_por_anio($idAnio);
     
             $predio = $arrayPrediosRural['predio'][0];
             $edificaciones = $arrayPrediosRural['edificacion'];
+            //aqui calculamos mapeando el valor del terreno y nos tiene que retornar el costo del predio rustico
+            $resultado = $objRuralUrbano->obtener_Resultado_DAta_Terrenos_REsticos($anio,$predio['tierras_aptas'],$predio['altitud'], $predio['calidad_agrologica']);
     
             // Panel predio
             $htmlPredio = '
@@ -24,12 +27,14 @@
                     <div class="col-sm-4"><strong>Altitud de Terreno: </strong>' . $predio['altitud'] . '</div>
                     <div class="col-sm-4"><strong>Calidad Agrológica: </strong>' . $predio['calidad_agrologica'] . '</div>
                     <div class="col-sm-4"><strong>Total de Hectáreas: </strong>' . $predio['total_hectareas'] . '</div>
+                    <div class="col-sm-4"><strong>Resultado: </strong>' . ($resultado->status ? $resultado->resultado : 'No encontrado') . '</div>
+
                 </div>
             ';
     
             if ($predio['existe_construccion'] == 1) {
                 $htmlPredio .= '
-                    <h5 class="text-success mb-3">Construcción</h5>
+                    <h5 class="text-success mb-3">Construcción desde JS</h5>
                     <div class="row mb-3">
                         <div class="col-sm-4"><strong>Clasificación:</strong> ' . $predio['clasificacion'] . '</div>
                         <div class="col-sm-4"><strong>Material:</strong> ' . $predio['material'] . '</div>

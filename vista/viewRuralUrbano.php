@@ -194,13 +194,7 @@
 
 
                         <!-- Información de Construcción -->
-                        <h5 class="text-success mb-3">Construcción</h5>
-                        <div class="row mb-3">
-                            <div class="col-sm-4"><strong>Clasificación:</strong> Casa Habitación</div>
-                            <div class="col-sm-4"><strong>Material:</strong> Adobe</div>
-                            <div class="col-sm-4"><strong>Estado:</strong> Bueno</div>
-                            <div class="col-sm-6"><strong>Tipo de Uso:</strong> Multifamiliar</div>
-                        </div>
+                       
 
                         <!-- Tabla de Detalles -->
                        
@@ -208,32 +202,17 @@
                         <div class="container my-4">
                             <div class="table-responsive" id="contenedorEdificaciones">
                                 
+                                
+                                <!--final de tabla -->
+
+                                
                             </div>
                             <div class="valor-total">VALOR DE LA CONSTRUCCIÓN: <strong>85265.60</strong></div>
 
                             <div class="seccion-titulo">DETERMINACIÓN DE AUTOVALUO DEL TERRENO</div>
                         </div>
                             <!--final de tabla -->
-                             <table class="table table-bordered table-hover modern-table">
-                                    <thead>
-                                        <tr>
-                                            <th class="wide-column">Bloque</th>
-                                            <th class="wide-column">Piso</th>
-                                            <th class="wide-column">Año de Construcción</th>
-                                            <th class="vertical-header">Muro</th>
-                                            <th class="vertical-header">Techo</th>
-                                            <th class="vertical-header">Pisos</th>
-                                            <th class="vertical-header">Puerta-Ventana</th>
-                                            <th class="vertical-header">Revestimiento</th>
-                                            <th class="vertical-header">Baño</th>
-                                            <th class="vertical-header">Instalaciones Eléctricas</th>
-                                            <th class="wide-column">Área Construida (m²)</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="tablaCuerpo">
-                                        <!-- Aquí se agregarán las filas dinámicamente -->
-                                    </tbody>
-                                </table>
+                             
 
                     </div>
                 </div>
@@ -243,6 +222,13 @@
 
     </main>
     <!-- end: Main -->
+
+
+
+
+
+
+
 
 
      <!-- FULLLL MODALLLLLLLLLLLLLLLLLLLLLLLLLLLLL-->
