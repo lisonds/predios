@@ -326,13 +326,28 @@ $pdf->SetFont('Arial', 'B', 9);
 $pdf->Cell(0, 6, utf8_decode('DETERMINACION DE AUTOVALUO DEL TERRENO'), 0, 1);
 $pdf->SetFont('Arial', '', 9);
 
-$pdf->Cell(35, 6, utf8_decode('Grupo de Tierras'), 1, 0, 'C');
-$pdf->Cell(35, 6, utf8_decode('Valor por Hect'), 1, 0, 'C');
-$pdf->Cell(35, 6, utf8_decode('Cant Hect'), 1, 0, 'C');
-$pdf->Cell(35, 6, utf8_decode('Valor Total'), 1, 0, 'C');
-$pdf->Cell(35, 6, utf8_decode('Total Autovaluo'), 1, 1, 'C');
+$pdf->Cell(55, 6, utf8_decode('Grupo de Tierras'), 1, 0, 'C');
+$pdf->Cell(25, 6, utf8_decode('Valor por Hect'), 1, 0, 'C');
+$pdf->Cell(25, 6, utf8_decode('Cant Hect'), 1, 0, 'C');
+$pdf->Cell(25, 6, utf8_decode('Valor Total'), 1, 0, 'C');
+$pdf->Cell(30, 6, utf8_decode('Total Autovaluo'), 1, 1, 'C');
 
-$pdf->MultiCell(35, 6, utf8_decode('Terrenos aptos para cultivo en límite con un'), 1, 0, 'C');
+// Guardar posición inicial
+$x = $pdf->GetX();
+$y = $pdf->GetY();
+
+// Primera celda con texto largo usando MultiCell (ancho 35, alto línea 5)
+$pdf->MultiCell(55, 5, utf8_decode("Terrenos aptos para cultivo en limpio con una altitud 2001 msnm - 3000 msnm calidad agrologica"), 1, '');
+
+// Volver a la derecha del MultiCell
+$pdf->SetXY($x + 55, $y);
+
+// Las otras celdas deben tener el mismo alto total (en este caso 10)
+$pdf->Cell(25, 15, utf8_decode('20445'), 1, 0, 'C');
+$pdf->Cell(25, 15, utf8_decode('5'), 1, 0, 'C');
+$pdf->Cell(25, 15, utf8_decode('10225'), 1, 0, 'C');
+$pdf->Cell(30, 15, utf8_decode('187491'), 1, 1, 'C');
+
 //$pdf->Cell(40, 6, number_format($valor_unitario_hectarea, 2), 1, 0, 'R');
 //$pdf->Cell(40, 6, number_format($cantidad_hectareas, 2), 1, 0, 'R');
 //$pdf->Cell(40, 6, number_format($valor_total_terreno, 2), 1, 0, 'R');
