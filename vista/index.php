@@ -10,6 +10,30 @@
     ?>
     <!-- end: Sidebar -->
 
+    <style>
+.carousel-slide-bg {
+    height: 600px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    border-radius: 0.5rem;
+}
+
+.carousel-caption-custom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo negro semitransparente */
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+}
+</style>
+
+
     <!-- start: Main -->
     <main class="bg-light">
         <div class="p-2">
@@ -130,8 +154,9 @@
                     </div>
                 </div>
                 <!-- end: Summary -->
+
                 <!-- start: Graph -->
-                <div class="row g-3 mt-2">
+                <!-- <div class="row g-3 mt-2">
                     <div class="col-12 col-md-7 col-xl-8">
                         <div class="card border-0 shadow-sm h-100">
                             <div class="card-header bg-white">
@@ -154,8 +179,62 @@
                     </div>
 
                     
-                </div>
+                </div> -->
                 <!-- end: Graph -->
+                
+                <!-- start: Avisos - Carrusel -->
+            <div class="row g-3 mt-2">
+                <div class="col-12">
+                    <div id="avisosCarousel" class="carousel slide shadow-sm" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+
+                            <div class="carousel-item active">
+                                <div class="carousel-slide-bg" style="background-image: url('../assets/img/Fondo_tributario.jpg');">
+                                    <div class="carousel-caption-custom">
+                                        <h5 class="text-white">¡Bienvenido al Sistema de Autovalúo!</h5>
+                                        <p>Este sistema le permitirá consultar, registrar y emitir reportes de predios y propietarios.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="carousel-item">
+                                <div class="carousel-slide-bg" style="background-image: url('../assets/img/impuestos.png');">
+                                    <div class="carousel-caption-custom">
+                                        <h5 class="text-white">Recuerda actualizar tus datos</h5>
+                                        <p>Mantén actualizada la información del propietario y del predio para evitar observaciones.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="carousel-item">
+                                <div class="carousel-slide-bg" style="background-image: url('../assets/img/impuestos.png');">
+                                    <div class="carousel-caption-custom">
+                                        <h5 class="text-danger">Reporte de contribuyentes disponible</h5>
+                                        <p class="mb-0">Haz clic en el menú para generar tu reporte en PDF actualizado.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            
+
+                        </div>
+
+                        <!-- Controles -->
+                        <button class="carousel-control-prev" type="button" data-bs-target="#avisosCarousel" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon bg-dark rounded-circle" aria-hidden="true"></span>
+                            <span class="visually-hidden">Anterior</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#avisosCarousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon bg-dark rounded-circle" aria-hidden="true"></span>
+                            <span class="visually-hidden">Siguiente</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- end: Avisos -->
+
             </div>
             <!-- end: Content -->
         </div>
